@@ -1,0 +1,11 @@
+.sass-cache
+node_modules
+bower_components
+.idea
+
+
+# gulpfile.js
+# package.json
+# .ftppass
+# .jshintrc
+# src
