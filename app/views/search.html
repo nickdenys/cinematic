@@ -1,0 +1,47 @@
+<div id="main-wrapper" class="search-wrapper">
+
+  <h2>Search</h2>
+  
+  <div class="flash-error" ng-show="error">
+    <span>{{ error }}</span>
+  </div>
+
+  <form class="search-bar" role="search">
+    <input type="search" ng-model="searchString" placeholder="Enter Search" required />
+    <button type="submit" ng-click="searchMovie()">
+      <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/search-icon.png" alt="Search Icon">
+    </button>
+  </form>
+
+  <br><br>
+
+  
+
+  <div id="results" ng-show="results">
+  <h3>Results</h3>
+    <p>Page: {{page}}</p>
+  <br>
+
+
+  <span ng-hide="movies.length">No movies found !</span>
+  <div ng-repeat="movie in movies">
+    {{ movie.title }}
+  </div>
+  <br>
+  <div class="pagination">
+    <ul>
+      <li class="page-prev"><a href="javascript:void(0)" ng-click="renderPrevSearchPage()">Prev</a></li>
+      <li>
+        <ul>
+          <li ng-repeat="i in getNumber(data.total_pages) track by $index">
+            <a href="javascript:void(0)" ng-click="renderSearchPage($index+1)">{{ $index+1 }}</a>
+          </li>
+        </ul>
+      </li>
+      <li class="page-next"><a href="javascript:void(0)" ng-click="renderNextSearchPage()">Next</a></li>
+    </ul>
+  </div>
+
+
+  </div>
+</div>

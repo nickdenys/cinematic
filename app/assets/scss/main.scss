@@ -46,20 +46,24 @@ Here the layout of the site is defined with a grid function and breakpoints. The
 Reusable blocks of code are defined including list items, buttons and typography.
 ========================================================================== */
 
+    @import "modules/badges";
   @import "modules/buttons";
+  @import "modules/flashes";
   @import "modules/forms";
   @import "modules/lists";
-  @import "modules/tables";
+  @import "modules/pagination";
   @import "modules/search-bar";
+  @import "modules/tables";
+
+
 
 
 /* THEME
 The theme files contain the sites unique styling elements broken down in to site sections including Header, Footer, Nav etc.
 ========================================================================== */
-  /*@import 'theme/main';
-  @import 'theme/header';
-  @import 'theme/nav';
   @import 'theme/main';
+  /*@import 'theme/header';
+  @import 'theme/nav';
   @import 'theme/footer';
   @import 'theme/shame';*/
 

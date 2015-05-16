@@ -1,59 +1,50 @@
-var gulp    = require('gulp'),
-    concat  = require('gulp-concat'),
-    uglify  = require('gulp-uglify'),
-    sass    = require('gulp-ruby-sass'),
-    minify  = require('gulp-minify-css');
-    rename  = require('gulp-rename');
+var gulp = require('gulp'),
+  plumber = require('gulp-plumber'),
+  rename = require('gulp-rename');
+var autoprefixer = require('gulp-autoprefixer');
+var imagemin = require('gulp-imagemin'),
+  cache = require('gulp-cache');
+var minifycss = require('gulp-minify-css');
+var sass = require('gulp-sass');
+var browserSync = require('browser-sync');
 
-// Declare paths
-var paths = {
-  styles: './assets/scss/**/*.scss',
-};
-
-// Move files from bower_components to project folders
-gulp.task('bower', function() {
-  // JS
-  gulp.src([
-      './bower_components/jquery/dist/*',
-      './bower_components/angular/angular*',
-      '!./bower_components/angular/*.css',
-      './bower_components/angular-route/angular*'
-    ])
-    .pipe(gulp.dest('./app/js/vendor'));
-
-  // CSS
-  gulp.src('./bower_components/bourbon/app/assets/stylesheets/**/*.scss')
-    .pipe(gulp.dest('./assets/scss/vendor/bourbon'));
-  gulp.src('./bower_components/neat/app/assets/stylesheets/**/*.scss')
-    .pipe(gulp.dest('./assets/scss/vendor/neat'));
-
-  // FONTS
+gulp.task('browser-sync', function() {
+  browserSync({
+    server: {
+      baseDir: "./app"
+    },
+    files: "./app/assets/css/**/*.css"
+  });
 });
 
-// Rerun the task when a file changes
-gulp.task('watch', function() {
-  gulp.watch(paths.styles, ['sass']);
+gulp.task('bs-reload', function () {
+  browserSync.reload();
 });
 
-// Minify the outputted css
-gulp.task('css', ['sass'], function() {
-  return gulp.src([
-      'assets/css/*.css',
-      '!assets/css/*.min.css',
-    ])
-    .pipe(minify())
-    .pipe(rename({
-      extname: ".min.css"
-    }))
-    .pipe(gulp.dest('assets/css'));
+gulp.task('images', function(){
+  gulp.src('app/assets/images/')
+    .pipe(cache(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
+    .pipe(gulp.dest('app/assets/images/optimized/'));
 });
 
-// Compile .scss files to .css
-gulp.task('sass', function() {
-  return gulp.src('assets/scss/*.scss')
+gulp.task('styles', function(){
+  gulp.src(['app/assets/scss/**/*.scss', 'app/assets/vendor/css/**/*.css'])
+    .pipe(plumber({
+      errorHandler: function (error) {
+        console.log(error.message);
+        this.emit('end');
+      }}))
     .pipe(sass())
-    .on('error', function (err) { console.log(err.message); })
-    .pipe(gulp.dest('assets/css'));
+    .pipe(autoprefixer('last 2 versions'))
+    .pipe(gulp.dest('app/assets/css/'))
+    .pipe(rename({suffix: '.min'}))
+    .pipe(minifycss())
+    .pipe(gulp.dest('app/assets/css/'))
+    //.pipe(browserSync.reload({stream:true}))
 });
 
-gulp.task('default', ['bower', 'watch', 'css']);
+
+gulp.task('default', ['browser-sync'], function(){
+  gulp.watch("app/assets/scss/**/*.scss", ['styles']);
+  gulp.watch("*.html", ['bs-reload']);
+});

@@ -1,24 +1,23 @@
 {
   "name": "cinematic",
   "version": "1.0.0",
-  "description": "thesis 2014-15",
+  "description": "Thesis 2014-15",
   "main": "gulpfile.js",
-  "dependencies": {
-    "gulp-concat": "^2.4.3",
-    "gulp-minify-css": "^0.3.12",
-    "gulp-ruby-sass": "^0.7.1",
-    "gulp": "^3.8.10",
-    "gulp-uglify": "^1.0.2",
-    "bower": "^1.3.12",
-    "gulp-rename": "^1.2.0"
-  },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "cinematic"
-  ],
   "author": "Nick Denys",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "bower": "^1.3.12",
+    "browser-sync": "2.6.5",
+    "gulp-autoprefixer": "2.1.0",
+    "gulp-cache": "0.2.8",
+    "gulp-imagemin": "2.2.1",
+    "gulp-minify-css": "1.0.0",
+    "gulp-plumber": "1.0.0",
+    "gulp-rename": "1.2.2",
+    "gulp-sass": "1.3.3",
+    "gulp": "3.8.11"
+  }
 }
