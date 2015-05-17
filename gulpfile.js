@@ -28,7 +28,7 @@ gulp.task('images', function(){
 });
 
 gulp.task('styles', function(){
-  gulp.src(['app/assets/scss/**/*.scss', 'app/assets/vendor/css/**/*.css'])
+  gulp.src(['app/assets/scss/**/*.scss'])
     .pipe(plumber({
       errorHandler: function (error) {
         console.log(error.message);

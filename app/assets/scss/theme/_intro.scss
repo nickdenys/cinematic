@@ -1,0 +1,101 @@
+.above-the-fold{
+    height: 100vh;
+    width: 100%;
+    text-align: center;
+    @include outer-container(100%);
+
+    .header{
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+
+        .logo{
+            background: url('../images/logo.png') no-repeat center center;
+            width: 250px;
+            height: 82px;
+            margin: 0 auto 1rem;
+        }
+
+        .slogan{
+            font-family: 'Aller Bold Italic', sans-serif;
+            font-size: 1.075rem;
+            color: $cm-grey;
+        }
+
+        .explanation{
+            display: block;
+            margin: 5rem auto 0;
+            font-family: 'Aller Light', sans-serif;
+            font-size: 1.7rem;
+            color: $cm-lightgrey;
+        }
+    }
+    .call-to-action{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        text-transform: uppercase;
+        font-family: 'Aller Light', sans-serif;
+        margin-bottom: .5rem;
+
+        .action{
+            display: inline-block;
+            background: linear-gradient(left, $cm-yellow, $cm-red);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: #f98a1b;
+
+            .fa{
+                margin-top: .3rem;
+                background: linear-gradient(left, $cm-yellow, $cm-red);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+        }
+    }
+}
+
+.below-the-fold{
+    .header{
+        padding: 15px 0;
+        background: $cm-darkgrey;
+
+        h2{
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            font-weight: 400;
+            color: $cm-lightgrey;
+            font-size: 1.4rem;
+            text-align: center;
+        }
+    }
+    .choose-format{
+        @include span-columns(12);
+        .movies{
+            @include span-columns(6 of 12, table);
+        }
+        .tv-shows{
+            @include span-columns(6 of 12, table);
+        }
+        .movies.image-gradient-dynamic{
+            @include image-gradient-dynamic(53deg, $cm-red, $cm-yellow, 0.25, 0.45);
+        }
+
+        .tv-shows.image-gradient-dynamic{
+            @include image-gradient-dynamic(53deg, $cm-red, $cm-blue, 0.25, 0.45);
+        }
+    }
+}
+
+@media only screen and (max-width: $medium-screen){
+    .below-the-fold .choose-format{
+        .movies{
+            @include span-columns(12 of 12, block);
+        }
+        .tv-shows{
+            @include span-columns(12 of 12, block);
+        }
+    }
+}

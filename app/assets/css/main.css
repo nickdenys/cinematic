@@ -676,8 +676,209 @@ tr, td, th {
 /* THEME
 The theme files contain the sites unique styling elements broken down in to site sections including Header, Footer, Nav etc.
 ========================================================================== */
-body {
+html, body {
   background: #f3f3f3; }
+
+.above-the-fold {
+  height: 100vh;
+  width: 100%;
+  text-align: center;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto; }
+  .above-the-fold::after {
+    clear: both;
+    content: "";
+    display: table; }
+  .above-the-fold .header {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+            transform: translateY(-50%); }
+    .above-the-fold .header .logo {
+      background: url('../images/logo.png') no-repeat center center;
+      width: 250px;
+      height: 82px;
+      margin: 0 auto 1rem; }
+    .above-the-fold .header .slogan {
+      font-family: 'Aller Bold Italic', sans-serif;
+      font-size: 1.075rem;
+      color: #838383; }
+    .above-the-fold .header .explanation {
+      display: block;
+      margin: 5rem auto 0;
+      font-family: 'Aller Light', sans-serif;
+      font-size: 1.7rem;
+      color: #bbb; }
+  .above-the-fold .call-to-action {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Aller Light', sans-serif;
+    margin-bottom: .5rem; }
+    .above-the-fold .call-to-action .action {
+      display: inline-block;
+      background: -webkit-linear-gradient(left, #ffcb10, #f23a29);
+      background: linear-gradient(left, #ffcb10, #f23a29);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: #f98a1b; }
+      .above-the-fold .call-to-action .action .fa {
+        margin-top: .3rem;
+        background: -webkit-linear-gradient(left, #ffcb10, #f23a29);
+        background: linear-gradient(left, #ffcb10, #f23a29);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent; }
+
+.below-the-fold .header {
+  padding: 15px 0;
+  background: #424242; }
+  .below-the-fold .header h2 {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: #bbb;
+    font-size: 1.4rem;
+    text-align: center; }
+.below-the-fold .choose-format {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 100%; }
+  .below-the-fold .choose-format:last-child {
+    margin-right: 0; }
+  .below-the-fold .choose-format .movies {
+    display: table-cell;
+    width: 50%; }
+  .below-the-fold .choose-format .tv-shows {
+    display: table-cell;
+    width: 50%; }
+  .below-the-fold .choose-format .movies.image-gradient-dynamic {
+    line-height: 0;
+    position: relative; }
+    .below-the-fold .choose-format .movies.image-gradient-dynamic img {
+      height: auto;
+      left: 0;
+      position: relative;
+      top: 0;
+      width: 100%; }
+    .below-the-fold .choose-format .movies.image-gradient-dynamic .copy {
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      left: 50%;
+      margin: auto;
+      position: absolute;
+      text-align: center;
+      top: 50%;
+      z-index: 999;
+      text-transform: uppercase;
+      font-size: 3.5rem;
+      font-family: 'Aller Bold', sans-serif;
+      text-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      -webkit-transition: text-shadow .3s ease;
+              transition: text-shadow .3s ease; }
+      .below-the-fold .choose-format .movies.image-gradient-dynamic .copy span {
+        color: white;
+        font-weight: 800;
+        line-height: 1.5em;
+        position: relative; }
+    .below-the-fold .choose-format .movies.image-gradient-dynamic .overlay {
+      -webkit-transition: opacity .2s ease;
+              transition: opacity .2s ease;
+      display: block;
+      background-color: rgba(255, 203, 16, 0.55);
+      background-image: -webkit-linear-gradient(-323deg, rgba(255, 203, 16, 0.55), rgba(242, 58, 41, 0.75));
+      background-image: -webkit-linear-gradient(37deg, rgba(255, 203, 16, 0.55), rgba(242, 58, 41, 0.75));
+      background-image: linear-gradient(53deg,rgba(255, 203, 16, 0.55), rgba(242, 58, 41, 0.75));
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      bottom: 0px;
+      left: 0px; }
+    .below-the-fold .choose-format .movies.image-gradient-dynamic:hover .copy {
+      text-shadow: 0 0 20px rgba(0, 0, 0, 0.5); }
+    .below-the-fold .choose-format .movies.image-gradient-dynamic:hover .overlay {
+      opacity: 0.85; }
+    @media only screen and (max-width: 53.75em) {
+      .below-the-fold .choose-format .movies.image-gradient-dynamic .copy {
+        font-size: 2rem; } }
+    @media only screen and (max-width: 40em) {
+      .below-the-fold .choose-format .movies.image-gradient-dynamic .copy {
+        font-size: 1.5rem; } }
+  .below-the-fold .choose-format .tv-shows.image-gradient-dynamic {
+    line-height: 0;
+    position: relative; }
+    .below-the-fold .choose-format .tv-shows.image-gradient-dynamic img {
+      height: auto;
+      left: 0;
+      position: relative;
+      top: 0;
+      width: 100%; }
+    .below-the-fold .choose-format .tv-shows.image-gradient-dynamic .copy {
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      left: 50%;
+      margin: auto;
+      position: absolute;
+      text-align: center;
+      top: 50%;
+      z-index: 999;
+      text-transform: uppercase;
+      font-size: 3.5rem;
+      font-family: 'Aller Bold', sans-serif;
+      text-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      -webkit-transition: text-shadow .3s ease;
+              transition: text-shadow .3s ease; }
+      .below-the-fold .choose-format .tv-shows.image-gradient-dynamic .copy span {
+        color: white;
+        font-weight: 800;
+        line-height: 1.5em;
+        position: relative; }
+    .below-the-fold .choose-format .tv-shows.image-gradient-dynamic .overlay {
+      -webkit-transition: opacity .2s ease;
+              transition: opacity .2s ease;
+      display: block;
+      background-color: rgba(58, 185, 195, 0.55);
+      background-image: -webkit-linear-gradient(-323deg, rgba(58, 185, 195, 0.55), rgba(242, 58, 41, 0.75));
+      background-image: -webkit-linear-gradient(37deg, rgba(58, 185, 195, 0.55), rgba(242, 58, 41, 0.75));
+      background-image: linear-gradient(53deg,rgba(58, 185, 195, 0.55), rgba(242, 58, 41, 0.75));
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      bottom: 0px;
+      left: 0px; }
+    .below-the-fold .choose-format .tv-shows.image-gradient-dynamic:hover .copy {
+      text-shadow: 0 0 20px rgba(0, 0, 0, 0.5); }
+    .below-the-fold .choose-format .tv-shows.image-gradient-dynamic:hover .overlay {
+      opacity: 0.85; }
+    @media only screen and (max-width: 53.75em) {
+      .below-the-fold .choose-format .tv-shows.image-gradient-dynamic .copy {
+        font-size: 2rem; } }
+    @media only screen and (max-width: 40em) {
+      .below-the-fold .choose-format .tv-shows.image-gradient-dynamic .copy {
+        font-size: 1.5rem; } }
+
+@media only screen and (max-width: 40em) {
+  .below-the-fold .choose-format .movies {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 100%; }
+    .below-the-fold .choose-format .movies:last-child {
+      margin-right: 0; }
+  .below-the-fold .choose-format .tv-shows {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 100%; }
+    .below-the-fold .choose-format .tv-shows:last-child {
+      margin-right: 0; } }
 
 /*@import 'theme/header';
   @import 'theme/nav';
@@ -693,69 +894,44 @@ Google web font include.
   font-weight: normal;
   font-style: normal; }
 
-/*@font-face {
-    font-family: 'Aller Bold';
-    src: url('../fonts/allerbd-webfont.eot');
-    src: url('../fonts/allerbd-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/allerbd-webfont.woff2') format('woff2'),
-         url('../fonts/allerbd-webfont.woff') format('woff'),
-         url('../fonts/allerbd-webfont.ttf') format('truetype'),
-         url('../fonts/allerbd-webfont.svg#allerbold') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
 @font-face {
-    font-family: 'Aller Italic';
-    src: url('../fonts/allerit-webfont.eot');
-    src: url('../fonts/allerit-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/allerit-webfont.woff2') format('woff2'),
-         url('../fonts/allerit-webfont.woff') format('woff'),
-         url('../fonts/allerit-webfont.ttf') format('truetype'),
-         url('../fonts/allerit-webfont.svg#alleritalic') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
+  font-family: 'Aller Bold';
+  src: url('../fonts/aller_bd-webfont.eot');
+  src: url('../fonts/aller_bd-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/aller_bd-webfont.woff2') format('woff2'), url('../fonts/aller_bd-webfont.woff') format('woff'), url('../fonts/aller_bd-webfont.ttf') format('truetype'), url('../fonts/aller_bd-webfont.svg#allerbold') format('svg');
+  font-weight: normal;
+  font-style: normal; }
+
 @font-face {
-    font-family: 'Aller Bold Italic';
-    src: url('../fonts/allerbdit-webfont.eot');
-    src: url('../fonts/allerbdit-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/allerbdit-webfont.woff2') format('woff2'),
-         url('../fonts/allerbdit-webfont.woff') format('woff'),
-         url('../fonts/allerbdit-webfont.ttf') format('truetype'),
-         url('../fonts/allerbdit-webfont.svg#allerbolditalic') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
+  font-family: 'Aller Italic';
+  src: url('../fonts/aller_it-webfont.eot');
+  src: url('../fonts/aller_it-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/aller_it-webfont.woff2') format('woff2'), url('../fonts/aller_it-webfont.woff') format('woff'), url('../fonts/aller_it-webfont.ttf') format('truetype'), url('../fonts/aller_it-webfont.svg#alleritalic') format('svg');
+  font-weight: normal;
+  font-style: normal; }
+
 @font-face {
-    font-family: 'Aller Light';
-    src: url('../fonts/allerlt-webfont.eot');
-    src: url('../fonts/allerlt-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/allerlt-webfont.woff2') format('woff2'),
-         url('../fonts/allerlt-webfont.woff') format('woff'),
-         url('../fonts/allerlt-webfont.ttf') format('truetype'),
-         url('../fonts/allerlt-webfont.svg#allerlightregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
+  font-family: 'Aller Bold Italic';
+  src: url('../fonts/aller_bdit-webfont.eot');
+  src: url('../fonts/aller_bdit-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/aller_bdit-webfont.woff2') format('woff2'), url('../fonts/aller_bdit-webfont.woff') format('woff'), url('../fonts/aller_bdit-webfont.ttf') format('truetype'), url('../fonts/aller_bdit-webfont.svg#allerbolditalic') format('svg');
+  font-weight: normal;
+  font-style: normal; }
+
 @font-face {
-    font-family: 'Aller Light Italic';
-    src: url('../fonts/allerltit-webfont.eot');
-    src: url('../fonts/allerltit-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/allerltit-webfont.woff2') format('woff2'),
-         url('../fonts/allerltit-webfont.woff') format('woff'),
-         url('../fonts/allerltit-webfont.ttf') format('truetype'),
-         url('../fonts/allerltit-webfont.svg#allerlightitalic') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
+  font-family: 'Aller Light';
+  src: url('../fonts/aller_lt-webfont.eot');
+  src: url('../fonts/aller_lt-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/aller_lt-webfont.woff2') format('woff2'), url('../fonts/aller_lt-webfont.woff') format('woff'), url('../fonts/aller_lt-webfont.ttf') format('truetype'), url('../fonts/aller_lt-webfont.svg#allerlightregular') format('svg');
+  font-weight: normal;
+  font-style: normal; }
+
 @font-face {
-    font-family: 'Aller Display';
-    src: url('../fonts/allerdisplay-webfont.eot');
-    src: url('../fonts/allerdisplay-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/allerdisplay-webfont.woff2') format('woff2'),
-         url('../fonts/allerdisplay-webfont.woff') format('woff'),
-         url('../fonts/allerdisplay-webfont.ttf') format('truetype'),
-         url('../fonts/allerdisplay-webfont.svg#allerdisplayregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}*/
+  font-family: 'Aller Light Italic';
+  src: url('../fonts/aller_ltit-webfont.eot');
+  src: url('../fonts/aller_ltit-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/aller_ltit-webfont.woff2') format('woff2'), url('../fonts/aller_ltit-webfont.woff') format('woff'), url('../fonts/aller_ltit-webfont.ttf') format('truetype'), url('../fonts/aller_ltit-webfont.svg#allerlightitalic') format('svg');
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Aller Display';
+  src: url('../fonts/allerdisplay-webfont.eot');
+  src: url('../fonts/allerdisplay-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/allerdisplay-webfont.woff2') format('woff2'), url('../fonts/allerdisplay-webfont.woff') format('woff'), url('../fonts/allerdisplay-webfont.ttf') format('truetype'), url('../fonts/allerdisplay-webfont.svg#allerdisplayregular') format('svg');
+  font-weight: normal;
+  font-style: normal; }

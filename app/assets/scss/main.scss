@@ -50,6 +50,7 @@ Reusable blocks of code are defined including list items, buttons and typography
   @import "modules/buttons";
   @import "modules/flashes";
   @import "modules/forms";
+    @import "modules/image-gradient-dynamic";
   @import "modules/lists";
   @import "modules/pagination";
   @import "modules/search-bar";
@@ -58,10 +59,12 @@ Reusable blocks of code are defined including list items, buttons and typography
 
 
 
+
 /* THEME
 The theme files contain the sites unique styling elements broken down in to site sections including Header, Footer, Nav etc.
 ========================================================================== */
   @import 'theme/main';
+  @import 'theme/intro';
   /*@import 'theme/header';
   @import 'theme/nav';
   @import 'theme/footer';
@@ -83,58 +86,58 @@ Google web font include.
     font-weight: normal;
     font-style: normal;
 }
-/*@font-face {
+@font-face {
     font-family: 'Aller Bold';
-    src: url('../fonts/allerbd-webfont.eot');
-    src: url('../fonts/allerbd-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/allerbd-webfont.woff2') format('woff2'),
-         url('../fonts/allerbd-webfont.woff') format('woff'),
-         url('../fonts/allerbd-webfont.ttf') format('truetype'),
-         url('../fonts/allerbd-webfont.svg#allerbold') format('svg');
+    src: url('../fonts/aller_bd-webfont.eot');
+    src: url('../fonts/aller_bd-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/aller_bd-webfont.woff2') format('woff2'),
+         url('../fonts/aller_bd-webfont.woff') format('woff'),
+         url('../fonts/aller_bd-webfont.ttf') format('truetype'),
+         url('../fonts/aller_bd-webfont.svg#allerbold') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'Aller Italic';
-    src: url('../fonts/allerit-webfont.eot');
-    src: url('../fonts/allerit-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/allerit-webfont.woff2') format('woff2'),
-         url('../fonts/allerit-webfont.woff') format('woff'),
-         url('../fonts/allerit-webfont.ttf') format('truetype'),
-         url('../fonts/allerit-webfont.svg#alleritalic') format('svg');
+    src: url('../fonts/aller_it-webfont.eot');
+    src: url('../fonts/aller_it-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/aller_it-webfont.woff2') format('woff2'),
+         url('../fonts/aller_it-webfont.woff') format('woff'),
+         url('../fonts/aller_it-webfont.ttf') format('truetype'),
+         url('../fonts/aller_it-webfont.svg#alleritalic') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'Aller Bold Italic';
-    src: url('../fonts/allerbdit-webfont.eot');
-    src: url('../fonts/allerbdit-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/allerbdit-webfont.woff2') format('woff2'),
-         url('../fonts/allerbdit-webfont.woff') format('woff'),
-         url('../fonts/allerbdit-webfont.ttf') format('truetype'),
-         url('../fonts/allerbdit-webfont.svg#allerbolditalic') format('svg');
+    src: url('../fonts/aller_bdit-webfont.eot');
+    src: url('../fonts/aller_bdit-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/aller_bdit-webfont.woff2') format('woff2'),
+         url('../fonts/aller_bdit-webfont.woff') format('woff'),
+         url('../fonts/aller_bdit-webfont.ttf') format('truetype'),
+         url('../fonts/aller_bdit-webfont.svg#allerbolditalic') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'Aller Light';
-    src: url('../fonts/allerlt-webfont.eot');
-    src: url('../fonts/allerlt-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/allerlt-webfont.woff2') format('woff2'),
-         url('../fonts/allerlt-webfont.woff') format('woff'),
-         url('../fonts/allerlt-webfont.ttf') format('truetype'),
-         url('../fonts/allerlt-webfont.svg#allerlightregular') format('svg');
+    src: url('../fonts/aller_lt-webfont.eot');
+    src: url('../fonts/aller_lt-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/aller_lt-webfont.woff2') format('woff2'),
+         url('../fonts/aller_lt-webfont.woff') format('woff'),
+         url('../fonts/aller_lt-webfont.ttf') format('truetype'),
+         url('../fonts/aller_lt-webfont.svg#allerlightregular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'Aller Light Italic';
-    src: url('../fonts/allerltit-webfont.eot');
-    src: url('../fonts/allerltit-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/allerltit-webfont.woff2') format('woff2'),
-         url('../fonts/allerltit-webfont.woff') format('woff'),
-         url('../fonts/allerltit-webfont.ttf') format('truetype'),
-         url('../fonts/allerltit-webfont.svg#allerlightitalic') format('svg');
+    src: url('../fonts/aller_ltit-webfont.eot');
+    src: url('../fonts/aller_ltit-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/aller_ltit-webfont.woff2') format('woff2'),
+         url('../fonts/aller_ltit-webfont.woff') format('woff'),
+         url('../fonts/aller_ltit-webfont.ttf') format('truetype'),
+         url('../fonts/aller_ltit-webfont.svg#allerlightitalic') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -148,4 +151,4 @@ Google web font include.
          url('../fonts/allerdisplay-webfont.svg#allerdisplayregular') format('svg');
     font-weight: normal;
     font-style: normal;
-}*/
+}
