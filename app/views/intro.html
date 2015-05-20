@@ -1,13 +1,3 @@
-<!--<div id="main-wrapper">
-    <h1>cinematic</h1>
-
-    <ul class="default">
-        <li><a href="/">Home</a></li>
-        <li><a href="#search">Search</a></li>
-    </ul>
-    <hr>
-</div>-->
-
 <div class="intro-wrapper">
     <section class="above-the-fold">
         <header class="header">
@@ -16,24 +6,24 @@
             <span class="explanation">Discover new movies <br />&amp; tv-shows with our platform</span>
         </header>
         <div class="call-to-action">
-            <a href scroll-to="below" duration="800" easing="easeInOutQuad" class="action">
+            <a href scroll-to="below-the-fold" duration="800" easing="easeInOutQuad" class="action">
                 <span>Let's begin</span><br />
-                <i class="fa fa-2x fa-chevron-down"></i>
+                <img src="/assets/images/arrow-down.png" alt=""/>
             </a>
         </div>
     </section>
 
-    <section id="below" class="below-the-fold">
+    <section id="below-the-fold" class="below-the-fold">
         <header class="header">
             <h2>What do you want to watch?</h2>
         </header>
         <div class="choose-format">
-            <a href="" class="movies image-gradient-dynamic" ng-init="getSomePopularMovie()">
+            <a href="#discover/movie" class="movies image-gradient-dynamic" ng-init="getSomePopularMovie()">
                 <img src="https://image.tmdb.org/t/p/w780{{ movie.backdrop_path }}" alt="">
                 <div class="overlay"></div>
                 <div class="copy"><span>Movies</span></div>
             </a>
-            <a href="" class="tv-shows image-gradient-dynamic" ng-init="getSomePopularTvShow()">
+            <a href="#discover/tv" class="tv-shows image-gradient-dynamic" ng-init="getSomePopularTvShow()">
                 <img src="https://image.tmdb.org/t/p/w780{{ tvshow.backdrop_path }}" alt="">
                 <div class="overlay"></div>
                 <div class="copy"><span>TV shows</span></div>

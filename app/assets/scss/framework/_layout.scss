@@ -7,3 +7,25 @@ html,body{
   min-height: 100%;
   height: 100%;
 }
+
+.wrapper{
+  @include outer-container();
+}
+
+.row{
+  @include row();
+}
+
+.person{
+  @include span-columns(3);
+  max-height: 195px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  &:nth-of-type(4n){
+    margin-right: 0;
+  }
+}
+
+.left, .right{
+  @include span-columns(6);
+}

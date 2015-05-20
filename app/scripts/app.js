@@ -8,8 +8,9 @@ var cinematic = angular.module('cmApp', [
     'cmApp.directives',
     'cmApp.filters',
     'cmApp.models',
+    'LocalStorageModule'
   ])
-  .config(['$routeProvider', function($routeProvider) {
+  .config(['$routeProvider','localStorageServiceProvider', function($routeProvider, localStorageServiceProvider) {
 
     // Handle routing URLs
 
@@ -23,6 +24,21 @@ var cinematic = angular.module('cmApp', [
         controller:'cmApp.controllers.SearchCtrl'
     });
 
+    $routeProvider.when('/discover/movie', {
+      templateUrl:'views/discover.movie.html',
+      controller:'cmApp.controllers.DiscoverMovieCtrl'
+    });
+
+    /*$routeProvider.when('/discover/tv', {
+      templateUrl:'views/discover.tv.html',
+      controller:'cmApp.controllers.DiscoverTvCtrl'
+    });*/
 
     $routeProvider.otherwise({redirectTo: '/'});
-}]);
+
+    // Configure LocalStorage settings
+    localStorageServiceProvider
+      .setPrefix('cmApp')
+      .setStorageType('sessionStorage')
+      .setNotify(true, true)
+  }]);

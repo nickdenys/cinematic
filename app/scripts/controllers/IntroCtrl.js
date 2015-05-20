@@ -5,11 +5,14 @@
 
     controllers.controller('cmApp.controllers.IntroCtrl', ['$scope','$location', '$anchorScroll', function($scope,$location, $anchorScroll) {
 
-        /*$scope.goToBottom = function(){
-            var old = $location.hash();
-            $location.hash('below');
-            $anchorScroll();
-            $location.hash(old);
+        /*$scope.test = function(){
+            theMovieDb.certifications.getList(
+                function(data){
+                console.log(JSON.parse(data));
+            },
+                function(){
+                console.log('error');
+            });
         };*/
 
         $scope.movies = [];
@@ -31,10 +34,11 @@
     }
 
     // How many items do we need?
-    var x = 5;
+    var x = 10;
+
     function movieSuccessCB(data) {
         var parsedData = JSON.parse(data);
-        console.log(parsedData);
+        //console.log(parsedData);
 
         var introWrapper = $('.intro-wrapper');
         var scope = angular.element(introWrapper).scope();
@@ -49,7 +53,7 @@
 
     function tvSuccessCB(data) {
         var parsedData = JSON.parse(data);
-        console.log(parsedData);
+        //console.log(parsedData);
 
         var introWrapper = $('.intro-wrapper');
         var scope = angular.element(introWrapper).scope();

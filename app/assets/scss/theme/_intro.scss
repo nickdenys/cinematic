@@ -1,3 +1,21 @@
+@keyframes bounce {
+    0% {
+        transform: translate(0px, 0px);
+    }
+
+    15%{
+        transform: translate(0px, 0px);
+    }
+
+    45%{
+        transform: translate(0px, -7px);
+    }
+
+    100% {
+        transform: translate(0px, 0px);
+    }
+}
+
 .above-the-fold{
     height: 100vh;
     width: 100%;
@@ -47,11 +65,9 @@
             -webkit-text-fill-color: transparent;
             color: #f98a1b;
 
-            .fa{
-                margin-top: .3rem;
-                background: linear-gradient(left, $cm-yellow, $cm-red);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
+            img{
+                margin: .8rem 0;
+                animation: bounce 2s infinite;
             }
         }
     }
@@ -74,10 +90,12 @@
     .choose-format{
         @include span-columns(12);
         .movies{
-            @include span-columns(6 of 12, table);
+            float: left;
+            width: 50%;
         }
         .tv-shows{
-            @include span-columns(6 of 12, table);
+            float: left;
+            width: 50%;
         }
         .movies.image-gradient-dynamic{
             @include image-gradient-dynamic(53deg, $cm-red, $cm-yellow, 0.25, 0.45);

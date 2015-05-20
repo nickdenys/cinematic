@@ -1,0 +1,39 @@
+<div class="wrapper discover-movie">
+    <div class="left">
+    <form class="search-bar" role="search">
+        <input type="text" ng-model="searchPeopleInput" placeholder="Who are you looking for?" />
+        <button type="submit" ng-click="getPerson(searchPeopleInput)">
+            <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/search-icon.png" alt="Search Icon">
+        </button>
+    </form>
+
+
+        <div id="results_people" class="row" ng-show="peopleSearchResults">
+            <h3>Results</h3>
+
+            <p ng-if="peopleSearchResults.results.length">{{ peopleSearchResults.total_results }} result(s) found!</p>
+            <span ng-hide="peopleSearchResults.results.length">No people found !</span>
+            <div class="person" ng-repeat="person in peopleSearchResults.results">
+                {{ person.name }} <br />
+                <img ng-click="togglePeople(person.id, person.name)" ng-if="person.profile_path" src="https://image.tmdb.org/t/p/w150{{ person.profile_path }}" alt="">
+                <img ng-click="togglePeople(person.id, person.name)" ng-if="person.profile_path == null" src="http://dummyimage.com/150x220/ccc/ccc.jpg" alt="">
+            </div>
+            <br>
+        </div>
+    </div>
+
+    <div class="right">
+
+        <button ng-click="getMovies()">Search Movies</button>
+
+        <div id="results" ng-show="results">
+            <h3>Movies</h3>
+            <span ng-hide="results.length">No movies found !</span>
+            <div ng-repeat="movie in results">
+                {{ movie.title }}
+            </div>
+            <br>
+        </div>
+
+    </div>
+</div>
