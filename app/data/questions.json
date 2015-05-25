@@ -1,0 +1,88 @@
+{
+  "questions": {
+    "movies": [
+      {
+        "nr": 1,
+        "id": "genre",
+        "title": "Genre",
+        "question": "What genres do you like?",
+        "instructions": "Select one or more of the following",
+        "answers": []
+      },
+      {
+        "nr": 2,
+        "id": "duration",
+        "title": "Duration",
+        "question": "How much time do you have?",
+        "instructions": "Do you prefer a longer or shorter movie?",
+        "answers": [
+          {
+            "minutes": "0",
+            "label": "doesn't matter"
+          },
+          {
+            "minutes": "59",
+            "label": "< 1 hour"
+          },
+          {
+            "minutes": "60",
+            "label": "1 hour"
+          },
+          {
+            "minutes": "90",
+            "label": "1.5 hours"
+          },
+          {
+            "minutes": "120",
+            "label": "2 hours"
+          },
+          {
+            "minutes": "121",
+            "label": "2+ hours"
+          }
+        ]
+      },
+      {
+        "nr": 3,
+        "id": "popularity",
+        "title": "Popularity",
+        "question": "How highly rated do you want your movie to be?",
+        "instructions": "Warning: this can significantly limit your results",
+        "answers": []
+      },
+      {
+        "nr": 4,
+        "id": "cast",
+        "title": "Cast",
+        "question": "Any favorite actor you'd like to see tonight?",
+        "instructions": "Do you want to see a movie only with certain actors?",
+        "answers": []
+      },
+      {
+        "nr": 5,
+        "id": "year",
+        "title": "Cast",
+        "question": "Watch an old classic or a recent blockbuster?",
+        "instructions": "Choose a time period",
+        "answers": []
+      },
+      {
+        "nr": 6,
+        "id": "crew",
+        "title": "Crew",
+        "question": "Any favorite directors or producers?",
+        "instructions": "e.g. Steven Spielberg or George Lucas",
+        "answers": []
+      },
+      {
+        "nr": 7,
+        "id": "language",
+        "title": "Language",
+        "question": "Do you prefer foreign films?",
+        "instructions": "A film in your native tongue perhaps?",
+        "answers": []
+      }
+    ],
+    "tv": []
+  }
+}

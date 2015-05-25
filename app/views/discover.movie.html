@@ -1,5 +1,33 @@
 <div class="wrapper discover-movie">
-    <div class="left">
+
+    <nav>
+        <ul>
+            <li><a ng-click="getPrevQuestion()">Prev question</a></li>
+            <li><a ng-click="getNextQuestion()">Next question</a></li>
+        </ul>
+    </nav><br />
+
+    <h1>{{data.questionNo}}. {{ data.question.question }}</h1>
+
+    <section class="answers" ng-switch="answerType">
+        <div class="input" ng-switch-when="input">
+            <input type="text" name="answer" id="answer" ng-model="data.answer" />
+        </div>
+        <div class="multiple-choice" ng-switch-when="multiple">
+            <ul>
+                <li ng-repeat="result in data.multipleResults" ng-click="addToSelection(result.id, result.name)">{{ result.name }}</li>
+            </ul>
+        </div>
+        <div class="slider" ng-switch-when="slider-duration">
+            <input id="slider-duration" ng-model="data.answer" value="{{data.answer}}" ng-change="saveDuration(data.answer)" type="range" min="0" max="{{ data.questions.movies[data.questionNo-1].answers.length - 1 }}" step="1" />
+            {{data.answer}}
+        </div>
+        <div ng-switch-default>
+            <p>Something went wrong!</p>
+        </div>
+    </section>
+
+    <!--<div class="left">
     <form class="search-bar" role="search">
         <input type="text" ng-model="searchPeopleInput" placeholder="Who are you looking for?" />
         <button type="submit" ng-click="getPerson(searchPeopleInput)">
@@ -35,5 +63,5 @@
             <br>
         </div>
 
-    </div>
+    </div> -->
 </div>

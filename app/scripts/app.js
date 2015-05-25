@@ -29,6 +29,28 @@ var cinematic = angular.module('cmApp', [
       controller:'cmApp.controllers.DiscoverMovieCtrl'
     });
 
+    $routeProvider.when('/discover/movie/:questionNo', {
+      templateUrl:'views/discover.movie.html',
+      controller:'cmApp.controllers.DiscoverMovieCtrl'
+      /*resolve: {
+        movieQuestion: ['$route', '$q', 'cmApp.services.QuestionSrvc', function($route, $q, QuestionSrvc) {
+          var deferred = $q.defer();
+          QuestionSrvc.getMovieQuestion().then(
+            function(data){
+              deferred.resolve(data);
+              console.log(data);
+            },
+            function(error){
+              deferred.reject(error);
+              console.log('error')
+            }
+          );
+
+          return deferred.promise;
+        }]
+      }*/
+    });
+
     /*$routeProvider.when('/discover/tv', {
       templateUrl:'views/discover.tv.html',
       controller:'cmApp.controllers.DiscoverTvCtrl'
