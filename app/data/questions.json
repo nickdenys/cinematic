@@ -44,8 +44,8 @@
       },
       {
         "nr": 3,
-        "id": "popularity",
-        "title": "Popularity",
+        "id": "rating",
+        "title": "Rating",
         "question": "How highly rated do you want your movie to be?",
         "instructions": "Warning: this can significantly limit your results",
         "answers": []
@@ -54,7 +54,7 @@
         "nr": 4,
         "id": "cast",
         "title": "Cast",
-        "question": "Any favorite actor you'd like to see tonight?",
+        "question": "Any favorite actor you'd like to see?",
         "instructions": "Do you want to see a movie only with certain actors?",
         "answers": []
       },

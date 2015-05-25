@@ -11,7 +11,7 @@
     $http.get('./data/questions.json').success(function (data){
       $scope.data.questions = data.questions;
       $scope.data.question = data.questions.movies[$scope.data.questionNo-1];
-      $scope.questionID = $scope.data.question.id;
+      $scope.data.questionID = $scope.data.question.id;
     });
 
 
@@ -30,7 +30,7 @@
     $scope.getNextQuestion = function(){
       if (this.data.questionNo < this.data.questions.movies.length) {
         console.log($scope.answer);
-        QuestionSrvc.setAnswer(this.data.questionNo, this.data.answer);
+        QuestionSrvc.setAnswer(this.data.questionID, this.data.answer);
 
         this.data.answer = null;
         this.data.questionNo++;
@@ -40,9 +40,9 @@
     // Watch the questionID and fetch correct function for it
     $scope.$watch(
       function(scope) {
-        if ($scope.data.questions)
-          $scope.questionID = $scope.data.questions.movies[$scope.data.questionNo - 1].id;
-        return scope.questionID;
+        if (scope.data.questions)
+          scope.data.questionID = scope.data.questions.movies[scope.data.questionNo - 1].id;
+        return scope.data.questionID;
       },
       function(newValue, oldValue) {
         if ( newValue !== oldValue ) {
@@ -53,6 +53,10 @@
             }
             case 'duration':{
               prepareDuration();
+              break;
+            }
+            case 'rating':{
+              prepareRating();
               break;
             }
             default:{
@@ -90,16 +94,27 @@
       } else {
         $scope.data.multipleSelection[id] = name;
       }
+      $('.genres li[data-id="' + id + '"]').toggleClass('active');
       console.log($scope.data.multipleSelection);
       $scope.data.answer = $scope.data.multipleSelection;
     };
 
     // Duration
     function prepareDuration() {
-      $scope.data.answer = "0";
       $scope.answerType = "slider-duration";
+      $scope.data.answer = "0";
     }
     $scope.saveDuration = function(val){
+      console.log(val);
+      $scope.data.answer = val;
+    };
+
+    // Rating
+    function prepareRating() {
+      $scope.answerType = "slider-rating";
+      $scope.data.answer = 1;
+    }
+    $scope.saveRating = function(val){
       console.log(val);
       $scope.data.answer = val;
     };

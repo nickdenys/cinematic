@@ -7,19 +7,26 @@
         </ul>
     </nav><br />
 
-    <h1>{{data.questionNo}}. {{ data.question.question }}</h1>
+    <h1>{{data.questionNo}}/{{data.questions.movies.length}} - {{ data.questions.movies[data.questionNo-1].question }}</h1>
+    <span class="instructions">{{ data.questions.movies[data.questionNo-1].instructions }}</span>
+
+    <hr>
 
     <section class="answers" ng-switch="answerType">
         <div class="input" ng-switch-when="input">
             <input type="text" name="answer" id="answer" ng-model="data.answer" />
         </div>
-        <div class="multiple-choice" ng-switch-when="multiple">
+        <div class="genres multiple-choice" ng-switch-when="multiple">
             <ul>
-                <li ng-repeat="result in data.multipleResults" ng-click="addToSelection(result.id, result.name)">{{ result.name }}</li>
+                <li data-id="{{result.id}}" ng-repeat="result in data.multipleResults" ng-click="addToSelection(result.id, result.name)">{{ result.name }}</li>
             </ul>
         </div>
         <div class="slider" ng-switch-when="slider-duration">
             <input id="slider-duration" ng-model="data.answer" value="{{data.answer}}" ng-change="saveDuration(data.answer)" type="range" min="0" max="{{ data.questions.movies[data.questionNo-1].answers.length - 1 }}" step="1" />
+            {{data.answer}}
+        </div>
+        <div class="slider" ng-switch-when="slider-rating">
+            <input id="slider-rating" ng-model="data.answer" value="{{data.answer}}" ng-change="saveRating(data.answer)" type="range" min="1" max="10" step="1" />
             {{data.answer}}
         </div>
         <div ng-switch-default>
