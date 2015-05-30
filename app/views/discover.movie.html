@@ -4,8 +4,9 @@
         <ul>
             <li><a ng-click="getPrevQuestion()">Prev question</a></li>
             <li><a ng-click="getNextQuestion()">Next question</a></li>
+            <li><a ng-click="getMovies()">Recommend me some movies!</a></li>
         </ul>
-    </nav><br />
+    </nav>
 
     <h1>{{data.questionNo}}/{{data.questions.movies.length}} - {{ data.questions.movies[data.questionNo-1].question }}</h1>
     <span class="instructions">{{ data.questions.movies[data.questionNo-1].instructions }}</span>
@@ -13,12 +14,9 @@
     <hr>
 
     <section class="answers" ng-switch="answerType">
-        <div class="input" ng-switch-when="input">
-            <input type="text" name="answer" id="answer" ng-model="data.answer" />
-        </div>
         <div class="genres multiple-choice" ng-switch-when="multiple">
             <ul>
-                <li data-id="{{result.id}}" ng-repeat="result in data.multipleResults" ng-click="addToSelection(result.id, result.name)">{{ result.name }}</li>
+                <li data-id="{{result.id}}" ng-repeat="result in data.multipleResults" ng-click="addToSelection(result.id, result.name)">{{ result.id }} : {{ result.name }}</li>
             </ul>
         </div>
         <div class="slider" ng-switch-when="slider-duration">
@@ -29,6 +27,49 @@
             <input id="slider-rating" ng-model="data.answer" value="{{data.answer}}" ng-change="saveRating(data.answer)" type="range" min="1" max="10" step="1" />
             {{data.answer}}
         </div>
+        <div class="input" ng-switch-when="input_cast">
+            Selected: {{ data.selectedCast }}
+            <form class="search-bar" role="search" ng-submit="getPerson(inputCast)">
+                <input type="search" name="answer" placeholder="Enter Search" ng-model="inputCast" />
+                <button type="submit">
+                    <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/search-icon.png" alt="Search Icon">
+                </button>
+            </form>
+            <div id="results_cast" class="row" ng-show="data.peopleSearchResults">
+                <span ng-hide="data.peopleSearchResults.results.length">No people found !</span>
+                <div class="person" ng-repeat="person in data.peopleSearchResults.results">
+                    {{ person.name }} <br />
+                    <img ng-click="toggleCast(person.id, person.name)" ng-if="person.profile_path" src="https://image.tmdb.org/t/p/w150{{ person.profile_path }}" alt="">
+                    <img ng-click="toggleCast(person.id, person.name)" ng-if="person.profile_path == null" src="http://dummyimage.com/150x220/ccc/ccc.jpg" alt="">
+                </div>
+                <br>
+            </div>
+        </div>
+        <div class="select" ng-switch-when="select_year">
+            <selectize placeholder='Select a person...' config="singleConfig" ng-model="single"></selectize>
+            {{ single }}
+        </div>
+        <div class="input" ng-switch-when="input_crew">
+            Selected: {{ data.selectedCrew }}
+            <form class="search-bar" role="search" ng-submit="getPerson(inputCrew)">
+                <input type="search" name="answer" placeholder="Enter Search" ng-model="inputCrew" />
+                <button type="submit">
+                    <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/search-icon.png" alt="Search Icon">
+                </button>
+            </form>
+            <div id="results_crew" class="row" ng-show="data.peopleSearchResults">
+                <span ng-hide="data.peopleSearchResults.results.length">No people found !</span>
+                <div class="person" ng-repeat="person in data.peopleSearchResults.results">
+                    {{ person.name }} <br />
+                    <img ng-click="toggleCrew(person.id, person.name)" ng-if="person.profile_path" src="https://image.tmdb.org/t/p/w150{{ person.profile_path }}" alt="">
+                    <img ng-click="toggleCrew(person.id, person.name)" ng-if="person.profile_path == null" src="http://dummyimage.com/150x220/ccc/ccc.jpg" alt="">
+                </div>
+                <br>
+            </div>
+        </div>
+
+
+
         <div ng-switch-default>
             <p>Something went wrong!</p>
         </div>

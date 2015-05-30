@@ -63,7 +63,7 @@
         "id": "year",
         "title": "Cast",
         "question": "Watch an old classic or a recent blockbuster?",
-        "instructions": "Choose a time period",
+        "instructions": "Choose the oldest possible release year",
         "answers": []
       },
       {
@@ -72,14 +72,6 @@
         "title": "Crew",
         "question": "Any favorite directors or producers?",
         "instructions": "e.g. Steven Spielberg or George Lucas",
-        "answers": []
-      },
-      {
-        "nr": 7,
-        "id": "language",
-        "title": "Language",
-        "question": "Do you prefer foreign films?",
-        "instructions": "A film in your native tongue perhaps?",
         "answers": []
       }
     ],

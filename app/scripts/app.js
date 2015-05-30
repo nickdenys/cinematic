@@ -8,7 +8,8 @@ var cinematic = angular.module('cmApp', [
     'cmApp.directives',
     'cmApp.filters',
     'cmApp.models',
-    'LocalStorageModule'
+    'LocalStorageModule',
+    'selectize'
   ])
   .config(['$routeProvider','localStorageServiceProvider', function($routeProvider, localStorageServiceProvider) {
 
