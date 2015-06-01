@@ -6,17 +6,26 @@
   services.service('cmApp.services.QuestionSrvc',
     ['$rootScope','$window','$http','$q','localStorageService', function($rootScope,$window,$http,$q,localStorageService){
 
+      var toggledQuestions = [];
       var answers = {};
 
       return{
         setAnswer:function(id, answer){
-          //console.log(id + ':' + answer);
           answers[id] = answer;
-          localStorageService.set('discover.movie.questionNo' + id, answer);
-          console.log(answers);
+          localStorageService.set('discover.movie.question.' + id, answer);
         },
         getAnswer:function(id){
-          return answers[id];
+          if(answers[id] != null)
+            return answers[id];
+          else
+            return {};
+        },
+        setToggledQuestion:function(id){
+          toggledQuestions.push(id);
+        },
+        getToggledQuestion:function(id){
+          return true;
+          //return $.inArray(id, toggledQuestions) > -1;
         }
       }
 

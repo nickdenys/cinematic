@@ -1,0 +1,68 @@
+.answers{
+    @include outer-container(100%);
+}
+
+.multiple-choice{
+    .active{
+        @include linear-gradient(53deg, $cm-red, $cm-yellow);
+        color: #fff;
+        padding-left: 20px;
+        transition: all .3s ease;
+    }
+}
+
+.genres{
+    @include row();
+    li{
+        border-radius: 3px;
+        display: inline-block;
+        background: #ccc;
+        padding: 10px;
+        margin: 0 10px 10px 0;
+        width: calc(25% - 10px);
+        &:hover{
+            cursor: pointer;
+        }
+    }
+    .btn-clear{
+
+    }
+}
+
+.cast{
+    .person{
+        @include span-columns(4 of 9);
+        overflow: hidden;
+        margin-bottom: 20px;
+        height: 150px;
+    }
+    .portrait{
+        @include span-columns(1 of 4);
+        display: block;
+        width: auto;
+        height: 100%;
+        overflow: hidden;
+        img{
+            height: 100%;
+            width: auto;
+        }
+    }
+    .name{
+        font-size: 2rem;
+    }
+    .known_for{
+        border-bottom: 1px solid darken($cm-lightgrey,25%);
+        color: darken($cm-lightgrey,25%);
+    }
+    .info{
+        //@include span-columns(3 of 4);
+        ul li{
+            text-transform: uppercase;
+            font-size: .8rem;
+            color: darken($cm-lightgrey,10%);
+            &:before{
+                content:"-";
+            }
+        }
+    }
+}

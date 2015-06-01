@@ -391,19 +391,18 @@ cite {
 /* FRAMEWORK
 Here the layout of the site is defined with a grid function and breakpoints. The layout file is used to create the page wireframe blocks.
 ========================================================================== */
+html, body {
+  height: 100%;
+  width: 100%; }
+
 #main-wrapper {
-  max-width: 68em;
+  max-width: 100%;
   margin-left: auto;
-  margin-right: auto;
-  padding: 2.35765%; }
+  margin-right: auto; }
   #main-wrapper::after {
     clear: both;
     content: "";
     display: table; }
-
-html, body {
-  min-height: 100%;
-  height: 100%; }
 
 .wrapper {
   max-width: 68em;
@@ -421,25 +420,14 @@ html, body {
     content: "";
     display: table; }
 
-.person {
+.cm-content {
+  margin-left: 25.58941%;
   float: left;
   display: block;
   margin-right: 2.35765%;
-  width: 23.23176%;
-  max-height: 195px;
-  overflow: hidden;
-  margin-bottom: 20px; }
-  .person:last-child {
-    margin-right: 0; }
-  .person:nth-of-type(4n) {
-    margin-right: 0; }
-
-.left, .right {
-  float: left;
-  display: block;
-  margin-right: 2.35765%;
-  width: 48.82117%; }
-  .left:last-child, .right:last-child {
+  width: 74.41059%;
+  padding: 2.35765%; }
+  .cm-content:last-child {
     margin-right: 0; }
 
 /*@import 'framework/grid'; 
@@ -588,6 +576,70 @@ select {
   max-width: 100%;
   width: auto; }
 
+/* CHECKBOX */
+.label-switch {
+  border-radius: 32px;
+  cursor: pointer;
+  display: inline-block;
+  height: 32px;
+  position: relative;
+  width: 52px; }
+  .label-switch input[type="checkbox"] {
+    display: none; }
+    .label-switch input[type="checkbox"] + .checkbox {
+      -webkit-transition: all 0.3s ease;
+      transition: all 0.3s ease;
+      background: #e8e8e8;
+      border-radius: 32px;
+      border: none;
+      cursor: pointer;
+      height: 32px;
+      margin: 0;
+      padding: 0;
+      position: relative;
+      width: 52px;
+      z-index: 0; }
+      .label-switch input[type="checkbox"] + .checkbox:before {
+        position: absolute;
+        top: 2px;
+        right: 0;
+        bottom: 0;
+        left: 2px;
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1);
+        -webkit-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+        background: white;
+        border-radius: 32px;
+        content: "";
+        height: 28px;
+        width: 48px;
+        z-index: 1; }
+      .label-switch input[type="checkbox"] + .checkbox:after {
+        position: absolute;
+        top: 2px;
+        right: 0;
+        bottom: 0;
+        left: 2px;
+        -webkit-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+        height: 28px;
+        width: 28px;
+        background: white;
+        border-radius: 28px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+        content: "";
+        z-index: 2; }
+    .label-switch input[type="checkbox"]:checked + .checkbox {
+      background: #477DCA; }
+      .label-switch input[type="checkbox"]:checked + .checkbox:before {
+        -webkit-transform: scale(0);
+        -ms-transform: scale(0);
+        transform: scale(0); }
+      .label-switch input[type="checkbox"]:checked + .checkbox:after {
+        left: 22px; }
+
 ul, ol {
   margin: 0;
   padding: 0;
@@ -650,7 +702,6 @@ form.search-bar {
     transition: border-color;
     background-color: white;
     border-radius: 3px;
-    border-radius: 3px;
     border: 1px solid #DDD;
     display: block;
     font-size: 1em;
@@ -709,6 +760,41 @@ td {
 
 tr, td, th {
   vertical-align: middle; }
+
+.cm-sidebar {
+  background: #ccc;
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 23.23176%;
+  height: 100vh;
+  position: fixed; }
+  .cm-sidebar:last-child {
+    margin-right: 0; }
+  .cm-sidebar .link {
+    padding: 1rem;
+    display: block;
+    height: 4.5rem;
+    width: 100%;
+    border-top: 1px solid #bbb; }
+    .cm-sidebar .link:hover {
+      cursor: pointer;
+      background: #f3f3f3; }
+  .cm-sidebar .title {
+    display: inline-block;
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+            transform: translateY(-50%); }
+  .cm-sidebar .label-switch {
+    float: right;
+    margin: 0;
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+            transform: translateY(-50%); }
 
 /* THEME
 The theme files contain the sites unique styling elements broken down in to site sections including Header, Footer, Nav etc.
@@ -948,6 +1034,77 @@ html, body {
     width: 100%; }
     .below-the-fold .choose-format .tv-shows:last-child {
       margin-right: 0; } }
+
+.answers {
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto; }
+  .answers::after {
+    clear: both;
+    content: "";
+    display: table; }
+
+.multiple-choice .active {
+  background-color: #f23a29;
+  background-image: -webkit-linear-gradient(-323deg, #f23a29, #ffcb10);
+  background-image: -webkit-linear-gradient(37deg, #f23a29, #ffcb10);
+  background-image: linear-gradient(53deg,#f23a29, #ffcb10);
+  color: #fff;
+  padding-left: 20px;
+  -webkit-transition: all .3s ease;
+          transition: all .3s ease; }
+
+.genres {
+  display: block; }
+  .genres::after {
+    clear: both;
+    content: "";
+    display: table; }
+  .genres li {
+    border-radius: 3px;
+    display: inline-block;
+    background: #ccc;
+    padding: 10px;
+    margin: 0 10px 10px 0;
+    width: calc(25% - 10px); }
+    .genres li:hover {
+      cursor: pointer; }
+
+.cast .person {
+  float: left;
+  display: block;
+  margin-right: 3.16844%;
+  width: 42.6842%;
+  overflow: hidden;
+  margin-bottom: 20px;
+  height: 150px; }
+  .cast .person:last-child {
+    margin-right: 0; }
+.cast .portrait {
+  float: left;
+  display: block;
+  margin-right: 7.42297%;
+  width: 19.43277%;
+  display: block;
+  width: auto;
+  height: 100%;
+  overflow: hidden; }
+  .cast .portrait:last-child {
+    margin-right: 0; }
+  .cast .portrait img {
+    height: 100%;
+    width: auto; }
+.cast .name {
+  font-size: 2rem; }
+.cast .known_for {
+  border-bottom: 1px solid #7b7b7b;
+  color: #7b7b7b; }
+.cast .info ul li {
+  text-transform: uppercase;
+  font-size: .8rem;
+  color: #a2a2a2; }
+  .cast .info ul li:before {
+    content: "-"; }
 
 /*@import 'theme/header';
   @import 'theme/nav';

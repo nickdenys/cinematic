@@ -1,11 +1,10 @@
-#main-wrapper{
-  @include outer-container();
-  @include pad();
+html,body{
+    height: 100%;
+    width: 100%;
 }
 
-html,body{
-  min-height: 100%;
-  height: 100%;
+#main-wrapper{
+  @include outer-container(100%);
 }
 
 .wrapper{
@@ -16,16 +15,8 @@ html,body{
   @include row();
 }
 
-.person{
-  @include span-columns(3);
-  max-height: 195px;
-  overflow: hidden;
-  margin-bottom: 20px;
-  &:nth-of-type(4n){
-    margin-right: 0;
-  }
-}
-
-.left, .right{
-  @include span-columns(6);
+.cm-content{
+    @include shift(3);
+  @include span-columns(9);
+    @include pad();
 }

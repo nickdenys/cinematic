@@ -7,19 +7,41 @@
 
     /* DATA */
     $scope.data = {};
-    $scope.data.questionNo = 1;
     $http.get('./data/questions.json').success(function (data){
       $scope.data.questions = data.questions;
-      $scope.data.question = data.questions.movies[$scope.data.questionNo-1];
-      $scope.data.questionID = $scope.data.question.id;
     });
 
 
 
 
 
+
     /* QUESTION CONTROLS */
-    $scope.getPrevQuestion = function(){
+    $scope.data.toggledQuestions = ["genre"];
+    $scope.toggleQuestion = function(id, ev){
+      // Make sure the checkbox is only toggled once
+      if(ev.target.tagName == "INPUT") {
+        var _found = $.inArray(id, this.data.toggledQuestions);
+        if (_found > -1) {
+          this.data.toggledQuestions.splice(_found,1);
+        } else {
+          this.data.toggledQuestions.push(id);
+        }
+      }
+    };
+    $scope.isToggled = function(id){
+      var _found = $.inArray(id, this.data.toggledQuestions) > -1;
+      if(_found) {
+        return true;
+      } else {
+        return false;
+      }
+    };
+    $scope.getQuestion = function(nr, id){
+      $scope.data.questionNo = nr;
+      $scope.data.questionID = id;
+    };
+    /*$scope.getPrevQuestion = function(){
       if (this.data.questionNo > 1) {
         var prevQuestionNo = (this.data.questionNo*1 - 1);
         $scope.data.answer = QuestionSrvc.getAnswer(prevQuestionNo);
@@ -35,14 +57,14 @@
         this.data.answer = null;
         this.data.questionNo++;
       }
-    };
+    };*/
 
     // Watch the questionID and fetch correct function for it
     $scope.$watch(
       function(scope) {
         if (scope.data.questions)
-          scope.data.questionID = scope.data.questions.movies[scope.data.questionNo - 1].id;
-        return scope.data.questionID;
+          //scope.data.questionID = scope.data.questions.movies[scope.data.questionNo - 1].id;
+          return scope.data.questionID;
       },
       function(newValue, oldValue) {
         if ( newValue !== oldValue ) {
@@ -83,6 +105,8 @@
 
 
 
+
+
     /* PREPARE DIFFERENT QUESTIONS */
 
     // Genre
@@ -100,33 +124,28 @@
     }
     $scope.data.multipleSelection = [];
     $scope.addToSelection = function(id, name){
-      // Check for doubles --> remove if true
-      /*if (id in $scope.data.multipleSelection){
-        delete $scope.data.multipleSelection[id];
-      } else {
-        $scope.data.multipleSelection[id] = name;
-      }*/
       $scope.item = {};
       $scope.item.id = id;
       $scope.item.name = name;
 
-      if (checkDoubles()) {
-        console.log('double');
+      // Check for doubles --> remove if true
+      if (checkDoubles() !== false) {
+        $scope.data.multipleSelection.splice(checkDoubles(), 1)
       } else {
-        console.log('adding');
         $scope.data.multipleSelection.push($scope.item);
       }
 
       $('.genres li[data-id="' + id + '"]').toggleClass('active');
       console.log($scope.data.multipleSelection);
       $scope.data.answer = $scope.data.multipleSelection;
+      QuestionSrvc.setAnswer(this.data.questionID, this.data.answer);
     };
     function checkDoubles() {
 
       if ($scope.data.multipleSelection.length) {
         for(var i = 0; i<$scope.data.multipleSelection.length; i++){
           if ($scope.data.multipleSelection[i].id == $scope.item.id){
-            return true;
+            return i;
           }
         }
         return false;
@@ -143,6 +162,7 @@
     $scope.saveDuration = function(val){
       console.log(val);
       $scope.data.answer = val;
+      QuestionSrvc.setAnswer(this.data.questionID, this.data.answer);
     };
 
     // Rating
@@ -153,6 +173,7 @@
     $scope.saveRating = function(val){
       console.log(val);
       $scope.data.answer = val;
+      QuestionSrvc.setAnswer(this.data.questionID, this.data.answer);
     };
 
     // Cast & Crew
@@ -191,6 +212,7 @@
 
       this.data.answer = this.data.selectedCast;
       console.log(this.data.answer);
+      QuestionSrvc.setAnswer(this.data.questionID, this.data.answer);
     };
     $scope.toggleCrew = function(id,name){
 
@@ -202,6 +224,7 @@
 
       this.data.answer = this.data.selectedCrew;
       console.log(this.data.answer);
+      QuestionSrvc.setAnswer(this.data.questionID, this.data.answer);
     };
 
     // Year
@@ -218,7 +241,7 @@
       var _count = 0;
       for (var i = _currentYear; i >= _startYear; i--){
         var item = {};
-        item.value = _count + 1;
+        item.value = i;
         item.text = i;
 
         _data.push(item);
@@ -230,16 +253,60 @@
       options: _years,
       create: false,
       sortField: {field: "text", direction: "desc"},
-      maxItems: 1
+      maxItems: 1,
+      onChange: function(selectize){
+        QuestionSrvc.setAnswer($scope.data.questionID, parseInt($scope.data.answer));
+      }
     };
 
 
+
+
+
+    /* FILTER RESULTS */
+    /* necessary to match api requirements! */
+
+    function filterGenres() {
+      var genres = QuestionSrvc.getAnswer("genre");
+      var data = "";
+      if (genres) {
+        for (var i = 0; i < genres.length; i++) {
+          var id = genres[i].id;
+          if (data === "")
+            data += "" + id;
+          else
+            data += "," + id;
+        }
+        console.log(data);
+        return data;
+      }
+    }
+
+
+
+
+
+
+    /* CLEAR ANSWERS */
+
+    function clearAll(){
+      $scope.data.answer = {};
+      QuestionSrvc.setAnswer($scope.data.questionID, $scope.data.answer);
+    }
+    $scope.clearGenres = function(){
+      this.data.multipleSelection = [];
+      $('.genres li').removeClass('active');
+      clearAll();
+    };
+
+
+
     /* GET RESULTS */
+
     $scope.getMovies = function() {
-      console.log(QuestionSrvc.getAnswer("genre"));
-      /*theMovieDb.discover.getMovies(
+      theMovieDb.discover.getMovies(
         {
-          with_genres: QuestionSrvc.getAnswer("genre")
+          with_genres: filterGenres()
         },
         function (data) {
           var scope = angular.element($('.discover-movie')).scope();
@@ -250,74 +317,8 @@
         },
         function () {
           console.log('error');
-        });*/
-    };
-
-
-
-    /*$scope.movieYear = null;
-    $scope.results = null;
-    $scope.searchPeopleInput = null;
-    $scope.peopleSearchResults = null;
-    $scope.selectedPeople = {};
-
-    localStorageService.set('localstorage', true);
-
-    //console.log(TMDbService.test());
-
-    $scope.getPerson = function(name){
-      var name = encodeURI(name);
-      theMovieDb.search.getPerson(
-        {"query":name},
-        function(data){
-          var scope = angular.element($('.discover-movie')).scope();
-          scope.$apply(function(){
-            scope.peopleSearchResults = JSON.parse(data);
-            console.log(scope.peopleSearchResults);
-          });
-        },
-        function(){
-          console.log('error');
         });
     };
-
-    $scope.togglePeople = function(id,name){
-
-      if (id in $scope.selectedPeople){
-        delete $scope.selectedPeople[id];
-      } else {
-        $scope.selectedPeople[id] = name;
-      }
-
-      $scope.getMovies();
-
-      console.log($scope.selectedPeople);
-    };
-
-    $scope.getMovies = function(){
-      if ($scope.selectedPeople.length){
-        theMovieDb.discover.getMovies(
-        {
-          primary_release_year: $scope.movieYear,
-          //primary_release_year.gte: $scope.movieYear,
-          'with_cast': $scope.selectedPeople   // Brad Pitt
-          //with_genres: 35   // Action
-        },
-        function(data){
-          var scope = angular.element($('.discover-movie')).scope();
-          scope.$apply(function(){
-            scope.results = JSON.parse(data).results;
-              console.log(scope.results);
-          });
-        },
-        function(){
-          console.log('error');
-        });
-      }
-      else {
-        console.log('please select some people');
-      }
-    }*/
 
   }]);
 

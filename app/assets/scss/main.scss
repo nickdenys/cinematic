@@ -55,6 +55,7 @@ Reusable blocks of code are defined including list items, buttons and typography
   @import "modules/pagination";
   @import "modules/search-bar";
   @import "modules/tables";
+  @import "modules/sidebar";
 
 
 
@@ -65,6 +66,7 @@ The theme files contain the sites unique styling elements broken down in to site
 ========================================================================== */
   @import 'theme/main';
   @import 'theme/intro';
+  @import 'theme/answers';
   /*@import 'theme/header';
   @import 'theme/nav';
   @import 'theme/footer';

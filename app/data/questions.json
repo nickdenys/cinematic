@@ -61,7 +61,7 @@
       {
         "nr": 5,
         "id": "year",
-        "title": "Cast",
+        "title": "Year",
         "question": "Watch an old classic or a recent blockbuster?",
         "instructions": "Choose the oldest possible release year",
         "answers": []

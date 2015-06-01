@@ -1,0 +1,33 @@
+.cm-sidebar{
+    background: #ccc;
+    @include span-columns(3);
+    height: 100vh;
+    position: fixed;
+    .link{
+        padding: 1rem;
+        display: block;
+        height: 4.5rem;
+        width: 100%;
+        border-top: 1px solid #bbb;
+        &:hover{
+            cursor: pointer;
+            background: $cm-lightergrey;
+        }
+    }
+    .title{
+        display: inline-block;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .label-switch{
+        float: right;
+        margin: 0;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        .checkbox{
+
+        }
+    }
+}
