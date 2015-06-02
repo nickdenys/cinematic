@@ -21,6 +21,7 @@
     "fontawesome": "~4.3.0",
     "angular-local-storage": "~0.2.1",
     "selectize": "~0.12.1",
-    "angular-selectize2": "~1.2.1"
+    "angular-selectize2": "~1.2.1",
+    "angularjs-slider": "~0.1.21"
   }
 }

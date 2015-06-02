@@ -1,0 +1,96 @@
+/**
+ * Angular JS slider directive
+ *
+ * (c) Rafal Zajac <rzajac@gmail.com>
+ * http://github.com/rzajac/angularjs-slider
+ *
+ * Licensed under the MIT license
+ */
+
+/* Slider colors */
+
+/* Slider size parameters */
+
+rzslider {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 4px;
+    margin: 30px 0 15px 0;
+    vertical-align: middle;
+}
+
+rzslider span {
+    position: absolute;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+rzslider span.rz-base {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+}
+
+rzslider span.rz-bar {
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    background: $cm-lightgrey;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+rzslider span.rz-bar.rz-selection {
+    z-index: 1;
+    width: 0;
+    background: $cm-yellow;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+rzslider span.rz-pointer {
+    top: -14px;
+    z-index: 2;
+    cursor: pointer;
+    background: $cm-red;
+    @include linear-gradient(8deg, $cm-red, $cm-yellow);
+    width: 32px;
+    height: 32px;
+    border-radius: 15%;
+    transform: rotate(45deg);
+    &:hover {
+        background: lighten($cm-red,10%);
+        @include linear-gradient(53deg, $cm-red, $cm-yellow);
+    }
+    &:active{
+        transform: rotate(45deg) scale(1.1);
+        @include linear-gradient(53deg, $cm-red, $cm-yellow);
+    }
+}
+
+rzslider span.rz-pointer:hover:after {
+    background-color: #ffffff;
+}
+
+rzslider span.rz-pointer.rz-active:after {
+    background-color: #451aff;
+}
+
+rzslider span.rz-bubble {
+    display: none;
+    top: -32px;
+    padding: 1px 3px;
+    color: #55637d;
+    cursor: default;
+}
+
+rzslider span.rz-bubble.rz-selection {
+    top: 16px;
+}
+
+rzslider span.rz-bubble.rz-limit {
+    color: #55637d;
+}

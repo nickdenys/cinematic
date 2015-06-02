@@ -1054,6 +1054,7 @@ html, body {
   -webkit-transition: all .3s ease;
           transition: all .3s ease; }
 
+/* GENRES */
 .genres {
   display: block; }
   .genres::after {
@@ -1066,10 +1067,13 @@ html, body {
     background: #ccc;
     padding: 10px;
     margin: 0 10px 10px 0;
-    width: calc(25% - 10px); }
+    width: calc(25% - 10px);
+    -webkit-transition: all .3s ease;
+            transition: all .3s ease; }
     .genres li:hover {
       cursor: pointer; }
 
+/* CAST */
 .cast .person {
   float: left;
   display: block;
@@ -1105,6 +1109,189 @@ html, body {
   color: #a2a2a2; }
   .cast .info ul li:before {
     content: "-"; }
+
+/* DURATION */
+.slider-duration-wrapper, .slider-rating-wrapper {
+  max-width: 600px; }
+
+#slider-duration {
+  margin-bottom: 2rem; }
+
+.slider-duration-bg {
+  margin-top: 1rem; }
+  .slider-duration-bg ul {
+    text-align: justify; }
+    .slider-duration-bg ul li {
+      display: inline-block;
+      width: 100px;
+      font-size: .8rem;
+      color: #838383;
+      text-align: center; }
+      .slider-duration-bg ul li:nth-of-type(1) {
+        -webkit-transform: translateX(-35%);
+            -ms-transform: translateX(-35%);
+                transform: translateX(-35%); }
+      .slider-duration-bg ul li:nth-of-type(2) {
+        -webkit-transform: translateX(-21%);
+            -ms-transform: translateX(-21%);
+                transform: translateX(-21%); }
+      .slider-duration-bg ul li:nth-of-type(3) {
+        -webkit-transform: translateX(-10%);
+            -ms-transform: translateX(-10%);
+                transform: translateX(-10%); }
+      .slider-duration-bg ul li:nth-of-type(4) {
+        -webkit-transform: translateX(10%);
+            -ms-transform: translateX(10%);
+                transform: translateX(10%); }
+      .slider-duration-bg ul li:nth-of-type(5) {
+        -webkit-transform: translateX(21%);
+            -ms-transform: translateX(21%);
+                transform: translateX(21%); }
+      .slider-duration-bg ul li:last-of-type {
+        -webkit-transform: translateX(35%);
+            -ms-transform: translateX(35%);
+                transform: translateX(35%); }
+
+.slider-rating-bg {
+  margin-top: 1rem; }
+  .slider-rating-bg ul {
+    text-align: justify; }
+    .slider-rating-bg ul li {
+      display: inline-block;
+      width: 60px;
+      font-size: .8rem;
+      color: #838383;
+      text-align: center; }
+      .slider-rating-bg ul li:nth-of-type(1) {
+        -webkit-transform: translateX(-20%);
+            -ms-transform: translateX(-20%);
+                transform: translateX(-20%); }
+      .slider-rating-bg ul li:nth-of-type(2) {
+        -webkit-transform: translateX(-18%);
+            -ms-transform: translateX(-18%);
+                transform: translateX(-18%); }
+      .slider-rating-bg ul li:nth-of-type(3) {
+        -webkit-transform: translateX(-12%);
+            -ms-transform: translateX(-12%);
+                transform: translateX(-12%); }
+      .slider-rating-bg ul li:nth-of-type(4) {
+        -webkit-transform: translateX(-10%);
+            -ms-transform: translateX(-10%);
+                transform: translateX(-10%); }
+      .slider-rating-bg ul li:nth-of-type(5) {
+        -webkit-transform: translateX(-5%);
+            -ms-transform: translateX(-5%);
+                transform: translateX(-5%); }
+      .slider-rating-bg ul li:nth-of-type(6) {
+        -webkit-transform: translateX(1%);
+            -ms-transform: translateX(1%);
+                transform: translateX(1%); }
+      .slider-rating-bg ul li:nth-of-type(7) {
+        -webkit-transform: translateX(5%);
+            -ms-transform: translateX(5%);
+                transform: translateX(5%); }
+      .slider-rating-bg ul li:nth-of-type(8) {
+        -webkit-transform: translateX(10%);
+            -ms-transform: translateX(10%);
+                transform: translateX(10%); }
+      .slider-rating-bg ul li:nth-of-type(9) {
+        -webkit-transform: translateX(15%);
+            -ms-transform: translateX(15%);
+                transform: translateX(15%); }
+      .slider-rating-bg ul li:last-of-type {
+        -webkit-transform: translateX(20%);
+            -ms-transform: translateX(20%);
+                transform: translateX(20%); }
+
+/**
+ * Angular JS slider directive
+ *
+ * (c) Rafal Zajac <rzajac@gmail.com>
+ * http://github.com/rzajac/angularjs-slider
+ *
+ * Licensed under the MIT license
+ */
+/* Slider colors */
+/* Slider size parameters */
+rzslider {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 4px;
+  margin: 30px 0 15px 0;
+  vertical-align: middle; }
+
+rzslider span {
+  position: absolute;
+  display: inline-block;
+  white-space: nowrap; }
+
+rzslider span.rz-base {
+  width: 100%;
+  height: 100%;
+  padding: 0; }
+
+rzslider span.rz-bar {
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  background: #bbb;
+  border-radius: 2px; }
+
+rzslider span.rz-bar.rz-selection {
+  z-index: 1;
+  width: 0;
+  background: #ffcb10;
+  border-radius: 2px; }
+
+rzslider span.rz-pointer {
+  top: -14px;
+  z-index: 2;
+  cursor: pointer;
+  background: #f23a29;
+  background-color: #f23a29;
+  background-image: -webkit-linear-gradient(-278deg, #f23a29, #ffcb10);
+  background-image: -webkit-linear-gradient(82deg, #f23a29, #ffcb10);
+  background-image: linear-gradient(8deg,#f23a29, #ffcb10);
+  width: 32px;
+  height: 32px;
+  border-radius: 15%;
+  -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+          transform: rotate(45deg); }
+  rzslider span.rz-pointer:hover {
+    background: #f56659;
+    background-color: #f23a29;
+    background-image: -webkit-linear-gradient(-323deg, #f23a29, #ffcb10);
+    background-image: -webkit-linear-gradient(37deg, #f23a29, #ffcb10);
+    background-image: linear-gradient(53deg,#f23a29, #ffcb10); }
+  rzslider span.rz-pointer:active {
+    -webkit-transform: rotate(45deg) scale(1.1);
+        -ms-transform: rotate(45deg) scale(1.1);
+            transform: rotate(45deg) scale(1.1);
+    background-color: #f23a29;
+    background-image: -webkit-linear-gradient(-323deg, #f23a29, #ffcb10);
+    background-image: -webkit-linear-gradient(37deg, #f23a29, #ffcb10);
+    background-image: linear-gradient(53deg,#f23a29, #ffcb10); }
+
+rzslider span.rz-pointer:hover:after {
+  background-color: #ffffff; }
+
+rzslider span.rz-pointer.rz-active:after {
+  background-color: #451aff; }
+
+rzslider span.rz-bubble {
+  display: none;
+  top: -32px;
+  padding: 1px 3px;
+  color: #55637d;
+  cursor: default; }
+
+rzslider span.rz-bubble.rz-selection {
+  top: 16px; }
+
+rzslider span.rz-bubble.rz-limit {
+  color: #55637d; }
 
 /*@import 'theme/header';
   @import 'theme/nav';

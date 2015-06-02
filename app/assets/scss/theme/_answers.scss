@@ -11,6 +11,11 @@
     }
 }
 
+
+
+
+/* GENRES */
+
 .genres{
     @include row();
     li{
@@ -20,6 +25,7 @@
         padding: 10px;
         margin: 0 10px 10px 0;
         width: calc(25% - 10px);
+        transition: all .3s ease;
         &:hover{
             cursor: pointer;
         }
@@ -28,6 +34,8 @@
 
     }
 }
+
+/* CAST */
 
 .cast{
     .person{
@@ -62,6 +70,91 @@
             color: darken($cm-lightgrey,10%);
             &:before{
                 content:"-";
+            }
+        }
+    }
+}
+
+
+/* DURATION */
+.slider-duration-wrapper,
+.slider-rating-wrapper{
+    max-width:600px;
+}
+#slider-duration{
+    margin-bottom: 2rem;
+}
+.slider-duration-bg{
+    margin-top: 1rem;
+    ul{
+        text-align: justify;
+        li{
+            display: inline-block;
+            width: 100px;
+            font-size: .8rem;
+            color: $cm-grey;
+            text-align: center;
+            &:nth-of-type(1){
+                transform: translateX(-35%);
+            }
+            &:nth-of-type(2){
+                transform: translateX(-21%);
+            }
+            &:nth-of-type(3){
+                transform: translateX(-10%);
+            }
+            &:nth-of-type(4){
+                transform: translateX(10%);
+            }
+            &:nth-of-type(5){
+                transform: translateX(21%);
+            }
+            &:last-of-type{
+                transform: translateX(35%);
+            }
+        }
+    }
+}
+
+.slider-rating-bg{
+    margin-top: 1rem;
+    ul{
+        text-align: justify;
+        li{
+            display: inline-block;
+            width: 60px;
+            font-size: .8rem;
+            color: $cm-grey;
+            text-align: center;
+            &:nth-of-type(1){
+                transform: translateX(-20%);
+            }
+            &:nth-of-type(2){
+                transform: translateX(-18%);
+            }
+            &:nth-of-type(3){
+                transform: translateX(-12%);
+            }
+            &:nth-of-type(4){
+                transform: translateX(-10%);
+            }
+            &:nth-of-type(5){
+                transform: translateX(-5%);
+            }
+            &:nth-of-type(6){
+                transform: translateX(1%);
+            }
+            &:nth-of-type(7){
+                transform: translateX(5%);
+            }
+            &:nth-of-type(8){
+                transform: translateX(10%);
+            }
+            &:nth-of-type(9){
+                transform: translateX(15%);
+            }
+            &:last-of-type{
+                transform: translateX(20%);
             }
         }
     }

@@ -14,10 +14,8 @@
 
 
 
-
-
     /* QUESTION CONTROLS */
-    $scope.data.toggledQuestions = ["genre"];
+    $scope.data.toggledQuestions = ["genre","duration"];
     $scope.toggleQuestion = function(id, ev){
       // Make sure the checkbox is only toggled once
       if(ev.target.tagName == "INPUT") {
@@ -164,11 +162,15 @@
       $scope.data.answer = val;
       QuestionSrvc.setAnswer(this.data.questionID, this.data.answer);
     };
+    $scope.$on("slideEnded", function() {
+      QuestionSrvc.setAnswer($scope.data.questionID, $scope.data.answer);
+    });
 
     // Rating
     function prepareRating() {
       $scope.answerType = "slider-rating";
       $scope.data.answer = 1;
+      $scope.data.ratings = [1,2,3,4,5,6,7,8,9,10];
     }
     $scope.saveRating = function(val){
       console.log(val);
