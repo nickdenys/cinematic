@@ -1,5 +1,7 @@
 <div class="cm-sidebar">
-    <h2>Filters</h2>
+    <a href="/#" class="logo" title="Go back">
+        <img src="/assets/images/logo.png" alt="cinematic"/>
+    </a>
     <nav>
         <ul>
             <li class="link" ng-repeat="question in data.questions.movies" data-nr="{{question.nr}}" data-id="{{question.id}}" ng-click="getQuestion(question.nr, question.id)">

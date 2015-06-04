@@ -15,7 +15,7 @@
 
 
     /* QUESTION CONTROLS */
-    $scope.data.toggledQuestions = ["year"];
+    $scope.data.toggledQuestions = [];
     $scope.toggleQuestion = function(id, ev){
       // Make sure the checkbox is only toggled once
       if(ev.target.tagName == "INPUT") {
@@ -27,13 +27,9 @@
         }
       }
     };
-    $scope.isToggled = function(id){
+    $scope.isToggled = function(id) {
       var _found = $.inArray(id, this.data.toggledQuestions) > -1;
-      if(_found) {
-        return true;
-      } else {
-        return false;
-      }
+      return _found ? true : false;
     };
     $scope.getQuestion = function(nr, id){
       $scope.data.questionNo = nr;
@@ -261,7 +257,7 @@
       create: false,
       sortField: {field: "text", direction: "desc"},
       maxItems: 1,
-      onChange: function(selectize){
+      onChange: function(){
         QuestionSrvc.setAnswer($scope.data.questionID, parseInt($scope.data.answer));
       }
     };
@@ -287,8 +283,7 @@
         var year = today.getFullYear();
         var month = ("0" + (today.getMonth() + 1)).slice(-2);
         var day = ("0" + today.getDate()).slice(-2);
-        var date = year+'-'+month+'-'+day;
-        return date;
+        return year+'-'+month+'-'+day;
       }
 
 
@@ -344,9 +339,8 @@
 
 
     function filterData(data) {
-      var parsedData = JSON.parse(data).results;
-      $scope.data.results = parsedData;
-      console.log($scope.data.results)
+      $scope.data.results = JSON.parse(data).results;
+      console.log($scope.data.results);
 
       /*
 
@@ -414,7 +408,7 @@
 
       theMovieDb.discover.getMovies(
         {
-          'release_date.lte': filterReleaseDate(),
+          'primary_release_date.lte': filterReleaseDate(),
           'vote_average.gte': filterRating(),
           'with_cast': filterCast(),
           'with_crew': filterCrew(),

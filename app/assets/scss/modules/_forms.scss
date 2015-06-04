@@ -79,7 +79,7 @@ select {
 
 /* CHECKBOX */
 .label-switch {
-  $action-color: #477DCA !default;
+  $action-color: $cm-yellow !default;
   $base-background-color: white !default;
   $switch-width: 52px;
   $switch-padding: 2px;
@@ -141,7 +141,8 @@ select {
 
     &:checked {
       + .checkbox {
-        background: $action-color;
+        //background: $action-color;
+        background: linear-gradient(left, $cm-yellow, $cm-red);
 
         &:before {
           @include transform(scale(0));
