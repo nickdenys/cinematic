@@ -37,7 +37,7 @@
 
 /* CAST */
 
-.cast{
+.cast, .crew{
     .person{
         @include span-columns(4 of 9);
         overflow: hidden;
@@ -85,29 +85,37 @@
     margin-bottom: 2rem;
 }
 .slider-duration-bg{
-    margin-top: 1rem;
+    margin-top: 1.5rem;
     ul{
         text-align: justify;
         li{
+            font-style: italic;
             display: inline-block;
-            width: 100px;
+            width: 120px;
             font-size: .8rem;
             color: $cm-grey;
             text-align: center;
+            &:before{
+                font-style: normal;
+                content:"|";
+                position: absolute;
+                top: -100%;
+                display: block;
+                width: 100%;
+                height: 50%;
+                overflow: hidden;
+            }
             &:nth-of-type(1){
-                transform: translateX(-35%);
+                transform: translateX(-36%);
             }
             &:nth-of-type(2){
-                transform: translateX(-21%);
+                transform: translateX(-19%);
             }
             &:nth-of-type(3){
-                transform: translateX(-10%);
+                transform: translateX(-1%);
             }
             &:nth-of-type(4){
-                transform: translateX(10%);
-            }
-            &:nth-of-type(5){
-                transform: translateX(21%);
+                transform: translateX(17%);
             }
             &:last-of-type{
                 transform: translateX(35%);
@@ -117,44 +125,55 @@
 }
 
 .slider-rating-bg{
-    margin-top: 1rem;
+    margin-top: 1.5rem;
     ul{
         text-align: justify;
         li{
+            font-style: italic;
             display: inline-block;
             width: 60px;
             font-size: .8rem;
             color: $cm-grey;
             text-align: center;
+            &:before{
+                font-style: normal;
+                content:"|";
+                position: absolute;
+                top: -100%;
+                display: block;
+                width: 100%;
+                height: 50%;
+                overflow: hidden;
+            }
             &:nth-of-type(1){
-                transform: translateX(-20%);
+                transform: translateX(-23%);
             }
             &:nth-of-type(2){
-                transform: translateX(-18%);
+                transform: translateX(-19%);
             }
             &:nth-of-type(3){
-                transform: translateX(-12%);
+                transform: translateX(-14%);
             }
             &:nth-of-type(4){
-                transform: translateX(-10%);
+                transform: translateX(-9%);
             }
             &:nth-of-type(5){
-                transform: translateX(-5%);
+                transform: translateX(-4%);
             }
             &:nth-of-type(6){
-                transform: translateX(1%);
+                transform: translateX(-1%);
             }
             &:nth-of-type(7){
-                transform: translateX(5%);
+                transform: translateX(4%);
             }
             &:nth-of-type(8){
-                transform: translateX(10%);
+                transform: translateX(9%);
             }
             &:nth-of-type(9){
-                transform: translateX(15%);
+                transform: translateX(14%);
             }
             &:last-of-type{
-                transform: translateX(20%);
+                transform: translateX(19%);
             }
         }
     }

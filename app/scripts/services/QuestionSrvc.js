@@ -19,13 +19,6 @@
             return answers[id];
           else
             return {};
-        },
-        setToggledQuestion:function(id){
-          toggledQuestions.push(id);
-        },
-        getToggledQuestion:function(id){
-          return true;
-          //return $.inArray(id, toggledQuestions) > -1;
         }
       }
 

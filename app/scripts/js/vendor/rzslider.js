@@ -642,7 +642,7 @@ function throttle(func, wait, options) {
     {
       var flHidden = false, clHidden = false;
 
-      if(this.minLab.rzsl <= this.flrLab.rzsl + this.flrLab.rzsw + 5)
+      if(this.minLab.rzsl <= this.flrLab.rzsl + this.flrLab.rzsw + 15)
       {
         flHidden = true;
         this.hideEl(this.flrLab);

@@ -15,7 +15,7 @@
 
 
     /* QUESTION CONTROLS */
-    $scope.data.toggledQuestions = ["genre","duration"];
+    $scope.data.toggledQuestions = ["year"];
     $scope.toggleQuestion = function(id, ev){
       // Make sure the checkbox is only toggled once
       if(ev.target.tagName == "INPUT") {
@@ -155,7 +155,8 @@
     // Duration
     function prepareDuration() {
       $scope.answerType = "slider-duration";
-      $scope.data.answer = "0";
+      $scope.data.answer = 0;
+      QuestionSrvc.setAnswer("duration", $scope.data.answer);
     }
     $scope.saveDuration = function(val){
       console.log(val);
@@ -169,8 +170,12 @@
     // Rating
     function prepareRating() {
       $scope.answerType = "slider-rating";
-      $scope.data.answer = 1;
-      $scope.data.ratings = [1,2,3,4,5,6,7,8,9,10];
+      $scope.data.answer = 55;
+      $scope.data.ratings = [];
+      for (var i = 1; i<=100; i++){
+        if (i%10 == 0)
+          $scope.data.ratings.push(i);
+      }
     }
     $scope.saveRating = function(val){
       console.log(val);
@@ -265,9 +270,31 @@
 
 
 
+
+
+
     /* FILTER RESULTS */
     /* necessary to match api requirements! */
 
+    function filterReleaseDate() {
+      var answeredYear = QuestionSrvc.getAnswer("year");
+      var data = "";
+      if (typeof(answeredYear) != 'object'){
+        data += answeredYear + "-12-31";
+        return data;
+      } else {
+        var today = new Date();
+        var year = today.getFullYear();
+        var month = ("0" + (today.getMonth() + 1)).slice(-2);
+        var day = ("0" + today.getDate()).slice(-2);
+        var date = year+'-'+month+'-'+day;
+        return date;
+      }
+
+
+
+
+    }
     function filterGenres() {
       var genres = QuestionSrvc.getAnswer("genre");
       var data = "";
@@ -279,9 +306,85 @@
           else
             data += "," + id;
         }
-        console.log(data);
         return data;
       }
+    }
+    function filterRating() {
+      var rating = QuestionSrvc.getAnswer("rating") / 10;
+      return rating.toFixed(2);
+    }
+    // Get all movies released today or earlier
+    function filterCast() {
+      var castData = QuestionSrvc.getAnswer("cast");
+      var data = "";
+      for(var property in castData){
+        if (castData.hasOwnProperty(property)){
+          if (data === "")
+            data += "" + property;
+          else
+            data += "|" + property;
+        }
+      }
+      return data;
+    }
+    function filterCrew() {
+      var castData = QuestionSrvc.getAnswer("crew");
+      var data = "";
+      for(var property in castData){
+        if (castData.hasOwnProperty(property)){
+          if (data === "")
+            data += "" + property;
+          else
+            data += "|" + property;
+        }
+      }
+      return data;
+    }
+
+
+
+    function filterData(data) {
+      var parsedData = JSON.parse(data).results;
+      $scope.data.results = parsedData;
+      console.log($scope.data.results)
+
+      /*
+
+      // Link duration value to minutes
+      var durationAnswers = $scope.data.questions.movies[1].answers;
+      $scope.data.runtime = durationAnswers[QuestionSrvc.getAnswer("duration")].minutes;
+      //$scope.data.runtime = $scope.data.questions.movies[1].answers[QuestionSrvc.getAnswer("duration")].minutes;
+      //console.log($scope.data.runtime);
+
+      if (QuestionSrvc.getAnswer("duration") != 0){
+
+        $scope.data.filteredResults = [];
+
+        // Get runtime for each movie
+        for(var i=0; i< parsedData.length; i++){
+          var movieId = parsedData[i].id;
+          theMovieDb.movies.getById({"id":movieId },
+            function(data){
+              var parsedMovie = JSON.parse(data);
+              var scope = angular.element($('.discover-movie')).scope();
+              scope.$apply(function(){
+
+                scope.data.filteredResults.push(parsedMovie);
+                // Check runtimes
+                if (parsedMovie.runtime >= scope.data.runtime) {
+                  // Add each movie to scope.data.filteredResults
+                  scope.data.filteredResults.push(parsedMovie);
+                }
+              });
+            },function(error){
+              console.log(error);
+            });
+        }
+        console.log("filtered: " + $scope.data.filteredResults);
+      } else {
+        console.log('doesnt matter');
+        $scope.data.results = parsedData;
+      }*/
     }
 
 
@@ -306,19 +409,27 @@
     /* GET RESULTS */
 
     $scope.getMovies = function() {
+
+      filterCast();
+
       theMovieDb.discover.getMovies(
         {
-          with_genres: filterGenres()
+          'release_date.lte': filterReleaseDate(),
+          'vote_average.gte': filterRating(),
+          'with_cast': filterCast(),
+          'with_crew': filterCrew(),
+          'with_genres': filterGenres()
         },
         function (data) {
-          var scope = angular.element($('.discover-movie')).scope();
+          filterData(data);
+          /*var scope = angular.element($('.discover-movie')).scope();
           scope.$apply(function () {
             scope.data.results = JSON.parse(data).results;
             console.log(scope.data.results);
-          });
+          });*/
         },
-        function () {
-          console.log('error');
+        function (error) {
+          console.log(error);
         });
     };
 

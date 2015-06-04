@@ -17,28 +17,24 @@
         "instructions": "Do you prefer a longer or shorter movie?",
         "answers": [
           {
-            "minutes": "0",
+            "minutes": 0,
             "label": "doesn't matter"
           },
           {
-            "minutes": "59",
+            "minutes": 45,
             "label": "< 1 hour"
           },
           {
-            "minutes": "60",
+            "minutes": 60,
             "label": "1 hour"
           },
           {
-            "minutes": "90",
+            "minutes": 90,
             "label": "1.5 hours"
           },
           {
-            "minutes": "120",
+            "minutes": 120,
             "label": "2 hours"
-          },
-          {
-            "minutes": "121",
-            "label": "2+ hours"
           }
         ]
       },
@@ -63,7 +59,7 @@
         "id": "year",
         "title": "Year",
         "question": "Watch an old classic or a recent blockbuster?",
-        "instructions": "Choose the oldest possible release year",
+        "instructions": "Only watch movies from this year or older",
         "answers": []
       },
       {
