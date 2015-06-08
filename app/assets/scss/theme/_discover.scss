@@ -1,0 +1,11 @@
+.question-title{
+    font-family: $oswald;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: $cm-darkgrey;
+    margin-bottom: 1rem;
+}
+.question-instructions{
+    font-style: italic;
+    color: $cm-lightgrey;
+}

@@ -15,7 +15,7 @@
 
 
     /* QUESTION CONTROLS */
-    $scope.data.toggledQuestions = [];
+    $scope.data.toggledQuestions = ["genre"];
     $scope.toggleQuestion = function(id, ev){
       // Make sure the checkbox is only toggled once
       if(ev.target.tagName == "INPUT") {
@@ -105,6 +105,7 @@
 
     // Genre
     function prepareGenre() {
+      $scope.data.answer = {};
       $scope.answerType = "multiple";
       theMovieDb.genres.getList({}, function(data){
         var scope = angular.element($('.discover-movie')).scope();
@@ -299,7 +300,7 @@
           if (data === "")
             data += "" + id;
           else
-            data += "," + id;
+            data += "|" + id;
         }
         return data;
       }

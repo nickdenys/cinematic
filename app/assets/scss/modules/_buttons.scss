@@ -8,3 +8,52 @@ input[type="submit"] {
   vertical-align: middle;
   white-space: nowrap;
 }
+
+.cm-btn{
+    background: transparent;
+    border: 3px solid $cm-grey;
+    color: $cm-grey;
+    text-transform: uppercase;
+    font-size: .9rem;
+    padding: 15px 40px;
+    max-width: 200px;
+    transition: all .2s ease;
+    &:hover{
+        background: $cm-grey;
+    }
+    .fa-lg{
+        vertical-align: -7%;
+    }
+}
+
+.cm-btn-red{
+    border-color: $cm-red;
+    color: $cm-red;
+    &:hover{
+        background: $cm-red;
+    }
+}
+
+.cm-btn-blue{
+    border-color: $cm-blue;
+    color: $cm-blue;
+    &:hover{
+        background: $cm-blue;
+    }
+}
+
+.cm-btn-green{
+    border-color: $cm-green;
+    color: $cm-green;
+    &:hover{
+        background: $cm-green;
+    }
+}
+
+.cm-btn-yellow{
+    border-color: $cm-yellow;
+    color: $cm-yellow;
+    &:hover{
+        background: $cm-yellow;
+    }
+}

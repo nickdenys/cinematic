@@ -2,6 +2,7 @@
 
 var cinematic = angular.module('cmApp', [
     'ngRoute',
+    'ngAnimate',
     'smoothScroll',
     'cmApp.controllers',
     'cmApp.services',

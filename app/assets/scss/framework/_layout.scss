@@ -16,7 +16,16 @@ html,body{
 }
 
 .cm-content{
-    @include shift(3);
-  @include span-columns(9);
+    @include shift(2.5);
+    @include span-columns(8.5);
     @include pad();
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.cm-content{
+    .content-top{
+        height: 10rem;
+        padding: 3rem 0;
+    }
 }

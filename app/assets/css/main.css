@@ -305,7 +305,7 @@ button, input[type="submit"] {
   -webkit-font-smoothing: antialiased;
   background-color: #477DCA;
   border-radius: 3px;
-  color: white;
+  color: #838383;
   display: inline-block;
   font-size: 1em;
   font-weight: bold;
@@ -318,6 +318,20 @@ button, input[type="submit"] {
   button:disabled, input[type="submit"]:disabled {
     cursor: not-allowed;
     opacity: 0.5; }
+
+.cm-sidebar, .genres li {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+.ng-hide-add {
+  opacity: 1; }
+
+.ng-hide-remove {
+  opacity: 0; }
 
 body {
   -webkit-font-smoothing: antialiased;
@@ -421,14 +435,20 @@ html, body {
     display: table; }
 
 .cm-content {
-  margin-left: 25.58941%;
+  margin-left: 21.32451%;
   float: left;
   display: block;
   margin-right: 2.35765%;
-  width: 74.41059%;
-  padding: 2.35765%; }
+  width: 70.14568%;
+  padding: 2.35765%;
+  padding-top: 0;
+  padding-bottom: 0; }
   .cm-content:last-child {
     margin-right: 0; }
+
+.cm-content .content-top {
+  height: 10rem;
+  padding: 3rem 0; }
 
 /*@import 'framework/grid'; 
   @import 'framework/breakpoints';
@@ -500,6 +520,45 @@ button, input[type="submit"] {
           user-select: none;
   vertical-align: middle;
   white-space: nowrap; }
+
+.cm-btn {
+  background: transparent;
+  border: 3px solid #838383;
+  color: #838383;
+  text-transform: uppercase;
+  font-size: .9rem;
+  padding: 15px 40px;
+  max-width: 200px;
+  -webkit-transition: all .2s ease;
+          transition: all .2s ease; }
+  .cm-btn:hover {
+    background: #838383; }
+  .cm-btn .fa-lg {
+    vertical-align: -7%; }
+
+.cm-btn-red {
+  border-color: #f23a29;
+  color: #f23a29; }
+  .cm-btn-red:hover {
+    background: #f23a29; }
+
+.cm-btn-blue {
+  border-color: #3ab9c3;
+  color: #3ab9c3; }
+  .cm-btn-blue:hover {
+    background: #3ab9c3; }
+
+.cm-btn-green {
+  border-color: #A1C366;
+  color: #A1C366; }
+  .cm-btn-green:hover {
+    background: #A1C366; }
+
+.cm-btn-yellow {
+  border-color: #ffcb10;
+  color: #ffcb10; }
+  .cm-btn-yellow:hover {
+    background: #ffcb10; }
 
 .flash-error {
   background-color: #FBE3E4;
@@ -772,20 +831,27 @@ tr, td, th {
   position: fixed; }
   .cm-sidebar:last-child {
     margin-right: 0; }
+  .cm-sidebar .logo-wrapper {
+    height: 10rem; }
   .cm-sidebar .logo {
     display: block;
     text-align: center;
-    margin: 3rem auto;
+    margin: 0 auto;
     width: 200px;
     -webkit-transition: -webkit-transform .2s ease;
-            transition: transform .2s ease; }
+            transition: transform .2s ease;
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+            transform: translateY(-50%); }
     .cm-sidebar .logo img {
       width: inherit;
       height: auto; }
     .cm-sidebar .logo:hover {
-      -webkit-transform: scale(1.02);
-          -ms-transform: scale(1.02);
-              transform: scale(1.02); }
+      -webkit-transform: translateY(-50%) scale(0.98);
+          -ms-transform: translateY(-50%) scale(0.98);
+              transform: translateY(-50%) scale(0.98); }
   .cm-sidebar .link {
     padding: 1rem;
     display: block;
@@ -794,10 +860,32 @@ tr, td, th {
     border-top: 1px solid #ddd;
     font-family: "Oswald", "Aller", "Helvetica Neue", "Arial", sans-serif;
     text-transform: uppercase;
-    color: #838383; }
+    color: #838383;
+    -webkit-transition: background .2s ease;
+            transition: background .2s ease; }
     .cm-sidebar .link:hover {
       cursor: pointer;
-      background: #eee; }
+      background: #e5e5e5; }
+  .cm-sidebar .button button {
+    width: 100%;
+    border-radius: 0;
+    padding: 30px 0;
+    position: absolute;
+    bottom: 0;
+    color: #fff;
+    background-color: rgba(255, 203, 16, 0.5);
+    background-image: -webkit-linear-gradient(-323deg, rgba(255, 203, 16, 0.5) 0%, #A1C366 50%);
+    background-image: -webkit-linear-gradient(37deg, rgba(255, 203, 16, 0.5) 0%, #A1C366 50%);
+    background-image: linear-gradient(53deg,rgba(255, 203, 16, 0.5) 0%, #A1C366 50%);
+    font-family: "Oswald", "Aller", "Helvetica Neue", "Arial", sans-serif;
+    text-transform: uppercase;
+    font-weight: 400;
+    -webkit-transition: all .2s ease;
+            transition: all .2s ease; }
+    .cm-sidebar .button button i.fa {
+      margin-left: 5px; }
+    .cm-sidebar .button button:hover {
+      letter-spacing: 1px; }
   .cm-sidebar .title {
     display: inline-block;
     position: relative;
@@ -1053,6 +1141,17 @@ html, body {
     .below-the-fold .choose-format .tv-shows:last-child {
       margin-right: 0; } }
 
+.question-title {
+  font-family: "Oswald", "Aller", "Helvetica Neue", "Arial", sans-serif;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: #424242;
+  margin-bottom: 1rem; }
+
+.question-instructions {
+  font-style: italic;
+  color: #bbb; }
+
 .answers {
   max-width: 100%;
   margin-left: auto;
@@ -1075,6 +1174,11 @@ html, body {
   -webkit-transition: color .1s ease, -webkit-transform .3s ease;
           transition: color .1s ease, transform .3s ease;
   border: none; }
+  .multiple-choice .active:hover {
+    background-color: #3ab9c3;
+    background-image: -webkit-linear-gradient(-323deg, #3ab9c3, #ffcb10);
+    background-image: -webkit-linear-gradient(37deg, #3ab9c3, #ffcb10);
+    background-image: linear-gradient(53deg,#3ab9c3, #ffcb10); }
 
 /* GENRES */
 .genres {
@@ -1089,14 +1193,16 @@ html, body {
     padding: 10px 0;
     margin: 0 10px 10px 0;
     width: calc(25% - 10px);
-    -webkit-transition: all .3s ease;
-            transition: all .3s ease;
+    -webkit-transition: background .2s ease;
+            transition: background .2s ease;
     text-align: center;
-    font-weight: 700;
-    border: 3px solid #ccc;
+    border: 1px solid #ccc;
     color: #838383; }
     .genres li:hover {
-      cursor: pointer; }
+      cursor: pointer;
+      background: #e5e5e5; }
+  .genres .btn-clear {
+    margin-top: 20px; }
 
 /* CAST & CREW */
 .cast .person, .crew .person {

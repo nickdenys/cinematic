@@ -40,7 +40,7 @@ gulp.task('styles', function(){
     .pipe(rename({suffix: '.min'}))
     .pipe(minifycss())
     .pipe(gulp.dest('app/assets/css/'))
-    //.pipe(browserSync.reload({stream:true}))
+    .pipe(browserSync.reload({stream:true}))
 });
 
 
