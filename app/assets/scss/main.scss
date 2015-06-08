@@ -56,6 +56,7 @@ Reusable blocks of code are defined including list items, buttons and typography
   @import "modules/search-bar";
   @import "modules/tables";
   @import "modules/sidebar";
+  @import "modules/cards";
 
 
 
@@ -68,6 +69,7 @@ The theme files contain the sites unique styling elements broken down in to site
   @import 'theme/intro';
   @import 'theme/discover';
   @import 'theme/answers';
+  @import 'theme/results';
   @import 'theme/vendor/rzslider';
   /*@import 'theme/header';
   @import 'theme/nav';

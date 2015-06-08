@@ -15,23 +15,24 @@
 
 
     /* QUESTION CONTROLS */
-    $scope.data.toggledQuestions = ["genre"];
+    $scope.data.toggledQuestions = [];
     $scope.toggleQuestion = function(id, ev){
       // Make sure the checkbox is only toggled once
       if(ev.target.tagName == "INPUT") {
-        var _found = $.inArray(id, this.data.toggledQuestions);
+        var _found = $.inArray(id, $scope.data.toggledQuestions);
         if (_found > -1) {
-          this.data.toggledQuestions.splice(_found,1);
+          $scope.data.toggledQuestions.splice(_found,1);
         } else {
-          this.data.toggledQuestions.push(id);
+          $scope.data.toggledQuestions.push(id);
         }
       }
     };
     $scope.isToggled = function(id) {
-      var _found = $.inArray(id, this.data.toggledQuestions) > -1;
+      var _found = $.inArray(id, $scope.data.toggledQuestions) > -1;
       return _found ? true : false;
     };
     $scope.getQuestion = function(nr, id){
+      $scope.data.results = null;
       $scope.data.questionNo = nr;
       $scope.data.questionID = id;
     };
@@ -273,6 +274,7 @@
     /* FILTER RESULTS */
     /* necessary to match api requirements! */
 
+    // Get all movies released today or earlier
     function filterReleaseDate() {
       var answeredYear = QuestionSrvc.getAnswer("year");
       var data = "";
@@ -286,10 +288,6 @@
         var day = ("0" + today.getDate()).slice(-2);
         return year+'-'+month+'-'+day;
       }
-
-
-
-
     }
     function filterGenres() {
       var genres = QuestionSrvc.getAnswer("genre");
@@ -309,7 +307,6 @@
       var rating = QuestionSrvc.getAnswer("rating") / 10;
       return rating.toFixed(2);
     }
-    // Get all movies released today or earlier
     function filterCast() {
       var castData = QuestionSrvc.getAnswer("cast");
       var data = "";
@@ -340,8 +337,14 @@
 
 
     function filterData(data) {
-      $scope.data.results = JSON.parse(data).results;
-      console.log($scope.data.results);
+      var scope = angular.element($('.discover-movie')).scope();
+      scope.$apply(function () {
+        scope.data.results = JSON.parse(data).results;
+        console.log(scope.data.results);
+      });
+
+      /*$scope.data.results = JSON.parse(data).results;
+      console.log($scope.data.results);*/
 
       /*
 
@@ -405,7 +408,7 @@
 
     $scope.getMovies = function() {
 
-      filterCast();
+      console.log("getting movies");
 
       theMovieDb.discover.getMovies(
         {
@@ -417,6 +420,7 @@
         },
         function (data) {
           filterData(data);
+          console.log("success");
           /*var scope = angular.element($('.discover-movie')).scope();
           scope.$apply(function () {
             scope.data.results = JSON.parse(data).results;

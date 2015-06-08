@@ -441,14 +441,13 @@ html, body {
   margin-right: 2.35765%;
   width: 70.14568%;
   padding: 2.35765%;
-  padding-top: 0;
+  padding-top: 3rem;
   padding-bottom: 0; }
   .cm-content:last-child {
     margin-right: 0; }
 
 .cm-content .content-top {
-  height: 10rem;
-  padding: 3rem 0; }
+  margin-bottom: 3rem; }
 
 /*@import 'framework/grid'; 
   @import 'framework/breakpoints';
@@ -902,11 +901,98 @@ tr, td, th {
         -ms-transform: translateY(-50%);
             transform: translateY(-50%); }
 
+.cards {
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -moz-box-lines: multiple;
+  box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: justify;
+  box-pack: justify;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -ms-justify-content: space-between;
+  -o-justify-content: space-between;
+  justify-content: space-between;
+  -ms-flex-pack: justify; }
+
+.card {
+  -webkit-flex-basis: 25em;
+  flex-basis: 25em;
+  -ms-flex-preferred-size: 25em;
+  -webkit-flex-grow: 1;
+  -moz-flex-grow: 1;
+  -webkit-box-flex: 1;
+          flex-grow: 1;
+  -ms-flex-positive: 1;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  background-color: #f7f7f7;
+  border-radius: 3px;
+  border: 1px solid #DDD;
+  box-shadow: 0 2px 4px #e6e6e6;
+  margin: 0 1em 1.5em 1em;
+  position: relative; }
+  .card .card-image {
+    overflow: hidden;
+    height: 225px;
+    max-height: 225px;
+    background-color: #3ab9c3;
+    background-image: -webkit-linear-gradient(-323deg, #3ab9c3, #ffcb10);
+    background-image: -webkit-linear-gradient(37deg, #3ab9c3, #ffcb10);
+    background-image: linear-gradient(53deg,#3ab9c3, #ffcb10); }
+    .card .card-image img {
+      -webkit-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+      width: 100%;
+      opacity: 0.5; }
+  .card .card-header {
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #DDD;
+    border-radius: 3px 3px 0 0;
+    font-weight: bold;
+    line-height: 1.5em;
+    padding: 0.5em 0.75em; }
+  .card .card-copy {
+    font-size: 0.9em;
+    line-height: 1.5em;
+    padding: 0.75em 0.75em; }
+    .card .card-copy p {
+      margin: 0 0 0.75em; }
+  .card:focus img, .card:hover img {
+    opacity: 1; }
+  .card:active {
+    background-color: #f7f7f7; }
+    .card:active .card-header {
+      background-color: #f7f7f7; }
+  .card:nth-of-type(4n) .card-image, .card:nth-of-type(4n+1) .card-image {
+    background-color: #f23a29;
+    background-image: -webkit-linear-gradient(-323deg, #f23a29, #ffcb10);
+    background-image: -webkit-linear-gradient(37deg, #f23a29, #ffcb10);
+    background-image: linear-gradient(53deg,#f23a29, #ffcb10); }
+
 /* THEME
 The theme files contain the sites unique styling elements broken down in to site sections including Header, Footer, Nav etc.
 ========================================================================== */
 html, body {
   background: #f3f3f3; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Oswald", "Aller", "Helvetica Neue", "Arial", sans-serif;
+  font-weight: 400;
+  text-transform: uppercase; }
 
 @-webkit-keyframes bounce {
   0% {
@@ -1196,7 +1282,7 @@ html, body {
     -webkit-transition: background .2s ease;
             transition: background .2s ease;
     text-align: center;
-    border: 1px solid #ccc;
+    border: 3px solid #ccc;
     color: #838383; }
     .genres li:hover {
       cursor: pointer;

@@ -19,13 +19,12 @@ html,body{
     @include shift(2.5);
     @include span-columns(8.5);
     @include pad();
-    padding-top: 0;
+    padding-top: 3rem;
     padding-bottom: 0;
 }
 
 .cm-content{
     .content-top{
-        height: 10rem;
-        padding: 3rem 0;
+        margin-bottom: 3rem;
     }
 }
