@@ -146,9 +146,9 @@
     </section>
 
     <section class="cm-results" ng-show="data.results">
-        <div ng-hide="data.results.length">
-        <h2>Oops! We couldn't find any movies matching your filters.</h2>
-        <p>Try again, but don't be so strict ;)</p>
+        <div class="empty-text" ng-hide="data.results.length">
+            <h2>Oops! We couldn't find any movies matching your filters.</h2>
+            <p>Try again, but don't be so strict ;)</p>
         </div>
 
         <div class="cards">
@@ -157,10 +157,57 @@
                     <img ng-if="movie.backdrop_path" src="https://image.tmdb.org/t/p/w780{{ movie.backdrop_path }}" alt="">
                 </div>
                 <div class="card-header">
-                    {{ movie.title }}
+                    <!--<h4 class="movie-title">{{ movie.title }}</h4> -->
+                    <div class="modal">
+                        <label for="modal-1">
+                            <div class="modal-trigger" ng-click="getMovieDetail(movie.id)"><h4 class="movie-title">{{ movie.title }}</h4></div>
+                        </label>
+                        <input class="modal-state" id="modal-1" type="checkbox" />
+                        <div class="modal-fade-screen">
+                            <div class="modal-inner movie-detail">
+                                <div class="modal-close" for="modal-1"></div>
+                                <h2 class="movie-title">{{ data.movieDetail.title }}</h2>
+                                <ul class="metadata">
+                                    <li class="metadata-single"><span class="title">Score</span> {{ data.movieDetail.vote_average }}</li>
+                                    <li class="metadata-single"><span class="title">Year</span> {{ data.movieDetail.release_date | limitTo:4 }}</li>
+                                    <li class="metadata-single"><span class="title">Runtime</span> {{ data.movieDetail.runtime }} minutes</li>
+                                    <li class="metadata-single"><span class="title">Genres</span> <span class="genre" ng-repeat="genre in data.movieDetail.genres">{{ genre.name }}</span></li>
+                                </ul>
+                                <img class="poster" ng-if="data.movieDetail.poster_path" src="https://image.tmdb.org/t/p/w300{{ data.movieDetail.poster_path }}" alt="">
+                                <h5 class="tagline">{{ data.movieDetail.tagline }}</h5>
+                                <p class="modal-content"> {{ data.movieDetail.overview }}</p>
+                                <a href="http://www.imdb.com/title/{{ data.movieDetail.imdb_id }}">IMDB</a>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        $(function() {
+                            $("#modal-1").on("change", function() {
+                                if ($(this).is(":checked")) {
+                                    $("body").addClass("modal-open");
+                                } else {
+                                    $("body").removeClass("modal-open");
+                                }
+                            });
+
+                            $(".modal-fade-screen, .modal-close").on("click", function() {
+                                $(".modal-state:checked").prop("checked", false).change();
+                            });
+
+                            $(".modal-inner").on("click", function(e) {
+                                e.stopPropagation();
+                            });
+                        });
+
+                    </script>
+                    <ul class="metadata">
+                        <li class="metadata-single"><span class="title">Score</span> {{ movie.vote_average }}</li>
+                        <li class="metadata-single"><span class="title">Year</span> {{ movie.release_date | limitTo:4 }}</li>
+                    </ul>
                 </div>
                 <div class="card-copy">
                     <p>{{ movie.overview }}</p>
+                    <p ng-hide="movie.overview">No synopsis available</p>
                 </div>
             </div>
         </div>

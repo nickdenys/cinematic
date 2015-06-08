@@ -55,8 +55,10 @@
             i.fa{
                 margin-left: 5px;
             }
-            &:hover{
+            &:hover, &:focus{
+                outline: none;
                 letter-spacing: 1px;
+                @include linear-gradient(53deg, rgba($cm-yellow,0.5) 0%, $cm-green 50%);
             }
         }
     }

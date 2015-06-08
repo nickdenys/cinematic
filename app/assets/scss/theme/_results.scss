@@ -1,1 +1,20 @@
-
+.movie-detail{
+    .metadata{
+        margin-bottom: 1rem;
+    }
+    .tagline{
+        margin-bottom: 1rem;
+    }
+    .genre + .genre{
+        &:before{
+            content:" / ";
+            color: $cm-lightgrey;
+        }
+    }
+    .poster{
+        width: 250px;
+        height: auto;
+        float: left;
+        margin-right: 1rem;
+    }
+}

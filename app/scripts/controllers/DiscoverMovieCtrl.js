@@ -333,9 +333,6 @@
       }
       return data;
     }
-
-
-
     function filterData(data) {
       var scope = angular.element($('.discover-movie')).scope();
       scope.$apply(function () {
@@ -430,6 +427,18 @@
         function (error) {
           console.log(error);
         });
+    };
+    $scope.getMovieDetail = function(id){
+      theMovieDb.movies.getById({"id":id },
+        function(data) {
+          var scope = angular.element($('.discover-movie')).scope();
+           scope.$apply(function () {
+           scope.data.movieDetail = JSON.parse(data);
+           console.log(scope.data.movieDetail);
+           });
+      },function(error) {
+        console.log(error);
+      });
     };
 
   }]);

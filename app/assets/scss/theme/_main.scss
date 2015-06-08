@@ -1,9 +1,21 @@
 html,body{
     background: $cm-lightergrey;
+    color: $cm-grey;
 }
 
 h1,h2,h3,h4,h5,h6{
     font-family: $oswald;
     font-weight: 400;
     text-transform: uppercase;
+}
+
+::selection{
+    color: $cm-lightergrey;
+    background: $cm-blue;
+    text-shadow: 1px 1px 0 rgba(#000, 0.2);
+}
+
+.empty-text{
+    color: $cm-grey;
+    text-shadow: 0 0 5px rgba(0,0,0,0.3);
 }
