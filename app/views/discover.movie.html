@@ -177,11 +177,16 @@
                     <div class="modal">
                         <label for="modal">
                             <div class="modal-trigger" ng-click="getMovieDetail(movie.id)">
-                                <h4 class="movie-title">{{ movie.title }}</h4>
-                                <ul class="metadata">
-                                    <li class="metadata-single"><span class="title">Score</span> {{ movie.vote_average }}</li>
-                                    <li class="metadata-single"><span class="title">Year</span> {{ movie.release_date | limitTo:4 }}</li>
-                                </ul>
+                                <div class="card-header-left">
+                                    <h4 class="movie-title">{{ movie.title }}</h4>
+                                    <ul class="metadata">
+                                        <li class="metadata-single"><span class="title">Score</span> {{ movie.vote_average }}</li>
+                                        <li class="metadata-single"><span class="title">Year</span> {{ movie.release_date | limitTo:4 }}</li>
+                                    </ul>
+                                </div>
+                                <div class="card-header-right">
+                                    <div class="cm-btn-small">Details <i class="fa fa-lg fa-search-plus"></i></div>
+                                </div>
                             </div>
                         </label>
                         <input class="modal-state" id="modal" type="checkbox" />

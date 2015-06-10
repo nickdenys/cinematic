@@ -520,7 +520,7 @@ button, input[type="submit"] {
   vertical-align: middle;
   white-space: nowrap; }
 
-.cm-btn {
+.cm-btn, .cm-btn-small {
   background: transparent;
   border: 3px solid #838383;
   color: #838383;
@@ -529,11 +529,23 @@ button, input[type="submit"] {
   padding: 15px 40px;
   max-width: 200px;
   -webkit-transition: all .2s ease;
-          transition: all .2s ease; }
-  .cm-btn:hover {
-    background: #838383; }
-  .cm-btn .fa-lg {
+          transition: all .2s ease;
+  text-align: center;
+  border-radius: 4px; }
+  .cm-btn:hover, .cm-btn-small:hover {
+    background: #838383;
+    color: #fff; }
+  .cm-btn .fa-lg, .cm-btn-small .fa-lg {
     vertical-align: -7%; }
+
+.cm-btn-small {
+  display: inline-block;
+  padding: 5px 10px;
+  letter-spacing: 1px;
+  font-size: .8rem;
+  border-width: 2px;
+  font-weight: 400;
+  font-family: "Oswald", "Aller", "Helvetica Neue", "Arial", sans-serif; }
 
 .cm-btn-red {
   border-color: #f23a29;
@@ -969,6 +981,12 @@ tr, td, th {
     border-radius: 3px 3px 0 0;
     line-height: 1.5em;
     padding: 1rem 1.5rem; }
+    .card .card-header .card-header-left {
+      display: inline-block; }
+    .card .card-header .card-header-right {
+      display: inline-block;
+      float: right;
+      padding-top: .5rem; }
     .card .card-header .movie-title {
       color: #424242;
       margin-bottom: .5rem;
@@ -983,7 +1001,7 @@ tr, td, th {
       color: #424242;
       display: inline-block; }
       .card .card-header .metadata-single .title {
-        color: #bbb; }
+        color: #a2a2a2; }
   .card .card-copy {
     font-size: 0.9em;
     line-height: 1.5em;
@@ -1149,7 +1167,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .cm-spinner {
   text-align: center;
-  margin: 2rem 0; }
+  margin: 4rem 0; }
 
 .cm-spinner.active {
   display: block; }
