@@ -405,7 +405,7 @@
 
     $scope.getMovies = function() {
 
-      console.log("getting movies");
+      $scope.searching = true;
 
       theMovieDb.discover.getMovies(
         {
@@ -416,29 +416,36 @@
           'with_genres': filterGenres()
         },
         function (data) {
+          $scope.searching = false;
           filterData(data);
-          console.log("success");
-          /*var scope = angular.element($('.discover-movie')).scope();
-          scope.$apply(function () {
-            scope.data.results = JSON.parse(data).results;
-            console.log(scope.data.results);
-          });*/
         },
         function (error) {
           console.log(error);
         });
     };
     $scope.getMovieDetail = function(id){
+      $scope.data.movieDetail = {};
       theMovieDb.movies.getById({"id":id },
         function(data) {
           var scope = angular.element($('.discover-movie')).scope();
-           scope.$apply(function () {
-           scope.data.movieDetail = JSON.parse(data);
-           console.log(scope.data.movieDetail);
-           });
+          scope.$apply(function () {
+            scope.data.movieDetail.basic = JSON.parse(data);
+            console.log(scope.data.movieDetail);
+          });
       },function(error) {
         console.log(error);
       });
+      theMovieDb.movies.getTrailers({"id":id},
+      function(data) {
+        var scope = angular.element($('.discover-movie')).scope();
+        scope.$apply(function () {
+          scope.data.movieDetail.trailers = JSON.parse(data);
+        });
+
+      }, function(error) {
+          console.log(error);
+        }
+      );
     };
 
   }]);

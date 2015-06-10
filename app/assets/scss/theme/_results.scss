@@ -1,6 +1,19 @@
+.cm-results{
+    .content-top{
+        padding: 0 1rem 1.5rem 1rem;
+        margin-bottom: 1.5rem;
+        border-bottom: 1px solid $cm-lightgrey;
+    }
+}
+
 .movie-detail{
+    .title{
+        color: $cm-blue;
+    }
     .metadata{
-        margin-bottom: 1rem;
+        margin: 0 0 1rem 0;
+        padding: .5rem 0;
+        border-bottom: 1px solid lighten($cm-lightgrey,10%);
     }
     .tagline{
         margin-bottom: 1rem;
@@ -15,6 +28,21 @@
         width: 250px;
         height: auto;
         float: left;
-        margin-right: 1rem;
+        margin-right: 2rem;
+        margin-bottom: 1rem;
+    }
+    .links{
+        li a{
+            font-size: .9em;
+            color: $cm-blue;
+            text-transform: uppercase;
+            font-family: $oswald;
+            &:hover{
+                color: darken($cm-blue, 10%);
+            }
+        }
+        i.fa{
+            margin-right: 7px;
+        }
     }
 }
