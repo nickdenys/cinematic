@@ -21,7 +21,7 @@
     .genre + .genre{
         &:before{
             content:" / ";
-            color: $cm-lightgrey;
+            color: $cm-grey;
         }
     }
     .poster{

@@ -185,10 +185,12 @@
     function prepareCast() {
       $scope.answerType = "input_cast";
       $scope.data.answer = {};
+      $scope.data.peopleSearchResults = null;
     }
     function prepareCrew() {
       $scope.answerType = "input_crew";
       $scope.data.answer = {};
+      $scope.data.peopleSearchResults = null;
     }
     $scope.getPerson = function(name){
       var _name = encodeURI(name);
@@ -209,6 +211,8 @@
     $scope.data.selectedCrew = {};
     $scope.toggleCast = function(id,name){
 
+      $('.person[data-id="' + id + '"]').toggleClass('active');
+
       if (id in this.data.selectedCast){
         delete this.data.selectedCast[id];
       } else {
@@ -220,6 +224,8 @@
       QuestionSrvc.setAnswer(this.data.questionID, this.data.answer);
     };
     $scope.toggleCrew = function(id,name){
+
+      $('.person[data-id="' + id + '"]').toggleClass('active');
 
       if (id in this.data.selectedCrew){
         delete this.data.selectedCrew[id];

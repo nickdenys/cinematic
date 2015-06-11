@@ -6,6 +6,59 @@
     margin-bottom: 1rem;
 }
 .question-instructions{
-    font-style: italic;
-    color: $cm-lightgrey;
+    font-family: $aller-italic;
+    color: $cm-grey;
+}
+
+.filter{
+    max-width: em(1000);
+    margin-left: 0;
+}
+
+.intro-cards{
+    .intro-card{
+        @include span-columns(3 of 9);
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+        background: $cm-blue;
+        @include linear-gradient(53deg, $cm-blue 20%, $cm-yellow);
+        min-height: 500px;
+        border-radius: 3px;
+        box-shadow: 0 2px 4px darken(#fff, 10%);
+        text-align: center;
+        position: relative;
+        color: #fff;
+        &:nth-of-type(2){
+            @include linear-gradient(53deg, $cm-blue 20%, $cm-red);
+        }
+        &:nth-of-type(1){
+            @include linear-gradient(53deg, $cm-red 20%, $cm-yellow);
+        }
+
+        .inner{
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 0;
+            width: 100%;
+            padding: 0 2rem;
+
+        }
+
+        i.fa{
+            margin-bottom: 3rem;
+        }
+        .title{
+            color: #fff;
+            //text-shadow: 1px 1px 0 rgba(#000, 0.2);
+            margin-bottom: 3rem;
+            font-size: 1.7rem;
+        }
+        .instructions{
+            color: #fff;
+            //text-shadow: 1px 1px 0 rgba(#000, 0.2);
+            font-size: .9rem;
+            font-family: 'Aller Italic', sans-serif;
+        }
+    }
 }
