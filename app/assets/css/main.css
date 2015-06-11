@@ -879,6 +879,17 @@ tr, td, th {
     .cm-sidebar .link:hover {
       cursor: pointer;
       background: #e5e5e5; }
+  .cm-sidebar .clear i.fa {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-53%);
+        -ms-transform: translateY(-53%);
+            transform: translateY(-53%);
+    line-height: normal;
+    vertical-align: top;
+    float: right; }
+  .cm-sidebar .clear:hover {
+    color: #f23a29; }
   .cm-sidebar .button button {
     width: 100%;
     border-radius: 0;

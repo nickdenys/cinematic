@@ -13,6 +13,10 @@
                     <div class="checkbox"></div>
                 </label>
             </li>
+            <li class="link clear" ng-click="clearFilters()">
+                <span class="title">Clear all filters</span>
+                <i class="fa fa-lg fa-close"></i>
+            </li>
             <li class="button">
                 <button ng-click="getMovies()">Calculate <i class="fa fa-rocket"></i></button>
             </li>
@@ -148,9 +152,9 @@
                                 </div>
                                 <div class="info">
                                     <span class="name">{{ person.name }}</span>
-                                    <ul>
-                                        <li ng-repeat="film in person.known_for">
-                                            {{film.title}}
+                                    <ul ng-if="person.known_for.length"><span class="known-for">Known For:</span>
+                                        <li ng-repeat="film in person.known_for" ng-if="film.title.length">
+                                            <i class="fa fa-angle-right"></i> {{film.title}}
                                         </li>
                                     </ul>
                                 </div>
@@ -163,23 +167,19 @@
                 </div>
 
                 <div ng-switch-default>
-                    <!--<p>Hi there!</p>
-                    <p>So you want to watch a movie tonight, huh? Let's help you with that!</p>
-                    <p>On the left, you'll find some useful filters for narrowing your search. Enable one or more and select your preferences for each. After you're all set and done, click on the big green button to show your results.</p>
-                    <p>Have fun!</p> -->
                     <div class="intro-cards">
                         <div class="intro-card">
                             <div class="inner">
                                 <i class="fa fa-4x fa-sliders"></i>
                                 <h2 class="title">Set filters</h2>
-                                <p class="instructions">On the left, you'll find some useful filters for narrowing your search. Enable one or more and select your preferences for each.</p>
+                                <p class="instructions">On the left, you'll find some optional filters for narrowing your search. Try enabling some and select your preferences.</p>
                             </div>
                         </div>
                         <div class="intro-card">
                             <div class="inner">
                                 <i class="fa fa-4x fa-gears"></i>
                                 <h2 class="title">Calculate results</h2>
-                                <p class="instructions">After you're all set and done, click on the big green button to show your results.</p>
+                                <p class="instructions">After you're all set and done, click on the big green button to calculate your results.</p>
                             </div>
                         </div>
                         <div class="intro-card">

@@ -36,24 +36,6 @@
       $scope.data.questionNo = nr;
       $scope.data.questionID = id;
     };
-    /*$scope.getPrevQuestion = function(){
-      if (this.data.questionNo > 1) {
-        var prevQuestionNo = (this.data.questionNo*1 - 1);
-        $scope.data.answer = QuestionSrvc.getAnswer(prevQuestionNo);
-
-        this.data.questionNo--;
-      }
-    };
-    $scope.getNextQuestion = function(){
-      if (this.data.questionNo < this.data.questions.movies.length) {
-        console.log($scope.data.answer);
-        QuestionSrvc.setAnswer(this.data.questionID, this.data.answer);
-
-        this.data.answer = null;
-        this.data.questionNo++;
-      }
-    };*/
-
     // Watch the questionID and fetch correct function for it
     $scope.$watch(
       function(scope) {
@@ -395,14 +377,21 @@
 
     /* CLEAR ANSWERS */
 
-    function clearAll(){
+    function clearAnswer(){
       $scope.data.answer = {};
       QuestionSrvc.setAnswer($scope.data.questionID, $scope.data.answer);
     }
     $scope.clearGenres = function(){
       this.data.multipleSelection = [];
       $('.genres li').removeClass('active');
-      clearAll();
+      clearAnswer();
+    };
+    $scope.clearFilters = function(){
+      QuestionSrvc.clearAllAnswers();
+      $scope.data.toggledQuestions = [];
+      $scope.answerType = null;
+      $scope.data.questionNo = null;
+      $scope.data.questionID = null;
     };
 
 

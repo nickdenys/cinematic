@@ -19,6 +19,9 @@
             return answers[id];
           else
             return {};
+        },
+        clearAllAnswers:function(){
+          answers = {};
         }
       }
 

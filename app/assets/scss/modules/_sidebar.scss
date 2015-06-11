@@ -39,6 +39,19 @@
             background: #e5e5e5;
         }
     }
+    .clear{
+        i.fa{
+            position: relative;
+            top: 50%;
+            transform: translateY(-53%);
+            line-height: normal;
+            vertical-align: top;
+            float: right;
+        }
+        &:hover{
+            color: $cm-red;
+        }
+    }
     .button{
         button{
             width: 100%;
