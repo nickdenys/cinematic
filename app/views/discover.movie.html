@@ -30,7 +30,7 @@
 
         <div class="content-top">
             <h1 class="question-title" ng-hide="data.questionNo">Instructions</h1>
-            <span ng-hide="data.questionNo" class="question-instructions">So you want to watch a movie tonight, huh? Let's help you with that...</span>
+            <span ng-hide="data.questionNo" class="question-instructions">So you want to watch a movie, huh? Let's help you with that...</span>
 
             <h1 class="question-title" ng-show="data.questionNo">{{ data.questions.movies[data.questionNo-1].question }}</h1>
             <span class="question-instructions">{{ data.questions.movies[data.questionNo-1].instructions }}</span>
@@ -42,7 +42,7 @@
                 <div class="filter genres multiple-choice" ng-switch-when="multiple">
                     <div class="inner" ng-show="isToggled('genre')">
                         <ul>
-                            <li data-id="{{result.id}}" ng-repeat="result in data.multipleResults" ng-click="addToSelection(result.id, result.name)">
+                            <li data-id="{{result.id}}" ng-repeat="result in data.multipleResults" ng-click="addToSelection(result.id, result.name)" ng-class="{active: checkGenreDoubles(result.id) !== false}">
                                 <span class="inner-text">{{ result.name }}</span>
                             </li>
                         </ul>
@@ -91,12 +91,9 @@
 
                 </div>
 
-
-
-
                 <div class="filter input" ng-switch-when="input_cast">
                     <div class="inner" ng-show="isToggled('cast')">
-                        Selected: {{ data.selectedCast }}
+                        <p class="selected"><span class="title">Selected:</span> {{ filterCast() }} </p>
                         <form class="search-bar" role="search" ng-submit="getPerson(inputCast)">
                             <input type="search" name="answer" placeholder="Search for an actor/actress" ng-model="inputCast" />
                             <button type="submit">
@@ -107,7 +104,7 @@
                     <div class="cast" id="results_cast" class="row multiple-choice" ng-show="data.peopleSearchResults">
                         <span ng-hide="data.peopleSearchResults.results.length">No people found! Are you sure you typed it right?</span>
 
-                        <div class="person" ng-repeat="person in data.peopleSearchResults.results" data-id="{{person.id}}" ng-click="toggleCast(person.id, person.name)">
+                        <div class="person" ng-repeat="person in data.peopleSearchResults.results" data-id="{{person.id}}" ng-click="toggleCast(person.id, person.name)" ng-class="{active: checkCastDoubles(person.id)}">
                             <div class="portrait">
                                 <img ng-if="person.profile_path" src="https://image.tmdb.org/t/p/w150{{ person.profile_path }}" alt="">
                             </div>
@@ -123,21 +120,18 @@
                                 <i class="fa fa-lg fa-check"></i>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
 
-
-
                 <div class="filter select" ng-switch-when="select_year">
                     <div class="inner" ng-show="isToggled('year')">
-                        <selectize placeholder='Select a year...' config="singleConfig" ng-model="data.answer"></selectize>
+                        <p>Select all movies that were released between {{ startYear }} and...
+                        <selectize placeholder='Select a year...' config="singleConfig" ng-model="data.answer"></selectize></p>
                     </div>
                 </div>
                 <div class="filter input" ng-switch-when="input_crew">
                     <div class="inner" ng-show="isToggled('crew')">
-                        Selected: {{ data.selectedCrew }}
+                        <p class="selected"><span class="title">Selected:</span> {{ filterCrew() }} </p>
                         <form class="search-bar" role="search" ng-submit="getPerson(inputCrew)">
                             <input type="search" name="answer" placeholder="Enter Search" ng-model="inputCrew" />
                             <button type="submit">
@@ -146,7 +140,7 @@
                         </form>
                         <div class="crew" id="results_crew" class="row multiple-choice" ng-show="data.peopleSearchResults">
                             <span ng-hide="data.peopleSearchResults.results.length">No people found !</span>
-                            <div class="person" ng-repeat="person in data.peopleSearchResults.results" data-id="{{person.id}}" ng-click="toggleCrew(person.id, person.name)">
+                            <div class="person" ng-repeat="person in data.peopleSearchResults.results" data-id="{{person.id}}" ng-click="toggleCrew(person.id, person.name)" ng-class="{active: checkCrewDoubles(person.id)}">
                                 <div class="portrait">
                                     <img ng-click="toggleCrew(person.id, person.name)" ng-if="person.profile_path" src="https://image.tmdb.org/t/p/w150{{ person.profile_path }}" alt="">
                                 </div>
@@ -165,7 +159,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div ng-switch-default>
                     <div class="intro-cards">
                         <div class="intro-card">
@@ -202,7 +195,8 @@
             <span class="question-instructions">These are the most popular results, based on your preferences</span>
         </div>
         <div class="empty-text fade-in" ng-show="data.results.length == 0">
-            <h2>Oops! We couldn't find any movies matching your filters.</h2>
+            <i class="fa fa-4x fa-frown-o"></i>
+            <p>Oops! We couldn't find any movies matching your filters.</p>
             <p>Try again, but don't be so strict ;)</p>
         </div>
 

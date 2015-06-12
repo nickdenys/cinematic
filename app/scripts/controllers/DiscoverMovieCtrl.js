@@ -87,42 +87,26 @@
     /* PREPARE DIFFERENT QUESTIONS */
 
     // Genre
-    function prepareGenre() {
-      $scope.data.answer = {};
-      $scope.answerType = "multiple";
-      theMovieDb.genres.getList({}, function(data){
-        var scope = angular.element($('.discover-movie')).scope();
-        scope.$apply(function(){
-          var result = JSON.parse(data);
-          $scope.data.multipleResults = result.genres;
-        });
-      }, function(){
-        console.log('error');
-      })
-    }
     $scope.data.multipleSelection = [];
-    $scope.addToSelection = function(id, name){
-      $scope.item = {};
-      $scope.item.id = id;
-      $scope.item.name = name;
-
-      // Check for doubles --> remove if true
-      if (checkDoubles() !== false) {
-        $scope.data.multipleSelection.splice(checkDoubles(), 1)
-      } else {
-        $scope.data.multipleSelection.push($scope.item);
+    function prepareGenre() {
+      $scope.answerType = "multiple";
+      // Get all genres
+      if (!$scope.data.multipleResults) {
+        theMovieDb.genres.getList({}, function (data) {
+          var scope = angular.element($('.discover-movie')).scope();
+          scope.$apply(function () {
+            var result = JSON.parse(data);
+            $scope.data.multipleResults = result.genres;
+          });
+        }, function (error) {
+          console.log(error);
+        });
       }
-
-      $('.genres li[data-id="' + id + '"]').toggleClass('active');
-      console.log($scope.data.multipleSelection);
-      $scope.data.answer = $scope.data.multipleSelection;
-      QuestionSrvc.setAnswer(this.data.questionID, this.data.answer);
-    };
-    function checkDoubles() {
-
+    }
+    $scope.checkGenreDoubles = function(id) {
       if ($scope.data.multipleSelection.length) {
         for(var i = 0; i<$scope.data.multipleSelection.length; i++){
-          if ($scope.data.multipleSelection[i].id == $scope.item.id){
+          if ($scope.data.multipleSelection[i].id == id){
             return i;
           }
         }
@@ -130,7 +114,23 @@
       } else {
         return false;
       }
-    }
+    };
+    $scope.addToSelection = function(id, name){
+      $scope.item = {};
+      $scope.item.id = id;
+      $scope.item.name = name;
+
+      // Check for doubles --> remove if true
+      if ($scope.checkGenreDoubles(id) !== false) {
+        $scope.data.multipleSelection.splice($scope.checkGenreDoubles(id), 1)
+      } else {
+        $scope.data.multipleSelection.push($scope.item);
+      }
+
+      $scope.data.answer = $scope.data.multipleSelection;
+      console.log($scope.data.answer);
+      QuestionSrvc.setAnswer(this.data.questionID, this.data.answer);
+    };
 
     // Duration
     function prepareDuration() {
@@ -150,18 +150,25 @@
     // Rating
     function prepareRating() {
       $scope.answerType = "slider-rating";
-      $scope.data.answer = 55;
+      // Fill slider
       $scope.data.ratings = [];
       for (var i = 1; i<=100; i++){
         if (i%10 == 0)
           $scope.data.ratings.push(i);
       }
+      // Check for prev answer
+      var prevAnswerRating = QuestionSrvc.getAnswer("rating");
+      if (prevAnswerRating) {
+        $scope.data.answer = prevAnswerRating;
+      } else {
+        $scope.data.answer = 55;
+      }
     }
-    $scope.saveRating = function(val){
+    /*$scope.saveRating = function(val){
       console.log(val);
       $scope.data.answer = val;
       QuestionSrvc.setAnswer(this.data.questionID, this.data.answer);
-    };
+    };*/
 
     // Cast & Crew
     function prepareCast() {
@@ -193,8 +200,6 @@
     $scope.data.selectedCrew = {};
     $scope.toggleCast = function(id,name){
 
-      $('.person[data-id="' + id + '"]').toggleClass('active');
-
       if (id in this.data.selectedCast){
         delete this.data.selectedCast[id];
       } else {
@@ -207,8 +212,6 @@
     };
     $scope.toggleCrew = function(id,name){
 
-      $('.person[data-id="' + id + '"]').toggleClass('active');
-
       if (id in this.data.selectedCrew){
         delete this.data.selectedCrew[id];
       } else {
@@ -219,17 +222,37 @@
       console.log(this.data.answer);
       QuestionSrvc.setAnswer(this.data.questionID, this.data.answer);
     };
+    $scope.checkCastDoubles = function(id){
+      if (id in this.data.selectedCast){
+        return true;
+      } else {
+        return false;
+      }
+    };
+    $scope.checkCrewDoubles = function(id){
+      if (id in this.data.selectedCrew){
+        return true;
+      } else {
+        return false;
+      }
+    };
 
     // Year
     function prepareYear() {
       $scope.answerType = "select_year";
-      $scope.data.answer = {};
+      // Check for prev answer
+      var prevAnswerRating = QuestionSrvc.getAnswer("year");
+      if (prevAnswerRating) {
+        $scope.data.answer = prevAnswerRating;
+      } else {
+        $scope.data.answer = {};
+      }
     }
-    $scope.single = null;
+    $scope.startYear = 1900; // Fill years 1900 -> now
     var _years = getYears();
     function getYears() {
       var _data = [];
-      var _startYear = 1900;
+      var _startYear = $scope.startYear;
       var _currentYear = new Date().getFullYear();
       var _count = 0;
       for (var i = _currentYear; i >= _startYear; i--){
@@ -289,6 +312,8 @@
             data += "|" + id;
         }
         return data;
+      } else {
+        return "";
       }
     }
     function filterRating() {
@@ -308,6 +333,32 @@
       }
       return data;
     }
+    $scope.filterCast = function(){
+      var castData = QuestionSrvc.getAnswer("cast");
+      var data = "";
+      for(var property in castData){
+        if (castData.hasOwnProperty(property)){
+          if (data === "")
+            data += "" + castData[property];
+          else
+            data += " + " + castData[property];
+        }
+      }
+      return data;
+    };
+    $scope.filterCrew = function(){
+      var crewData = QuestionSrvc.getAnswer("crew");
+      var data = "";
+      for(var property in crewData){
+        if (crewData.hasOwnProperty(property)){
+          if (data === "")
+            data += "" + crewData[property];
+          else
+            data += " + " + crewData[property];
+        }
+      }
+      return data;
+    };
     function filterCrew() {
       var castData = QuestionSrvc.getAnswer("crew");
       var data = "";
@@ -389,9 +440,13 @@
     $scope.clearFilters = function(){
       QuestionSrvc.clearAllAnswers();
       $scope.data.toggledQuestions = [];
+      $scope.data.multipleSelection = [];
+      $scope.data.selectedCast = {};
+      $scope.data.selectedCrew = {};
       $scope.answerType = null;
       $scope.data.questionNo = null;
       $scope.data.questionID = null;
+      $scope.data.results = null;
     };
 
 

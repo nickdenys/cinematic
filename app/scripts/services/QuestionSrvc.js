@@ -12,13 +12,13 @@
       return{
         setAnswer:function(id, answer){
           answers[id] = answer;
-          localStorageService.set('discover.movie.question.' + id, answer);
+          //localStorageService.set('discover.movie.question.' + id, answer);
         },
         getAnswer:function(id){
           if(answers[id] != null)
             return answers[id];
           else
-            return {};
+            return "";
         },
         clearAllAnswers:function(){
           answers = {};

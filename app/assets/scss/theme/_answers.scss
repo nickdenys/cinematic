@@ -131,6 +131,25 @@
     }
 }
 
+.selected{
+    //font-family: $oswald;
+    text-transform: uppercase;
+    .title{
+        border-bottom: 1px solid $cm-lightgrey;
+        color: $cm-lightgrey;
+        margin-right: 1rem;
+    }
+}
+
+.selectize-control.single{
+    .selectize-input{
+        font-family: $aller-italic;
+    }
+    .selectize-dropdown{
+        font-family: $aller-italic;
+    }
+}
+
 
 /* DURATION */
 .slider-duration-wrapper,

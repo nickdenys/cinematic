@@ -22,7 +22,7 @@ form.search-bar {
     border: 1px solid $base-border-color;
     display: block;
     font-size: 1em;
-    font-style: italic;
+    font-family: $aller-italic;
     margin: 0;
     padding: ($base-spacing / 3) ($base-spacing / 3);
     position: relative;
@@ -30,12 +30,18 @@ form.search-bar {
   }
 
   button[type=submit] {
-    @include button(flat, $action-color);
+    //@include button(flat, $action-color);
     @include position(absolute, 0em 0em 0em null);
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
     outline: none;
     padding: 5px 10px;
+    color: #fff;
+    @include linear-gradient(53deg, $cm-red, $cm-yellow);
+    transition: all .2s ease;
+    &:hover{
+      opacity: 0.8;
+    }
 
     img {
       height: 12px;
