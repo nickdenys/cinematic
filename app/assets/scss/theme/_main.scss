@@ -44,3 +44,7 @@ h1,h2,h3,h4,h5,h6{
     animation-fill-mode:forwards;
     animation-duration:.2s;
 }
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+    display: none !important;
+}

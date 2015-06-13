@@ -7,6 +7,13 @@
 }
 
 .movie-detail{
+    .details-left{
+        @include span-columns(3.5);
+    }
+    .details-right{
+        @include span-columns(8.5);
+    }
+
     .title{
         color: $cm-blue;
     }
@@ -18,6 +25,14 @@
     .tagline{
         margin-bottom: 1rem;
     }
+    .synopsis{
+        max-width: 550px;
+    }
+    .subtitle{
+        font-family: $aller-bold;
+        margin: .5rem 0 .25rem 0;
+        display: inline-block;
+    }
     .genre + .genre{
         &:before{
             content:" / ";
@@ -28,12 +43,10 @@
         width: 250px;
         height: auto;
         float: left;
-        margin-right: 2rem;
-        margin-bottom: 1rem;
     }
     .links{
         li a{
-            font-size: .9em;
+            font-size: .9rem;
             color: $cm-blue;
             text-transform: uppercase;
             font-family: $oswald;

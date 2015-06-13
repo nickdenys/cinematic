@@ -474,6 +474,7 @@
         });
     };
     $scope.getMovieDetail = function(id){
+
       $scope.data.movieDetail = {};
       theMovieDb.movies.getById({"id":id },
         function(data) {
@@ -482,22 +483,34 @@
             scope.data.movieDetail.basic = JSON.parse(data);
             console.log(scope.data.movieDetail);
           });
-      },function(error) {
-        console.log(error);
-      });
-      theMovieDb.movies.getTrailers({"id":id},
-      function(data) {
-        var scope = angular.element($('.discover-movie')).scope();
-        scope.$apply(function () {
-          scope.data.movieDetail.trailers = JSON.parse(data);
-        });
-
-      }, function(error) {
+        },function(error) {
           console.log(error);
         }
       );
-    };
 
+      theMovieDb.movies.getTrailers({"id":id},
+        function(data) {
+          var scope = angular.element($('.discover-movie')).scope();
+          scope.$apply(function () {
+            scope.data.movieDetail.trailers = JSON.parse(data);
+          });
+        }, function(error) {
+            console.log(error);
+        }
+      );
+
+      theMovieDb.movies.getCredits({"id":id},
+        function(data) {
+          var scope = angular.element($('.discover-movie')).scope();
+          scope.$apply(function () {
+            scope.data.movieDetail.credits = JSON.parse(data);
+          });
+        }, function(error) {
+          console.log(error);
+        }
+      );
+
+    };
   }]);
 
 })();

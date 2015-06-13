@@ -6,7 +6,6 @@
   services.service('cmApp.services.QuestionSrvc',
     ['$rootScope','$window','$http','$q','localStorageService', function($rootScope,$window,$http,$q,localStorageService){
 
-      var toggledQuestions = [];
       var answers = {};
 
       return{

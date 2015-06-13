@@ -17,12 +17,16 @@
 
 .intro-cards{
     .intro-card{
+        @extend %no-select;
+        cursor: default;
         @include span-columns(3 of 9);
         padding-top: 3rem;
         padding-bottom: 3rem;
         background: $cm-blue;
         @include linear-gradient(53deg, $cm-blue 20%, $cm-yellow);
         min-height: 500px;
+        height: 50vh;
+        max-height: 800px;
         border-radius: 3px;
         box-shadow: 0 2px 10px darken(#fff, 20%);
         text-align: center;
