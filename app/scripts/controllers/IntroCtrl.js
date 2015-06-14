@@ -5,16 +5,6 @@
 
     controllers.controller('cmApp.controllers.IntroCtrl', ['$scope','$location', '$anchorScroll', function($scope,$location, $anchorScroll) {
 
-        /*$scope.test = function(){
-            theMovieDb.certifications.getList(
-                function(data){
-                console.log(JSON.parse(data));
-            },
-                function(){
-                console.log('error');
-            });
-        };*/
-
         $scope.movies = [];
         $scope.tvshows = [];
         $scope.movie = null;
@@ -53,8 +43,6 @@
 
     function tvSuccessCB(data) {
         var parsedData = JSON.parse(data);
-        //console.log(parsedData);
-
         var introWrapper = $('.intro-wrapper');
         var scope = angular.element(introWrapper).scope();
         scope.$apply(function(){

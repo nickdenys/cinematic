@@ -11,20 +11,15 @@
     }
 
     .clear-search{
-        position: absolute;
-        top: 1rem;
-        left: 1rem;
+        position: fixed;
+        top: 3rem;
+        left: 3rem;
         @extend %no-select;
     }
     .movies-similar{
         @include display(flex);
         @include flex-wrap(wrap);
         @include justify-content(space-between);
-    }
-    .page-title{
-        text-align: center;
-        color: $cm-yellow;
-        margin-bottom: 3rem;
     }
     .subtitle{
         font-family: $aller-bold;
@@ -53,6 +48,9 @@
         @include display(flex);
         @include flex-wrap(wrap);
         @include justify-content(space-between);
+        .search-poster:hover{
+            cursor: pointer;
+        }
     }
 
     .movie.active{

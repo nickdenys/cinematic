@@ -36,21 +36,17 @@ Here the layout of the site is defined with a grid function and breakpoints. The
 ========================================================================== */
 
   @import "framework/layout";
-  /*@import 'framework/grid'; 
-  @import 'framework/breakpoints';
-  @import 'framework/layout';*/
-
 
 
 /* MODULES
 Reusable blocks of code are defined including list items, buttons and typography.
 ========================================================================== */
 
-    @import "modules/badges";
+  @import "modules/badges";
   @import "modules/buttons";
   @import "modules/flashes";
   @import "modules/forms";
-    @import "modules/image-gradient-dynamic";
+  @import "modules/image-gradient-dynamic";
   @import "modules/lists";
   @import "modules/pagination";
   @import "modules/search-bar";
@@ -73,11 +69,8 @@ The theme files contain the sites unique styling elements broken down in to site
   @import 'theme/answers';
   @import 'theme/results';
   @import 'theme/search';
+  @import 'theme/movie-intro';
   @import 'theme/vendor/rzslider';
-  /*@import 'theme/header';
-  @import 'theme/nav';
-  @import 'theme/footer';
-  @import 'theme/shame';*/
 
 
 /* WEB FONTS

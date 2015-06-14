@@ -16,6 +16,19 @@ h1,h2,h3,h4,h5,h6{
     text-shadow: 1px 1px 0 rgba(#000, 0.2);
 }
 
+.page-title{
+    text-align: center;
+    color: $cm-grey;
+    margin-bottom: 3rem;
+    .special{
+        color: $cm-yellow;
+    }
+}
+
+.page-description{
+    text-align: center;
+}
+
 .empty-text{
     i.fa{
         margin-bottom: 2rem;

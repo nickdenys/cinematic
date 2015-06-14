@@ -22,6 +22,10 @@ var cinematic = angular.module('cmApp', [
       controller: 'cmApp.controllers.IntroCtrl'
     });
 
+    $routeProvider.when('/movie/', {
+      templateUrl:'views/movie.html',
+    });
+
     $routeProvider.when('/movie/search', {
         templateUrl:'views/movie.search.html',
         controller:'cmApp.controllers.MovieSearchCtrl'
