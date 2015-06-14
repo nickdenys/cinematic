@@ -33,7 +33,7 @@ var cinematic = angular.module('cmApp', [
 
     $routeProvider.when('/movie/discover', {
       templateUrl:'views/movie.discover.html',
-      controller:'cmApp.controllers.DiscoverMovieCtrl'
+      controller:'cmApp.controllers.MovieDiscoverCtrl'
     });
 
     /*$routeProvider.when('/tv/discover', {

@@ -54,12 +54,12 @@
         });
     }
 
-    function movieErrorCB() {
-        console.log('error');
+    function movieErrorCB(error) {
+        console.log(error);
     }
 
-    function tvErrorCB() {
-        console.log('error');
+    function tvErrorCB(error) {
+        console.log(error);
     }
 
 })();

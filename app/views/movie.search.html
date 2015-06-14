@@ -56,7 +56,7 @@
             <div class="modal-fade-screen">
               <div class="modal-inner movie-detail">
                 <div class="modal-close" for="modal"></div>
-                <div class="details fade-in" ng-show="data.movieDetail.basic" ng-cloak>
+                <div class="details" ng-show="data.movieDetail.basic" ng-cloak>
                   <h2 class="title">{{ data.movieDetail.basic.title }}</h2>
                   <ul class="metadata">
                     <li class="metadata-single"><span class="title">Score</span> {{ data.movieDetail.basic.vote_average }}</li>
@@ -91,7 +91,7 @@
                   </div>
                 </div>
                 <div class="cm-spinner" ng-hide="data.movieDetail.basic"><i class="fa fa-2x fa-cog fa-spin"></i><br />Fetching data...</div>
-                <div class="backdrop" ng-if="data.movieDetail.basic.backdrop_path" style="background: url('https://image.tmdb.org/t/p/w1000{{ data.movieDetail.basic.backdrop_path }}') no-repeat center center; background-size: cover;"></div>
+                <div class="backdrop" ng-if="data.movieDetail.basic.backdrop_path" style="background: url('https://image.tmdb.org/t/p/w300{{ data.movieDetail.basic.backdrop_path }}') no-repeat center center; background-size: cover;"></div>
               </div>
             </div>
           </div>

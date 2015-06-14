@@ -85,16 +85,12 @@
         };
 
         $scope.getMovieDetail = function(id){
-
-            console.log("calling id: " + id);
-
             $scope.data.movieDetail = {};
             theMovieDb.movies.getById({"id":id },
               function(data) {
                   var scope = angular.element($('.search-movie')).scope();
                   scope.$apply(function () {
                       scope.data.movieDetail.basic = JSON.parse(data);
-                      console.log(scope.data.movieDetail);
                   });
               },function(error) {
                   console.log(error);
@@ -130,7 +126,6 @@
     function successCB(data) {
         // Parse JSON as object
         var parsedData = JSON.parse(data);
-        console.log(parsedData);
 
         // Access scope from outside angular
         var searchWrapper = $('.search-movie');
@@ -144,8 +139,8 @@
         });
     }
 
-    function errorCB() {
-        console.log('error');
+    function errorCB(error) {
+        console.log(error);
         var searchWrapper = $('.search-movie');
         var searchScope = angular.element(searchWrapper).scope();
         searchScope.$apply(function(){
