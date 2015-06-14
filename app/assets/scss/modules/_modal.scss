@@ -32,10 +32,6 @@
         display: none;
     }
 
-    .modal-trigger {
-        //padding: 0.8em 1em;
-    }
-
     .modal-fade-screen { // overlay
         @include transition(opacity 0.25s ease);
         @include position(fixed, 0px 0px 0px 0px);
@@ -98,7 +94,7 @@
         width: 95%;
         font-size: .9rem;
 
-        .backdrop{
+        > .backdrop{
             position: absolute;
             top: 0;
             left: 0;
@@ -108,7 +104,7 @@
             z-index: 1;
         }
 
-        .details{
+        > .details{
             position: relative;
             z-index: 2;
             color: $cm-darkgrey;
@@ -135,7 +131,7 @@
             }
             .name-wrapper{
                 .name{
-                    border-bottom: 1px solid $cm-grey;
+                    font-family: $aller-bold;
                 }
             }
         }

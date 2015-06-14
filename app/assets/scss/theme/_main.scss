@@ -23,6 +23,10 @@ h1,h2,h3,h4,h5,h6{
     margin: 10rem 0;
     text-align: center;
     color: $cm-grey;
+
+    i.fa + i.fa{
+        margin-left: 1rem;
+    }
 }
 
 .cm-spinner{

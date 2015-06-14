@@ -30,14 +30,13 @@ form.search-bar {
   }
 
   button[type=submit] {
-    //@include button(flat, $action-color);
     @include position(absolute, 0em 0em 0em null);
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
     outline: none;
     padding: 5px 10px;
     color: #fff;
-    @include linear-gradient(53deg, $cm-red, $cm-yellow);
+    @include linear-gradient(53deg, $cm-yellow, $cm-red);
     transition: all .2s ease;
     &:hover{
       opacity: 0.8;

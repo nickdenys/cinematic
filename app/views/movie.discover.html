@@ -1,4 +1,4 @@
-<div class="cm-sidebar">
+<div class="cm-sidebar fade-in">
     <div class="logo-wrapper">
         <a href="#/" class="logo" title="Go to homepage">
             <img src="/assets/images/logo.png" alt="cinematic"/>
@@ -6,7 +6,7 @@
     </div>
     <nav>
         <ul>
-            <li class="link" ng-repeat="question in data.questions.movies" data-nr="{{question.nr}}" data-id="{{question.id}}" ng-click="getQuestion(question.nr, question.id)">
+            <li class="link" ng-repeat="question in data.questions.movies" data-nr="{{question.nr}}" data-id="{{question.id}}" ng-click="getQuestion(question.nr, question.id)" ng-class="{ 'active': activeFilter(question.id) }">
                 <span class="title">{{question.title}}</span>
                 <label class="label-switch" ng-click="toggleQuestion(question.id, $event);">
                     <input type="checkbox" ng-checked="isToggled(question.id)" />
@@ -24,7 +24,7 @@
     </nav>
 </div>
 
-<div class="cm-content discover-movie">
+<div class="cm-content discover-movie fade-in">
 
     <section class="cm-questions" ng-hide="data.results && !searching">
 
@@ -40,6 +40,14 @@
 
             <div class="answers" ng-switch="answerType">
                 <div class="filter genres multiple-choice" ng-switch-when="multiple">
+                    <div class="empty-text" ng-hide="isToggled('genre')">
+                        <i class="fa fa-4x fa-toggle-off"></i>
+                        <i class="fa fa-4x fa-long-arrow-right"></i>
+                        <i class="fa fa-4x fa-toggle-on"></i>
+                        <p>This filter is currently not enabled.</p>
+                        <p>Enable it in the sidebar if you want to configure this filter</p>
+                    </div>
+
                     <div class="inner" ng-show="isToggled('genre')">
                         <ul>
                             <li data-id="{{result.id}}" ng-repeat="result in data.multipleResults" ng-click="addToSelection(result.id, result.name)" ng-class="{active: checkGenreDoubles(result.id) !== false}">
@@ -66,9 +74,16 @@
                             </ul>
                         </div>
                     </div> -->
-                    <p>Sorry, this feature isn't enabled yet.</p>
+                    <p>Sorry, this feature isn't available yet.</p>
                 </div>
                 <div class="filter slider slider-rating-wrapper" ng-switch-when="slider-rating">
+                    <div class="empty-text" ng-hide="isToggled('rating')">
+                        <i class="fa fa-4x fa-toggle-off"></i>
+                        <i class="fa fa-4x fa-long-arrow-right"></i>
+                        <i class="fa fa-4x fa-toggle-on"></i>
+                        <p>This filter is currently not enabled.</p>
+                        <p>Enable it in the sidebar if you want to configure this filter</p>
+                    </div>
 
                     <div class="inner" ng-show="isToggled('rating')">
                         Rating: {{ data.answer / 10 }} or higher
@@ -90,19 +105,25 @@
                     </div>
 
                 </div>
-
                 <div class="filter input" ng-switch-when="input_cast">
+                    <div class="empty-text" ng-hide="isToggled('cast')">
+                        <i class="fa fa-4x fa-toggle-off"></i>
+                        <i class="fa fa-4x fa-long-arrow-right"></i>
+                        <i class="fa fa-4x fa-toggle-on"></i>
+                        <p>This filter is currently not enabled.</p>
+                        <p>Enable it in the sidebar if you want to configure this filter</p>
+                    </div>
                     <div class="inner" ng-show="isToggled('cast')">
-                        <p class="selected"><span class="title">Selected:</span> {{ filterCast() }} </p>
+                        <p class="selected"><span class="title">Selected:</span> {{ getCast() }} </p>
                         <form class="search-bar" role="search" ng-submit="getPerson(inputCast)">
                             <input type="search" name="answer" placeholder="Search for an actor/actress" ng-model="inputCast" />
                             <button type="submit">
-                                <i class="fa fa-search"></i>
+                                <i class="fa" ng-class="searchingPeople ? 'fa-cog fa-spin' : 'fa-search'"></i>
                             </button>
                         </form>
                     </div>
                     <div class="cast" id="results_cast" class="row multiple-choice" ng-show="data.peopleSearchResults">
-                        <span ng-hide="data.peopleSearchResults.results.length">No people found! Are you sure you typed it right?</span>
+                        <span ng-hide="data.peopleSearchResults.results.length">No people found with that name! Are you sure you typed it right?</span>
 
                         <div class="person" ng-repeat="person in data.peopleSearchResults.results" data-id="{{person.id}}" ng-click="toggleCast(person.id, person.name)" ng-class="{active: checkCastDoubles(person.id)}">
                             <div class="portrait">
@@ -122,20 +143,33 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="filter select" ng-switch-when="select_year">
+                    <div class="empty-text" ng-hide="isToggled('year')">
+                        <i class="fa fa-4x fa-toggle-off"></i>
+                        <i class="fa fa-4x fa-long-arrow-right"></i>
+                        <i class="fa fa-4x fa-toggle-on"></i>
+                        <p>This filter is currently not enabled.</p>
+                        <p>Enable it in the sidebar if you want to configure this filter</p>
+                    </div>
                     <div class="inner" ng-show="isToggled('year')">
                         <p>Select all movies that were released between {{ startYear }} and...
                         <selectize placeholder='Select a year...' config="singleConfig" ng-model="data.answer"></selectize></p>
                     </div>
                 </div>
                 <div class="filter input" ng-switch-when="input_crew">
+                    <div class="empty-text" ng-hide="isToggled('crew')">
+                        <i class="fa fa-4x fa-toggle-off"></i>
+                        <i class="fa fa-4x fa-long-arrow-right"></i>
+                        <i class="fa fa-4x fa-toggle-on"></i>
+                        <p>This filter is currently not enabled.</p>
+                        <p>Enable it in the sidebar if you want to configure this filter</p>
+                    </div>
                     <div class="inner" ng-show="isToggled('crew')">
-                        <p class="selected"><span class="title">Selected:</span> {{ filterCrew() }} </p>
+                        <p class="selected"><span class="title">Selected:</span> {{ getCrew() }} </p>
                         <form class="search-bar" role="search" ng-submit="getPerson(inputCrew)">
                             <input type="search" name="answer" placeholder="Enter Search" ng-model="inputCrew" />
                             <button type="submit">
-                                <i class="fa fa-search"></i>
+                                <i class="fa" ng-class="searchingPeople ? 'fa-cog fa-spin' : 'fa-search'"></i>
                             </button>
                         </form>
                         <div class="crew" id="results_crew" class="row multiple-choice" ng-show="data.peopleSearchResults">

@@ -78,6 +78,13 @@
         }
       }
     );
+    $scope.activeFilter = function(id){
+      if (id === this.data.questionID){
+        return true;
+      } else {
+        return false;
+      }
+    };
 
 
 
@@ -181,7 +188,9 @@
       $scope.data.answer = {};
       $scope.data.peopleSearchResults = null;
     }
+    $scope.searchingPeople = false;
     $scope.getPerson = function(name){
+      $scope.searchingPeople = true;
       var _name = encodeURI(name);
       theMovieDb.search.getPerson(
         {"query":_name},
@@ -189,11 +198,12 @@
           var scope = angular.element($('.discover-movie')).scope();
           scope.$apply(function(){
             scope.data.peopleSearchResults = JSON.parse(data);
-            console.log(scope.data.peopleSearchResults);
+            scope.searchingPeople = false;
           });
         },
         function(){
           console.log('error');
+          scope.searchingPeople = false;
         });
     };
     $scope.data.selectedCast = {};
@@ -235,6 +245,32 @@
       } else {
         return false;
       }
+    };
+    $scope.getCast = function(){
+      var castData = QuestionSrvc.getAnswer("cast");
+      var data = "";
+      for(var property in castData){
+        if (castData.hasOwnProperty(property)){
+          if (data === "")
+            data += "" + castData[property];
+          else
+            data += " + " + castData[property];
+        }
+      }
+      return data;
+    };
+    $scope.getCrew = function(){
+      var crewData = QuestionSrvc.getAnswer("crew");
+      var data = "";
+      for(var property in crewData){
+        if (crewData.hasOwnProperty(property)){
+          if (data === "")
+            data += "" + crewData[property];
+          else
+            data += " + " + crewData[property];
+        }
+      }
+      return data;
     };
 
     // Year
@@ -289,7 +325,7 @@
     function filterReleaseDate() {
       var answeredYear = QuestionSrvc.getAnswer("year");
       var data = "";
-      if (typeof(answeredYear) != 'object'){
+      if (typeof(answeredYear) != 'object' && $scope.isToggled("year")){
         data += answeredYear + "-12-31";
         return data;
       } else {
@@ -303,7 +339,7 @@
     function filterGenres() {
       var genres = QuestionSrvc.getAnswer("genre");
       var data = "";
-      if (genres) {
+      if (genres && $scope.isToggled("genre")) {
         for (var i = 0; i < genres.length; i++) {
           var id = genres[i].id;
           if (data === "")
@@ -317,57 +353,41 @@
       }
     }
     function filterRating() {
-      var rating = QuestionSrvc.getAnswer("rating") / 10;
-      return rating.toFixed(2);
+      var rating = QuestionSrvc.getAnswer("rating");
+      if (rating && $scope.isToggled("rating")){
+        rating = rating / 10;
+        return rating.toFixed(2);
+      } else {
+        return "";
+      }
+
     }
     function filterCast() {
       var castData = QuestionSrvc.getAnswer("cast");
       var data = "";
-      for(var property in castData){
-        if (castData.hasOwnProperty(property)){
-          if (data === "")
-            data += "" + property;
-          else
-            data += "|" + property;
+      if (castData && $scope.isToggled("cast")) {
+        for (var property in castData) {
+          if (castData.hasOwnProperty(property)) {
+            if (data === "")
+              data += "" + property;
+            else
+              data += "|" + property;
+          }
         }
       }
       return data;
     }
-    $scope.filterCast = function(){
-      var castData = QuestionSrvc.getAnswer("cast");
-      var data = "";
-      for(var property in castData){
-        if (castData.hasOwnProperty(property)){
-          if (data === "")
-            data += "" + castData[property];
-          else
-            data += " + " + castData[property];
-        }
-      }
-      return data;
-    };
-    $scope.filterCrew = function(){
+    function filterCrew() {
       var crewData = QuestionSrvc.getAnswer("crew");
       var data = "";
-      for(var property in crewData){
-        if (crewData.hasOwnProperty(property)){
-          if (data === "")
-            data += "" + crewData[property];
-          else
-            data += " + " + crewData[property];
-        }
-      }
-      return data;
-    };
-    function filterCrew() {
-      var castData = QuestionSrvc.getAnswer("crew");
-      var data = "";
-      for(var property in castData){
-        if (castData.hasOwnProperty(property)){
-          if (data === "")
-            data += "" + property;
-          else
-            data += "|" + property;
+      if (crewData && $scope.isToggled("crew")) {
+        for(var property in crewData){
+          if (crewData.hasOwnProperty(property)){
+            if (data === "")
+              data += "" + property;
+            else
+              data += "|" + property;
+          }
         }
       }
       return data;
@@ -378,9 +398,6 @@
         scope.data.results = JSON.parse(data).results;
         console.log(scope.data.results);
       });
-
-      /*$scope.data.results = JSON.parse(data).results;
-      console.log($scope.data.results);*/
 
       /*
 
