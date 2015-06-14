@@ -104,6 +104,27 @@
         .tv-shows.image-gradient-dynamic{
             @include image-gradient-dynamic(53deg, $cm-red, $cm-blue, 0.25, 0.45);
         }
+
+        .copy {
+            color: white;
+            font-family: $aller-bold;
+            line-height: 1.5em;
+            position: relative;
+        }
+
+        .tv-shows .copy{
+            $after-width: 200px;
+            &:after{
+                content: "coming soon";
+                position: absolute;
+                display: block;
+                font-size: 1rem;
+                width: $after-width;
+                left: calc(50% - #{$after-width}/2);
+                margin-top: -2rem;
+                color: $cm-blue;
+            }
+        }
     }
 }
 

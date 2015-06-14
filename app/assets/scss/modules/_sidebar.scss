@@ -1,5 +1,4 @@
 .cm-sidebar{
-    @include span-columns(2.5);
     border-right: 1px solid #ddd;
     height: 100vh;
     position: fixed;
@@ -33,10 +32,29 @@
         font-family: $oswald;
         text-transform: uppercase;
         color: $cm-grey;
-        transition: background .2s ease;
+        transition: all .2s ease;
         &:hover{
+            color: $cm-darkgrey;
             cursor: pointer;
             background: #e5e5e5;
+        }
+    }
+    .link.active{
+        background: #e5e5e5;
+        color: $cm-darkgrey;
+    }
+    .clear{
+        i.fa{
+            position: relative;
+            top: 50%;
+            transform: translateY(-53%);
+            line-height: normal;
+            vertical-align: top;
+            float: right;
+            margin-right: 1rem;
+        }
+        &:hover{
+            color: $cm-red;
         }
     }
     .button{
@@ -55,8 +73,10 @@
             i.fa{
                 margin-left: 5px;
             }
-            &:hover{
+            &:hover, &:focus{
+                outline: none;
                 letter-spacing: 1px;
+                @include linear-gradient(53deg, rgba($cm-yellow,0.5) 0%, $cm-green 50%);
             }
         }
     }

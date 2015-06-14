@@ -6,8 +6,7 @@
         "id": "genre",
         "title": "Genre",
         "question": "What genres do you like?",
-        "instructions": "Select one or more of the following",
-        "answers": []
+        "instructions": "Select one or more of the following"
       },
       {
         "nr": 2,
@@ -43,32 +42,28 @@
         "id": "rating",
         "title": "Rating",
         "question": "How highly rated do you want your movie to be?",
-        "instructions": "Warning: this can significantly limit your results",
-        "answers": []
+        "instructions": "Warning: this can significantly limit your results"
       },
       {
         "nr": 4,
         "id": "cast",
         "title": "Cast",
         "question": "Any favorite actor you'd like to see?",
-        "instructions": "Do you want to see a movie only with certain actors?",
-        "answers": []
+        "instructions": "Tip: you can choose as many as you want"
       },
       {
         "nr": 5,
         "id": "year",
         "title": "Year",
         "question": "Watch an old classic or a recent blockbuster?",
-        "instructions": "Only watch movies from this year or older",
-        "answers": []
+        "instructions": "Only watch movies from this year or older..."
       },
       {
         "nr": 6,
         "id": "crew",
         "title": "Crew",
         "question": "Any favorite directors or producers?",
-        "instructions": "e.g. Steven Spielberg or George Lucas",
-        "answers": []
+        "instructions": "e.g. Steven Spielberg or George Lucas"
       }
     ],
     "tv": []

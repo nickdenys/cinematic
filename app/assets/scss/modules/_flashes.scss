@@ -5,10 +5,14 @@ $error-color: #fbe3e4 !default;
   background-color: $color;
   color: darken($color, 60%);
   display: block;
-  font-weight: 600;
+  font-family: $aller-bold;
   margin-bottom: $base-spacing / 2;
   padding: $base-spacing / 2;
   text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
 
   a {
     color: darken($color, 70%);

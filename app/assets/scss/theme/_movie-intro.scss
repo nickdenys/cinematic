@@ -1,0 +1,70 @@
+.movie-intro-wrapper{
+    .logo-wrapper{
+        margin: 4rem 0;
+        a{
+            display: block;
+            width: 200px;
+            height: auto;
+            margin: 0 auto;
+        }
+    }
+    .choose-option{
+        @include span-columns(12);
+        box-shadow: 0 2px 8px darken($cm-lightergrey, 20%);
+
+        .search,
+        .discover{
+            float: left;
+            width: 50%;
+            height: 50vh;
+            text-align: center;
+            padding: 0 10%;
+            overflow: hidden;
+            @include display(flex);
+            @include align-items(center);
+            @include justify-content(center);
+            &:hover{
+                i.fa, .title{
+                    bottom: 0;
+                }
+                .description{
+                    opacity: 1;
+                }
+            }
+        }
+
+        .search{
+            @include linear-gradient(53deg, $cm-red, $cm-yellow);
+        }
+        .discover{
+            @include linear-gradient(53deg, $cm-yellow, $cm-blue);
+        }
+
+        .copy {
+            color: white;
+            i.fa{
+                position: relative;
+                bottom: -2.5rem;
+                transition: all .4s ease;
+            }
+            .title{
+                font-family: $aller-bold;
+                font-size: 3rem;
+                line-height: 1.5em;
+                color: #fff;
+                margin: 1rem 0 2rem 0;
+                text-align: center;
+                position: relative;
+                bottom: -2.5rem;
+                transition: all .4s ease;
+            }
+            .description{
+                opacity: 0;
+                font-size: 1rem;
+                line-height: 1.618;
+                transition: opacity .4s ease;
+                font-family: $aller-italic;
+            }
+        }
+    }
+}
