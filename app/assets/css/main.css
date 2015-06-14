@@ -1123,13 +1123,13 @@ tr, td, th {
   width: 95%;
   font-size: .9rem; }
   .modal .modal-inner > .backdrop {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
-    min-width: 100vw;
-    min-height: 100vh;
-    opacity: 1;
-    z-index: -1;
+    min-width: 100%;
+    min-height: 100%;
+    opacity: .15;
+    z-index: 1;
     -webkit-filter: blur(5px);
             filter: blur(5px); }
   .modal .modal-inner > .details {
