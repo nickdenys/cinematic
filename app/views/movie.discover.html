@@ -296,7 +296,7 @@
                                     </div>
                                 </div>
                                 <div class="cm-spinner" ng-hide="data.movieDetail.basic"><i class="fa fa-2x fa-cog fa-spin"></i><br />Fetching data...</div>
-                                <div class="backdrop fade-in" ng-if="data.movieDetail.basic.backdrop_path" style="background: url('https://image.tmdb.org/t/p/w1000{{ data.movieDetail.basic.backdrop_path }}') no-repeat center center; background-size: cover;"></div>
+                                <div class="backdrop" ng-if="data.movieDetail.basic.backdrop_path" style="background: url('https://image.tmdb.org/t/p/w1000{{ data.movieDetail.basic.backdrop_path }}') no-repeat center center; background-size: cover;"></div>
                             </div>
                         </div>
                     </div>
