@@ -23,6 +23,10 @@
     "selectize": "~0.12.1",
     "angular-selectize2": "~1.2.1",
     "angularjs-slider": "~0.1.21",
-    "angular-animate": "~1.4.0"
+    "angular-animate": "~1.4.0",
+    "oauth-ng": "~0.4.2"
+  },
+  "resolutions": {
+    "angular": "1.4.3"
   }
 }

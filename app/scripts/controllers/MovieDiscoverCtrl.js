@@ -3,7 +3,7 @@
 
   var controllers = angular.module('cmApp.controllers');
 
-  controllers.controller('cmApp.controllers.MovieDiscoverCtrl', ['$rootScope','$scope', '$http','$routeParams','$location','localStorageService','cmApp.services.QuestionSrvc', function($rootScope, $scope, $http, $routeParams, $location, localStorageService, QuestionSrvc) {
+  controllers.controller('cmApp.controllers.MovieDiscoverCtrl', ['$rootScope','$scope', '$http','$routeParams','$location','localStorageService','cmApp.services.QuestionSrvc', 'cmApp.services.TraktSrvc', function($rootScope, $scope, $http, $routeParams, $location, localStorageService, QuestionSrvc, TraktSrvc) {
 
     /*------------------------------------*\
         #DATA
@@ -415,6 +415,11 @@
         });
     };
     $scope.getMovieDetail = function(id){
+      $('#modal').show();
+      $("body").addClass("modal-open");
+
+
+
       var wrapper = $('.discover-movie');
       $scope.data.movieDetail = {};
       theMovieDb.movies.getById({"id":id },
@@ -423,6 +428,8 @@
           scope.$apply(function () {
             scope.data.movieDetail.basic = JSON.parse(data);
           });
+          isMovieInWatchlist($scope.data.movieDetail.basic.imdb_id);
+          console.log(scope.data.movieDetail);
         },function(error) {
           console.log(error);
         }
@@ -452,6 +459,54 @@
 
     };
 
+
+
+
+
+
+    /*------------------------------------*\
+        #TRAKT FUNCTIONALITY
+    \*------------------------------------*/
+    $scope.watchlist = [];
+    updateWatchlist();
+
+    function updateWatchlist(){
+      $scope.watchlist = TraktSrvc.getMovieWatchlist();
+      console.log($scope.watchlist);
+    }
+
+
+    $scope.addToWatchlist = function(id){
+      TraktSrvc.addMovieToWatchlist(id);
+      updateWatchlist();
+      $scope.data.movieDetail.watchlist = true;
+    };
+    $scope.removeFromWatchlist = function(id){
+      TraktSrvc.removeMovieFromWatchlist(id);
+      updateWatchlist();
+      $scope.data.movieDetail.watchlist = false;
+    };
+
   }]);
+
+  /*------------------------------------*\
+      #HELPERS
+  \*------------------------------------*/
+
+  var wrapper = $('.discover-movie');
+
+  function isMovieInWatchlist(id){
+    if (id){
+      var wrapper = $('.discover-movie');
+      var scope = angular.element(wrapper).scope();
+      scope.$apply(function () {
+        if (scope.watchlist.indexOf(id) > -1){
+          scope.data.movieDetail.watchlist = true;
+        } else {
+          scope.data.movieDetail.watchlist = false;
+        }
+      });
+    }
+  }
 
 })();

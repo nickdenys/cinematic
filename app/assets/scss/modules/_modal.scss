@@ -17,29 +17,16 @@
     $modal-image-width: $modal-image-height;
     $modal-trigger-image-width: 300px;
 
-    label {
-        cursor: pointer;
-        margin-bottom: 0;
-    }
+    display: none;
 
-    label img {
-        border-radius: $modal-trigger-image-width / 2;
-        display: block;
-        max-width: $modal-trigger-image-width;
-    }
-
-    .modal-state {
-        display: none;
-    }
 
     .modal-fade-screen { // overlay
         @include transition(opacity 0.25s ease);
         @include position(fixed, 0px 0px 0px 0px);
         background: rgba(0,0,0, 0.85);
-        opacity: 0;
+        opacity: 1;
         padding-top: 0.6em;
         text-align: left;
-        visibility: hidden;
         z-index: 99999999999;
 
         @include media($large-screen) {
@@ -170,16 +157,8 @@
             }
         }
     }
-
-    .modal-state:checked + .modal-fade-screen {
-        opacity: 1;
-        visibility: visible;
-    }
-
-    .modal-state:checked + .modal-fade-screen .modal-inner {
-        top: 0.5em;
-    }
 }
+
 
 .modal-open {
     overflow: hidden;

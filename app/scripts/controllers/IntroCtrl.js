@@ -3,7 +3,7 @@
 
     var controllers = angular.module('cmApp.controllers');
 
-    controllers.controller('cmApp.controllers.IntroCtrl', ['$scope','$location', '$anchorScroll', function($scope,$location, $anchorScroll) {
+    controllers.controller('cmApp.controllers.IntroCtrl', ['$scope','$location', '$anchorScroll', 'cmApp.services.TraktSrvc', function($scope, $location, $anchorScroll, TraktSrvc) {
 
         $scope.movies = [];
         $scope.tvshows = [];
@@ -14,7 +14,21 @@
         };
         $scope.getSomePopularTvShow = function(){
             theMovieDb.tv.getPopular({page:1}, tvSuccessCB, tvErrorCB);
-        }
+        };
+
+        $scope.$on('oauth:login', function(event, token) {
+            console.log('Authorized third party app with token', token.access_token);
+            TraktSrvc.saveToken(token.access_token);
+        });
+
+        $scope.$on('oauth:authorized', function(event, token) {
+            console.log('The user is authorized', token.access_token);
+            TraktSrvc.saveToken(token.access_token);
+            $scope.token = TraktSrvc.getToken();
+
+            TraktSrvc.fetchMovieWatchlist();
+        });
+
 
 
     }]);

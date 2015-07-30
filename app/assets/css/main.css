@@ -1045,164 +1045,151 @@ tr, td, th {
     background-image: -webkit-linear-gradient(37deg, #f23a29, #ffcb10);
     background-image: linear-gradient(53deg,#f23a29, #ffcb10); }
 
-.modal label {
-  cursor: pointer;
-  margin-bottom: 0; }
-.modal label img {
-  border-radius: 150px;
-  display: block;
-  max-width: 300px; }
-.modal .modal-state {
+.modal {
   display: none; }
-.modal .modal-fade-screen {
-  -webkit-transition: opacity 0.25s ease;
-  transition: opacity 0.25s ease;
-  position: fixed;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-  background: rgba(0, 0, 0, 0.85);
-  opacity: 0;
-  padding-top: 0.6em;
-  text-align: left;
-  visibility: hidden;
-  z-index: 99999999999; }
-  @media screen and (min-width: 64em) {
-    .modal .modal-fade-screen {
-      padding-top: 5em; } }
-  .modal .modal-fade-screen .modal-bg {
-    position: absolute;
+  .modal .modal-fade-screen {
+    -webkit-transition: opacity 0.25s ease;
+    transition: opacity 0.25s ease;
+    position: fixed;
     top: 0px;
     right: 0px;
     bottom: 0px;
     left: 0px;
-    cursor: pointer; }
-.modal .modal-close {
-  position: absolute;
-  top: 1.5em;
-  right: 1.5em;
-  height: 1.5em;
-  width: 1.5em;
-  cursor: pointer;
-  z-index: 2; }
-  .modal .modal-close:after, .modal .modal-close:before {
-    position: absolute;
-    top: 3px;
-    right: 3px;
-    bottom: 0;
-    left: 50%;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-    height: 1.5em;
-    width: 0.15em;
-    background: #838383;
-    content: '';
-    display: block;
-    margin: -3px 0 0 -1px; }
-  .modal .modal-close:hover:after, .modal .modal-close:hover:before {
-    background: #6a6a6a; }
-  .modal .modal-close:before {
-    -webkit-transform: rotate(-45deg);
-    -ms-transform: rotate(-45deg);
-    transform: rotate(-45deg); }
-.modal .modal-inner {
-  -webkit-transition: opacity 0.25s ease;
-  transition: opacity 0.25s ease;
-  background: white;
-  border-radius: 3px;
-  margin-top: 0;
-  margin-left: auto;
-  margin-right: auto;
-  max-height: 95%;
-  max-width: 1000px;
-  overflow: auto;
-  padding: 1.5em;
-  position: relative;
-  width: 95%;
-  font-size: .9rem; }
-  .modal .modal-inner > .backdrop {
-    position: absolute;
-    top: 0;
-    left: 0;
-    min-width: 100%;
-    min-height: 100%;
-    opacity: .15;
-    z-index: 1;
-    -webkit-filter: blur(5px);
-            filter: blur(5px); }
-  .modal .modal-inner > .details {
-    position: relative;
-    z-index: 2;
-    color: #424242; }
-  .modal .modal-inner .actors {
-    font-size: .9rem;
-    display: -webkit-box;
-    display: -moz-box;
-    display: box;
-    display: -webkit-flex;
-    display: -moz-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-lines: multiple;
-    -moz-box-lines: multiple;
-    box-lines: multiple;
-    -webkit-flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    -webkit-box-pack: justify;
-    box-pack: justify;
-    -webkit-justify-content: space-between;
-    -moz-justify-content: space-between;
-    -ms-justify-content: space-between;
-    -o-justify-content: space-between;
-    justify-content: space-between;
-    -ms-flex-pack: justify; }
-    .modal .modal-inner .actors .actor {
-      -webkit-flex-basis: 15em;
-      flex-basis: 15em;
-      -ms-flex-preferred-size: 15em;
-      -webkit-flex-grow: 1;
-      -moz-flex-grow: 1;
-      -webkit-box-flex: 1;
-              flex-grow: 1;
-      -ms-flex-positive: 1;
-      margin-bottom: .5rem; }
-    .modal .modal-inner .actors .image {
-      display: block;
-      width: 45px;
-      min-height: 45px;
-      background: #bbb;
-      float: left;
-      margin-right: .5rem; }
-    .modal .modal-inner .actors .name-wrapper .name {
-      font-family: "Aller Bold", "Helvetica Neue Bold", "Arial Bold", sans-serif; }
-  @media screen and (min-width: 40em) {
-    .modal .modal-inner {
-      max-height: 85%;
-      padding: 3em; } }
-  .modal .modal-inner h1 {
-    color: #333;
-    margin: 0 0 0.6em 0;
+    background: rgba(0, 0, 0, 0.85);
+    opacity: 1;
+    padding-top: 0.6em;
     text-align: left;
-    text-transform: capitalize; }
-  .modal .modal-inner p {
+    z-index: 99999999999; }
+    @media screen and (min-width: 64em) {
+      .modal .modal-fade-screen {
+        padding-top: 5em; } }
+    .modal .modal-fade-screen .modal-bg {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      bottom: 0px;
+      left: 0px;
+      cursor: pointer; }
+  .modal .modal-close {
+    position: absolute;
+    top: 1.5em;
+    right: 1.5em;
+    height: 1.5em;
+    width: 1.5em;
+    cursor: pointer;
+    z-index: 2; }
+    .modal .modal-close:after, .modal .modal-close:before {
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      bottom: 0;
+      left: 50%;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+      height: 1.5em;
+      width: 0.15em;
+      background: #838383;
+      content: '';
+      display: block;
+      margin: -3px 0 0 -1px; }
+    .modal .modal-close:hover:after, .modal .modal-close:hover:before {
+      background: #6a6a6a; }
+    .modal .modal-close:before {
+      -webkit-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+      transform: rotate(-45deg); }
+  .modal .modal-inner {
+    -webkit-transition: opacity 0.25s ease;
+    transition: opacity 0.25s ease;
+    background: white;
+    border-radius: 3px;
+    margin-top: 0;
+    margin-left: auto;
+    margin-right: auto;
+    max-height: 95%;
+    max-width: 1000px;
+    overflow: auto;
+    padding: 1.5em;
+    position: relative;
+    width: 95%;
     font-size: .9rem; }
-  .modal .modal-inner .modal-intro {
-    font-weight: 800; }
-  .modal .modal-inner a.cta {
-    color: white;
-    display: inline-block;
-    margin-right: 0.5em;
-    margin-top: 1em; }
-    .modal .modal-inner a.cta:last-child {
-      padding: 0 2em; }
-.modal .modal-state:checked + .modal-fade-screen {
-  opacity: 1;
-  visibility: visible; }
-.modal .modal-state:checked + .modal-fade-screen .modal-inner {
-  top: 0.5em; }
+    .modal .modal-inner > .backdrop {
+      position: absolute;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      opacity: .15;
+      z-index: 1;
+      -webkit-filter: blur(5px);
+              filter: blur(5px); }
+    .modal .modal-inner > .details {
+      position: relative;
+      z-index: 2;
+      color: #424242; }
+    .modal .modal-inner .actors {
+      font-size: .9rem;
+      display: -webkit-box;
+      display: -moz-box;
+      display: box;
+      display: -webkit-flex;
+      display: -moz-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-lines: multiple;
+      -moz-box-lines: multiple;
+      box-lines: multiple;
+      -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      -webkit-box-pack: justify;
+      box-pack: justify;
+      -webkit-justify-content: space-between;
+      -moz-justify-content: space-between;
+      -ms-justify-content: space-between;
+      -o-justify-content: space-between;
+      justify-content: space-between;
+      -ms-flex-pack: justify; }
+      .modal .modal-inner .actors .actor {
+        -webkit-flex-basis: 15em;
+        flex-basis: 15em;
+        -ms-flex-preferred-size: 15em;
+        -webkit-flex-grow: 1;
+        -moz-flex-grow: 1;
+        -webkit-box-flex: 1;
+                flex-grow: 1;
+        -ms-flex-positive: 1;
+        margin-bottom: .5rem; }
+      .modal .modal-inner .actors .image {
+        display: block;
+        width: 45px;
+        min-height: 45px;
+        background: #bbb;
+        float: left;
+        margin-right: .5rem; }
+      .modal .modal-inner .actors .name-wrapper .name {
+        font-family: "Aller Bold", "Helvetica Neue Bold", "Arial Bold", sans-serif; }
+    @media screen and (min-width: 40em) {
+      .modal .modal-inner {
+        max-height: 85%;
+        padding: 3em; } }
+    .modal .modal-inner h1 {
+      color: #333;
+      margin: 0 0 0.6em 0;
+      text-align: left;
+      text-transform: capitalize; }
+    .modal .modal-inner p {
+      font-size: .9rem; }
+    .modal .modal-inner .modal-intro {
+      font-weight: 800; }
+    .modal .modal-inner a.cta {
+      color: white;
+      display: inline-block;
+      margin-right: 0.5em;
+      margin-top: 1em; }
+      .modal .modal-inner a.cta:last-child {
+        padding: 0 2em; }
 
 .modal-open {
   overflow: hidden; }

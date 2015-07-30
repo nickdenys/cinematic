@@ -11,19 +11,24 @@ var cinematic = angular.module('cmApp', [
     'cmApp.models',
     'LocalStorageModule',
     'selectize',
-    'rzModule'
+    'rzModule',
+    'oauth'
   ])
-  .config(['$routeProvider','localStorageServiceProvider', function($routeProvider, localStorageServiceProvider) {
+  .config(['$routeProvider', '$locationProvider', 'localStorageServiceProvider', function($routeProvider, $locationProvider, localStorageServiceProvider) {
 
     // Handle routing URLs
-
     $routeProvider.when('/', {
       templateUrl: 'views/intro.html',
       controller: 'cmApp.controllers.IntroCtrl'
     });
 
+    $routeProvider.when('/test', {
+      templateUrl: 'views/test.html',
+      controller: 'cmApp.controllers.TestCtrl'
+    });
+
     $routeProvider.when('/movie/', {
-      templateUrl:'views/movie.html',
+      templateUrl:'views/movie.html'
     });
 
     $routeProvider.when('/movie/search', {
@@ -36,16 +41,24 @@ var cinematic = angular.module('cmApp', [
       controller:'cmApp.controllers.MovieDiscoverCtrl'
     });
 
-    /*$routeProvider.when('/tv/discover', {
-      templateUrl:'views/tv.discover.html',
-      controller:'cmApp.controllers.TvDiscoverCtrl'
-    });*/
+    // Catch access token without HTML5 mode
+    $routeProvider.when('/access_token=:accessToken', {
+      template: '',
+      controller: function ($location, AccessToken) {
+        var hash = $location.path().substr(1);
+        AccessToken.setTokenFromString(hash);
+        $location.path('/');
+        $location.replace();
+      }
+    });
 
     $routeProvider.otherwise({redirectTo: '/'});
+
 
     // Configure LocalStorage settings
     localStorageServiceProvider
       .setPrefix('cmApp')
       .setStorageType('sessionStorage')
-      .setNotify(true, true)
+      .setNotify(true, true);
+
   }]);
