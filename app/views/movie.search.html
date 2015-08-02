@@ -31,7 +31,7 @@
           <span ng-hide="movies.length">No movies found !</span>
           <article class="movie movie-result" data-id="{{ movie.id }}" ng-click="getSimilarMovies(movie.id, movie.title)" ng-repeat="movie in movies | limitTo:6" ng-class="isActive(movie.id) ? 'active' : 'inactive'">
             <div class="search-poster">
-              <img ng-if="movie.poster_path" src="https://image.tmdb.org/t/p/w154{{ movie.poster_path }}" alt="{{movie.title}}"><br />
+              <img ng-if="movie.poster_path" ng-src="https://image.tmdb.org/t/p/w154{{ movie.poster_path }}" alt="{{movie.title}}"><br />
             </div>
             <span class="search-title">{{ movie.title }}</span>
           </article>
@@ -43,82 +43,11 @@
       <p class="subtitle">If you enjoyed {{ selectedMovie.title }}, you might also like...</p>
       <div class="movies-similar">
         <article class="movie" ng-repeat="movie in similarMovies.results  | limitTo:12" data-id="{{movie.id}}">
-          <div class="modal">
-            <label for="modal">
-              <div class="modal-trigger" ng-click="getMovieDetail(movie.id)">
-                <div class="search-poster">
-                  <img ng-if="movie.poster_path" src="https://image.tmdb.org/t/p/w154{{ movie.poster_path }}" alt="{{movie.title}}"><br />
-                </div>
-                <span class="search-title">{{ movie.title }}</span>
-              </div>
-            </label>
-            <input class="modal-state" id="modal" type="checkbox" />
-            <div class="modal-fade-screen">
-              <div class="modal-inner movie-detail">
-                <div class="modal-close" for="modal"></div>
-                <div class="details" ng-show="data.movieDetail.basic" ng-cloak>
-                  <h2 class="title">{{ data.movieDetail.basic.title }}</h2>
-                  <ul class="metadata">
-                    <li class="metadata-single"><span class="title">Score</span> {{ data.movieDetail.basic.vote_average }}</li>
-                    <li class="metadata-single"><span class="title">Year</span> {{ data.movieDetail.basic.release_date | limitTo:4 }}</li>
-                    <li class="metadata-single"><span class="title">Runtime</span> {{ data.movieDetail.basic.runtime }} minutes</li>
-                    <li class="metadata-single"><span class="title">Genres</span> <span class="genre" ng-repeat="genre in data.movieDetail.basic.genres">{{ genre.name }}</span></li>
-                  </ul>
-                  <div class="details-left">
-                    <img class="poster" ng-if="data.movieDetail.basic.poster_path" src="https://image.tmdb.org/t/p/w300{{ data.movieDetail.basic.poster_path }}" alt="{{ data.movieDetail.basic.title }}">
-                  </div>
-                  <div class="details-right">
-                    <h5 class="tagline">{{ data.movieDetail.basic.tagline }}</h5>
-                    <p class="synopsis"> {{ data.movieDetail.basic.overview }}</p>
-                    <p ng-hide="data.movieDetail.basic.overview">No synopsis available</p>
-                    <span class="subtitle">Cast</span>
-                    <ul class="actors">
-                      <li class="actor" ng-repeat="actor in data.movieDetail.credits.cast | limitTo:4">
-                        <div class="image">
-                          <img ng-if="actor.profile_path" src="https://image.tmdb.org/t/p/w45{{ actor.profile_path }}" alt="{{ actor.name }}">
-                        </div>
-                        <div class="name-wrapper">
-                          <span class="name">{{ actor.name }}</span> <br />
-                          as {{ actor.character }}
-                        </div>
-                      </li>
-                    </ul>
-                    <span class="subtitle">Links</span>
-                    <ul class="links">
-                      <li ng-if="data.movieDetail.trailers.youtube.length"><a href="https://www.youtube.com/watch?v={{ data.movieDetail.trailers.youtube[0].source }}" target="_blank"><i class="fa fa-youtube-play"></i> Trailer</a></li>
-                      <li><a href="http://www.imdb.com/title/{{ data.movieDetail.basic.imdb_id }}" target="_blank"><i class="fa fa-external-link"></i> IMDB</a></li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="cm-spinner" ng-hide="data.movieDetail.basic"><i class="fa fa-2x fa-cog fa-spin"></i><br />Fetching data...</div>
-                <div class="backdrop" ng-if="data.movieDetail.basic.backdrop_path" style="background: url('https://image.tmdb.org/t/p/w300{{ data.movieDetail.basic.backdrop_path }}') no-repeat center center; background-size: cover;"></div>
-              </div>
+            <div class="search-poster" ng-click="getMovieDetail(movie.id)">
+              <img ng-if="movie.poster_path" ng-src="https://image.tmdb.org/t/p/w154{{ movie.poster_path }}" alt="{{movie.title}}"><br />
             </div>
-          </div>
-            <script>
-              $(function() {
-                $("#modal").on("change", function() {
-                  if ($(this).is(":checked")) {
-                    $("body").addClass("modal-open");
-                  } else {
-                    $("body").removeClass("modal-open");
-                  }
-                });
-
-                $(".modal-fade-screen, .modal-close").on("click", function() {
-                  $(".modal-state:checked").prop("checked", false).change();
-                });
-
-                $(".modal-inner").on("click", function(e) {
-                  e.stopPropagation();
-                });
-              });
-
-            </script>
+            <span class="search-title">{{ movie.title }}</span>
         </article>
-
-
-
       </div>
       <div class="empty-text fade-in" ng-show="selectedMovie.id && !similarMovies.results.length">
         <i class="fa fa-4x fa-frown-o"></i>
@@ -131,4 +60,71 @@
       <p>Fetching data...</p>
     </div>
   </div>
+
+  <div id="modal" class="modal fade-in">
+    <div class="modal-fade-screen">
+      <div class="modal-inner movie-detail">
+        <div class="modal-close" for="modal"></div>
+        <div class="details" ng-show="data.movieDetail.basic" ng-cloak>
+          <h2 class="title">{{ data.movieDetail.basic.title }}</h2>
+          <ul class="metadata">
+            <li class="metadata-single"><span class="title">Score</span> {{ data.movieDetail.basic.vote_average }}</li>
+            <li class="metadata-single"><span class="title">Year</span> {{ data.movieDetail.basic.release_date | limitTo:4 }}</li>
+            <li class="metadata-single"><span class="title">Runtime</span> {{ data.movieDetail.basic.runtime }} minutes</li>
+            <li class="metadata-single"><span class="title">Genres</span> <span class="genre" ng-repeat="genre in data.movieDetail.basic.genres">{{ genre.name }}</span></li>
+          </ul>
+          <div class="details-left">
+            <img class="poster" ng-if="data.movieDetail.basic.poster_path" ng-src="https://image.tmdb.org/t/p/w300{{ data.movieDetail.basic.poster_path }}" alt="{{ data.movieDetail.basic.title }}">
+          </div>
+          <div class="details-right">
+            <h5 class="tagline">{{ data.movieDetail.basic.tagline }}</h5>
+            <p class="synopsis"> {{ data.movieDetail.basic.overview }}</p>
+            <p ng-hide="data.movieDetail.basic.overview">No synopsis available</p>
+            <span class="subtitle">Cast</span>
+            <ul class="actors">
+              <li class="actor" ng-repeat="actor in data.movieDetail.credits.cast | limitTo:4">
+                <div class="image">
+                  <img ng-if="actor.profile_path" ng-src="https://image.tmdb.org/t/p/w45{{ actor.profile_path }}" alt="{{ actor.name }}">
+                </div>
+                <div class="name-wrapper">
+                  <span class="name">{{ actor.name }}</span> <br />
+                  as {{ actor.character }}
+                </div>
+              </li>
+            </ul>
+            <span class="subtitle">Links</span>
+            <ul class="links">
+              <li ng-if="data.movieDetail.trailers.youtube.length"><a href="https://www.youtube.com/watch?v={{ data.movieDetail.trailers.youtube[0].source }}" target="_blank"><i class="fa fa-youtube-play"></i> Trailer</a></li>
+              <li><a href="http://www.imdb.com/title/{{ data.movieDetail.basic.imdb_id }}" target="_blank"><i class="fa fa-external-link"></i> IMDB</a></li>
+            </ul>
+            <span class="subtitle">Trakt.tv</span>
+            <ul class="links">
+              <li><a href="#" ng-cloak ng-hide="data.movieDetail.watchlist" ng-click="addToWatchlist(data.movieDetail.basic.imdb_id)" data-imdb="{{ data.movieDetail.basic.imdb_id }}"><i class="fa fa-plus-circle"></i>Add to watchlist</a></li>
+              <li><a href="#" ng-cloak ng-hide="!data.movieDetail.watchlist" ng-click="removeFromWatchlist(data.movieDetail.basic.imdb_id)" data-imdb="{{ data.movieDetail.basic.imdb_id }}"><i class="fa fa-minus-circle"></i>Remove from watchlist</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="cm-spinner" ng-hide="data.movieDetail.basic"><i class="fa fa-2x fa-cog fa-spin"></i><br />Fetching data...</div>
+        <div class="backdrop" ng-if="data.movieDetail.basic.backdrop_path" style="background: url('https://image.tmdb.org/t/p/w1000{{ data.movieDetail.basic.backdrop_path }}') no-repeat center center; background-size: cover;"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $(function() {
+
+      var modal = $("#modal");
+
+      $('.modal-close').on('click', function() {
+        modal.hide();
+        $("body").removeClass("modal-open");
+      });
+
+      $(".modal-inner").on("click", function(e) {
+        e.stopPropagation();
+      });
+
+    });
+
+  </script>
 </div>

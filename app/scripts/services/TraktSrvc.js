@@ -15,7 +15,8 @@
     var TOKEN = null;
     //if (!data)
       //var data = {};
-    var watchlistMovies = [];
+    var watchlistMoviesById = [];
+    var watchlistMovies = {};
 
 
     /*------------------------------------*\
@@ -48,17 +49,17 @@
               // this callback will be called asynchronously
               // when the response is available
               console.log(status, "Fetched movies");
-              var results = data;
+              watchlistMovies = data;
 
               // Filter imdb ID's
-              watchlistMovies = [];
-              for (var movie in results){
-                if(results.hasOwnProperty(movie)){
-                  var obj = results[movie];
+              watchlistMoviesById = [];
+              for (var movie in watchlistMovies){
+                if(watchlistMovies.hasOwnProperty(movie)){
+                  var obj = watchlistMovies[movie];
                   for (var prop in obj) {
                     if(obj.hasOwnProperty(prop)){
                       if(prop === "movie") {
-                        watchlistMovies.push(obj[prop].ids.imdb);
+                        watchlistMoviesById.push(obj[prop].ids.imdb);
                       }
                     }
                   }
@@ -74,13 +75,16 @@
           console.log('no token found!');
         }
       },
-      getMovieWatchlist:function(){
-        if(watchlistMovies){
-          return watchlistMovies;
+      getMovieWatchlistById:function(){
+        if(watchlistMoviesById){
+          return watchlistMoviesById;
         }
         else{
           return "watchlist is empty!";
         }
+      },
+      getMovieWatchlist:function(){
+        return watchlistMovies;
       },
 
       addMovieToWatchlist:function(imdb_id){
@@ -106,7 +110,7 @@
         sendData(req);
 
         // Add movie to offline array
-        watchlistMovies.push(imdb_id);
+        watchlistMoviesById.push(imdb_id);
       },
       removeMovieFromWatchlist:function(imdb_id){
         var movie = {
@@ -131,9 +135,9 @@
         sendData(req);
 
         // Remove movie from offline array
-        var index = watchlistMovies.indexOf(imdb_id);
+        var index = watchlistMoviesById.indexOf(imdb_id);
         if (index > -1){
-          watchlistMovies.splice(index, 1);
+          watchlistMoviesById.splice(index, 1);
         }
       }
     };

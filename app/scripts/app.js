@@ -41,6 +41,11 @@ var cinematic = angular.module('cmApp', [
       controller:'cmApp.controllers.MovieDiscoverCtrl'
     });
 
+    $routeProvider.when('/movie/watchlist', {
+      templateUrl:'views/movie.watchlist.html',
+      controller:'cmApp.controllers.MovieWatchlistCtrl'
+    });
+
     // Catch access token without HTML5 mode
     $routeProvider.when('/access_token=:accessToken', {
       template: '',

@@ -59,7 +59,8 @@
             }
         };
 
-        $scope.getMovieDetail = function(id){
+        /*$scope.getMovieDetail = function(id){
+
             $scope.searching = true;
             theMovieDb.movies.getById({"id":id },
               function(data){
@@ -74,7 +75,7 @@
                 console.log(error);
               }
             );
-        };
+        };*/
 
         $scope.clearAll = function(){
             $scope.similarMovies = null;
@@ -85,6 +86,10 @@
         };
 
         $scope.getMovieDetail = function(id){
+
+            $('#modal').show();
+            $("body").addClass("modal-open");
+
             $scope.data.movieDetail = {};
             theMovieDb.movies.getById({"id":id },
               function(data) {

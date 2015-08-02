@@ -1,0 +1,32 @@
+<div class="wrapper">
+  <div class="cm-content-center search-movie fade-in">
+    <div class="logo-wrapper">
+      <a href="#/" class="logo" title="Go to homepage">
+        <img src="/assets/images/logo.png" alt="cinematic"/>
+      </a>
+    </div>
+
+    <div class="flash-error fade-in" ng-show="error" ng-cloak>
+      <span>{{ error }}</span>
+    </div>
+
+    <h1 class="page-title">What's on my <span class="special">watchlist</span>?</h1>
+
+    <section class="similar" ng-show="watchlist">
+      <div class="movies-similar">
+        <article class="movie" ng-repeat="movieData in watchlist">
+          {{ movieData.movie.title }}
+        </article>
+
+
+
+      </div>
+      <div class="empty-text fade-in" ng-show="selectedMovie.id && !similarMovies.results.length">
+        <i class="fa fa-4x fa-frown-o"></i>
+        <p>No similar movies found</p>
+      </div>
+    </section>
+
+    </div>
+  </div>
+</div>

@@ -89,6 +89,9 @@
             max-width: 154px;
             border-radius: 3px;
             margin: 0 auto;
+            &:hover{
+                cursor: pointer;
+            }
             img{
                 opacity: 0.7;
                 border-radius: 3px;

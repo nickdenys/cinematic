@@ -11,18 +11,20 @@
     .choose-option{
         @include span-columns(12);
         box-shadow: 0 2px 8px darken($cm-lightergrey, 20%);
+        @include display(flex);
+        @include flex-wrap(wrap);
+        min-height: 500px;
+        height: 50vh;
 
-        .search,
-        .discover{
-            float: left;
-            width: 50%;
-            height: 50vh;
+        .option{
+            min-width: calc(100% / 3);
             text-align: center;
-            padding: 0 10%;
+            padding: 0 5%;
             overflow: hidden;
             @include display(flex);
             @include align-items(center);
             @include justify-content(center);
+            @include flex(1);
             &:hover{
                 i.fa, .title{
                     bottom: 0;
@@ -39,6 +41,9 @@
         .discover{
             @include linear-gradient(53deg, $cm-yellow, $cm-blue);
         }
+        .watchlist{
+            @include linear-gradient(-127deg, $cm-red, $cm-blue);
+        }
 
         .copy {
             color: white;
@@ -46,6 +51,8 @@
                 position: relative;
                 bottom: -2.5rem;
                 transition: all .4s ease;
+                width: 64px;
+                height: 64px;
             }
             .title{
                 font-family: $aller-bold;

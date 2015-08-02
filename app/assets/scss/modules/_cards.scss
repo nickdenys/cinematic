@@ -38,6 +38,9 @@
         max-height: 225px;
         @include linear-gradient(53deg, $cm-blue, $cm-yellow);
 
+        &:hover{
+            cursor: pointer;
+        }
 
         img {
             @include transition (all 0.2s ease-in-out);
@@ -56,6 +59,17 @@
         line-height: 1.5em;
         padding: 1rem 1.5rem;
 
+        &:hover{
+            cursor: pointer;
+            .card-header-right{
+                .cm-btn-small{
+                    background: $cm-yellow;
+                    border-color: $cm-yellow;
+                    color: #fff;
+                }
+            }
+        }
+
         .card-header-left{
             display: inline-block;
             max-width: 75%;
@@ -68,12 +82,12 @@
             display: inline-block;
             float: right;
             padding-top: .5rem;
-            .cm-btn-small{
+            /*.cm-btn-small{
                 &:hover{
                     background: $cm-yellow;
                     border-color: $cm-yellow;
                 }
-            }
+            }*/
         }
 
         .movie-title{
@@ -121,10 +135,17 @@
         }
     }
 
-    &:nth-of-type(4n),
-    &:nth-of-type(4n + 1){
+    // 0,3,6,9,...
+    &:nth-of-type(3n){
         .card-image{
             @include linear-gradient(53deg, $cm-red, $cm-yellow);
+        }
+    }
+
+    // 1,4,7,10,...
+    &:nth-of-type(3n + 1){
+        .card-image{
+            @include linear-gradient(53deg, $cm-blue, $cm-red);
         }
     }
 }

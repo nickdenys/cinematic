@@ -166,11 +166,11 @@ accessTokenService.factory('AccessToken', ['Storage', '$rootScope', '$location',
    */
   var setExpiresAtEvent = function(){
     // Don't bother if there's no expires token
-    if (typeof(service.token.expires_at) === 'undefined' || service.token.expires_at === null) {
+    if (typeof(service.token.expires_at) === 'undefined' || service.token.expires_at === null || service.token.expires_at > (2147483647/1000)) {
       return;
     }
     var time = (new Date(service.token.expires_at))-(new Date());
-    if(time){
+    if(time && time < (2147483647/1000)){
       $interval(function(){
         $rootScope.$broadcast('oauth:expired', service.token);
       }, time, 1);

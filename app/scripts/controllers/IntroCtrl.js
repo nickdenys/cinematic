@@ -16,22 +16,30 @@
             theMovieDb.tv.getPopular({page:1}, tvSuccessCB, tvErrorCB);
         };
 
-        $scope.$on('oauth:login', function(event, token) {
-            console.log('Authorized third party app with token', token.access_token);
-            TraktSrvc.saveToken(token.access_token);
-        });
-
         $scope.$on('oauth:authorized', function(event, token) {
             console.log('The user is authorized', token.access_token);
             TraktSrvc.saveToken(token.access_token);
-            $scope.token = TraktSrvc.getToken();
+            $scope.token = token.access_token;
 
             TraktSrvc.fetchMovieWatchlist();
         });
 
+        $scope.$on('oauth:logout', function(event) {
+            TraktSrvc.saveToken(null);
+            $scope.token = null;
+        });
 
+        $scope.$on('oauth:denied', function(event) {
+            console.log('The user did not authorize the third party app');
+        });
+
+        $scope.$on('oauth:expired', function(event) {
+            console.log('The access token is expired. Please refresh.');
+        });
 
     }]);
+
+
 
     function getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min)) + min;

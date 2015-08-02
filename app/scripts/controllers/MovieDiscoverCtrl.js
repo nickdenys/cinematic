@@ -471,7 +471,7 @@
     updateWatchlist();
 
     function updateWatchlist(){
-      $scope.watchlist = TraktSrvc.getMovieWatchlist();
+      $scope.watchlist = TraktSrvc.getMovieWatchlistById();
       console.log($scope.watchlist);
     }
 
