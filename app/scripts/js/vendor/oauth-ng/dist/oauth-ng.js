@@ -412,7 +412,7 @@ directives.directive('oauth', [
         scope.tokenPath     = scope.tokenPath     || '/oauth/token';
         scope.template      = scope.template      || 'bower_components/oauth-ng/dist/views/templates/default.html';
         scope.responseType  = scope.responseType  || 'token';
-        scope.text          = scope.text          || 'Sign In';
+        scope.text          = scope.text          || 'Sign In with Trakt';
         scope.state         = scope.state         || undefined;
         scope.scope         = scope.scope         || undefined;
         scope.storage       = scope.storage       || 'sessionStorage';

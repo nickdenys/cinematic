@@ -23,6 +23,7 @@ input[type="submit"] {
     &:hover{
         background: $cm-grey;
         color: #fff;
+        cursor: pointer;
     }
     .fa-lg{
         vertical-align: -7%;
@@ -70,4 +71,21 @@ input[type="submit"] {
     &:hover{
         background: $cm-yellow;
     }
+}
+
+.cm-userdropdown {
+    float: right;
+    position: absolute;
+    z-index: 3;
+    right: 1rem;
+    top: 1rem;
+}
+
+.oauth span {
+    @extend .cm-btn-small;
+    @extend .cm-btn-yellow;
+}
+
+.oauth .logged-in {
+    @extend .cm-btn-red;
 }

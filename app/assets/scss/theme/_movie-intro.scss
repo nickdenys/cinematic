@@ -1,11 +1,11 @@
 .movie-intro-wrapper{
     .logo-wrapper{
-        margin: 4rem 0;
-        a{
-            display: block;
+        text-align: center;
+        .logo{
+            display: inline-block;
             width: 200px;
             height: auto;
-            margin: 0 auto;
+            margin: 4rem auto;
         }
     }
     .choose-option{

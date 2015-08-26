@@ -537,7 +537,7 @@ button, input[type="submit"] {
   vertical-align: middle;
   white-space: nowrap; }
 
-.cm-btn, .cm-btn-small {
+.cm-btn, .cm-btn-small, .oauth span {
   background: transparent;
   border: 3px solid #838383;
   color: #838383;
@@ -549,13 +549,14 @@ button, input[type="submit"] {
           transition: all .2s ease;
   text-align: center;
   border-radius: 4px; }
-  .cm-btn:hover, .cm-btn-small:hover {
+  .cm-btn:hover, .cm-btn-small:hover, .oauth span:hover {
     background: #838383;
-    color: #fff; }
-  .cm-btn .fa-lg, .cm-btn-small .fa-lg {
+    color: #fff;
+    cursor: pointer; }
+  .cm-btn .fa-lg, .cm-btn-small .fa-lg, .oauth span .fa-lg {
     vertical-align: -7%; }
 
-.cm-btn-small {
+.cm-btn-small, .oauth span {
   display: inline-block;
   padding: 5px 10px;
   letter-spacing: 1px;
@@ -564,10 +565,10 @@ button, input[type="submit"] {
   font-weight: 400;
   font-family: "Oswald", "Aller", "Helvetica Neue", "Arial", sans-serif; }
 
-.cm-btn-red {
+.cm-btn-red, .oauth .logged-in {
   border-color: #f23a29;
   color: #f23a29; }
-  .cm-btn-red:hover {
+  .cm-btn-red:hover, .oauth .logged-in:hover {
     background: #f23a29; }
 
 .cm-btn-blue {
@@ -582,11 +583,18 @@ button, input[type="submit"] {
   .cm-btn-green:hover {
     background: #A1C366; }
 
-.cm-btn-yellow {
+.cm-btn-yellow, .oauth span {
   border-color: #ffcb10;
   color: #ffcb10; }
-  .cm-btn-yellow:hover {
+  .cm-btn-yellow:hover, .oauth span:hover {
     background: #ffcb10; }
+
+.cm-userdropdown {
+  float: right;
+  position: absolute;
+  z-index: 3;
+  right: 1rem;
+  top: 1rem; }
 
 .flash-error {
   background-color: #FBE3E4;
@@ -1006,7 +1014,7 @@ tr, td, th {
     padding: 1rem 1.5rem; }
     .card .card-header:hover {
       cursor: pointer; }
-      .card .card-header:hover .card-header-right .cm-btn-small {
+      .card .card-header:hover .card-header-right .cm-btn-small, .card .card-header:hover .card-header-right .oauth span, .oauth .card .card-header:hover .card-header-right span {
         background: #ffcb10;
         border-color: #ffcb10;
         color: #fff; }
@@ -2060,12 +2068,12 @@ h1, h2, h3, h4, h5, h6 {
       opacity: 1; }
 
 .movie-intro-wrapper .logo-wrapper {
-  margin: 4rem 0; }
-  .movie-intro-wrapper .logo-wrapper a {
-    display: block;
+  text-align: center; }
+  .movie-intro-wrapper .logo-wrapper .logo {
+    display: inline-block;
     width: 200px;
     height: auto;
-    margin: 0 auto; }
+    margin: 4rem auto; }
 .movie-intro-wrapper .choose-option {
   float: left;
   display: block;
