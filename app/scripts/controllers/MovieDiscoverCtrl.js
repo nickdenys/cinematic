@@ -429,7 +429,8 @@
             scope.data.movieDetail.basic = JSON.parse(data);
           });
           isMovieInWatchlist($scope.data.movieDetail.basic.imdb_id);
-          console.log(scope.data.movieDetail);
+          isMovieInRatings($scope.data.movieDetail.basic.imdb_id);
+          //console.log("scope", scope.data.movieDetail);
         },function(error) {
           console.log(error);
         }
@@ -459,32 +460,65 @@
 
     };
 
-
-
-
-
-
     /*------------------------------------*\
         #TRAKT FUNCTIONALITY
     \*------------------------------------*/
     $scope.watchlist = [];
     updateWatchlist();
+    updateRatings();
 
     function updateWatchlist(){
-      $scope.watchlist = TraktSrvc.getMovieWatchlistById();
-      console.log($scope.watchlist);
+      TraktSrvc.fetchMovieWatchlist().
+        then(function(){
+          $scope.watchlist = TraktSrvc.getMovieWatchlistById();
+          console.log("watchlist", $scope.watchlist);
+        });
+    }
+    function updateRatings(){
+      TraktSrvc.fetchMovieRatings().
+        then(function(){
+          $scope.userRatings = TraktSrvc.getMovieRatings();
+          console.log("ratings", $scope.userRatings);
+        })
     }
 
-
     $scope.addToWatchlist = function(id){
-      TraktSrvc.addMovieToWatchlist(id);
-      updateWatchlist();
-      $scope.data.movieDetail.watchlist = true;
+      TraktSrvc.addMovieToWatchlist(id).
+        then(function(){
+          updateWatchlist();
+          $scope.data.movieDetail.watchlist = true;
+        });
     };
     $scope.removeFromWatchlist = function(id){
-      TraktSrvc.removeMovieFromWatchlist(id);
-      updateWatchlist();
-      $scope.data.movieDetail.watchlist = false;
+      TraktSrvc.removeMovieFromWatchlist(id).
+        then(function(){
+          updateWatchlist();
+          $scope.data.movieDetail.watchlist = false;
+        });
+    };
+
+    $scope.previewRatingFunc = function(rating){
+      $scope.previewRating = rating;
+    };
+
+    $scope.toggleRating = function(id, rating){
+      if(id && rating){
+        if(typeof $scope.previewRating == "string"){
+          TraktSrvc.removeMovieRating(id).
+            then(function(){
+              $scope.rating = -1;
+              $scope.previewRating = null;
+            });
+        } else {
+          TraktSrvc.addRatingToMovie(id, rating).
+            then(function(){
+              console.log('Added rating of ' + rating + ' to ' + id);
+              updateRatings();
+            });
+        }
+      } else {
+        console.log('Some arguments are missing');
+      }
     };
 
   }]);
@@ -493,19 +527,40 @@
       #HELPERS
   \*------------------------------------*/
 
-  var wrapper = $('.discover-movie');
-
   function isMovieInWatchlist(id){
-    if (id){
+    if(id){
       var wrapper = $('.discover-movie');
       var scope = angular.element(wrapper).scope();
       scope.$apply(function () {
-        if (scope.watchlist.indexOf(id) > -1){
+        if(scope.watchlist.indexOf(id) > -1){
           scope.data.movieDetail.watchlist = true;
         } else {
           scope.data.movieDetail.watchlist = false;
         }
       });
+    }
+  }
+
+  function isMovieInRatings(id){
+    if(id){
+      var wrapper = $('.discover-movie');
+      var scope = angular.element(wrapper).scope();
+      scope.$apply(function(){
+        scope.data.movieDetail.userRating = null;
+        scope.rating = 0;
+
+        if(scope.userRatings.length){
+          for (var i = 0; i < scope.userRatings.length; i++){
+            var item = scope.userRatings[i];
+
+            if(id === item.movie.ids.imdb){
+              scope.data.movieDetail.userRating = item.rating;
+              scope.rating = item.rating;
+              console.log("true", item.rating, scope.data.movieDetail);
+            }
+          }
+        }
+      })
     }
   }
 

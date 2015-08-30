@@ -44,8 +44,8 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         <div id="main-wrapper">
-            <trakt-auth></trakt-auth>
             <div class="cm-ngView" ng-view autoscroll="true"></div>
+            <trakt-auth></trakt-auth>
         </div>
 
         <!-- External JavaScript Libraries -->
@@ -66,12 +66,13 @@
         <!-- Custom JavaScript Libraries -->
         <script src="scripts/namespaces.js"></script>
         <script src="scripts/directives/TraktLoginDrtv.js"></script>
+        <script src="scripts/directives/RatingDrtv.js"></script>
         <script src="scripts/services/QuestionSrvc.js"></script>
         <script src="scripts/services/TraktSrvc.js"></script>
         <script src="scripts/controllers/IntroCtrl.js"></script>
         <script src="scripts/controllers/MovieSearchCtrl.js"></script>
         <script src="scripts/controllers/MovieDiscoverCtrl.js"></script>
-        <script src="scripts/controllers/MovieWatchlistCtrl.js"></script>
+        <script src="scripts/controllers/DashboardCtrl.js"></script>
         <script src="scripts/app.js"></script>
     </body>
 </html>

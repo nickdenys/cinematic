@@ -2,7 +2,7 @@
   'use strict';
   var directives = angular.module('cmApp.directives');
 
-  directives.directive('traktAuth', ['cmApp.services.TraktSrvc', function(TraktSrvc){
+  directives.directive('traktAuth', ['cmApp.services.TraktSrvc', '$window', function(TraktSrvc, $window){
       return {
         restrict: 'E',
         templateUrl: 'scripts/directives/views/UserOptions.html',
@@ -13,21 +13,29 @@
 
           // Fired when the view is initializing and user has a non-expired auth token in the local session storage.
           scope.$on('oauth:authorized', function(event, token) {
-            //console.log('The user is authorized', token.access_token);
-            scope.isUserLoggedIn = true;
+            if (!scope.isUserLoggedIn){
+              console.log('The user is authorized', token.access_token);
+              TraktSrvc.saveToken(token.access_token);
+              scope.isUserLoggedIn = true;
+            }
           });
 
           // Fired when the user has completed the login flow, and authorized the third party app.
           scope.$on('oauth:login', function(event, token) {
             console.log('Authorized third party app with token', token.access_token);
             TraktSrvc.saveToken(token.access_token);
-            TraktSrvc.fetchMovieWatchlist();
             scope.isUserLoggedIn = true;
           });
 
           scope.$on('oauth:logout', function(event) {
             TraktSrvc.saveToken(null);
             scope.isUserLoggedIn = false;
+
+            // TODO: Wait for redirect bugfix from oauth-ng
+            // https://github.com/andreareginato/oauth-ng/issues/86
+            setTimeout(function(){
+              $window.location.href = "/";
+            }, 110);
           });
 
           scope.$on('oauth:denied', function(event) {

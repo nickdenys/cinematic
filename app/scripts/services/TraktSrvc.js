@@ -3,7 +3,7 @@
 
   var services = angular.module('cmApp.services');
 
-  services.factory('cmApp.services.TraktSrvc', ['$http','$q', function($http, $q){
+  services.factory('cmApp.services.TraktSrvc', ['$http', function($http){
 
     /*------------------------------------*\
         #DATA
@@ -13,14 +13,15 @@
     var CLIENT_ID = '6aa065a776b54ddc441dbee1f8f50ab27a33521e152fe8f859c02cbc1bcffadc';
     var TRAKT_VERSION = '2';
     var TOKEN = null;
-    //if (!data)
-      //var data = {};
+
     var watchlistMoviesById = [];
     var watchlistMovies = {};
-
+    var userLists = [];
+    var userListDetail = [];
+    var userMovieRatings = [];
 
     /*------------------------------------*\
-        #TRAKT
+        #FUNCTIONS
     \*------------------------------------*/
 
     return{
@@ -32,6 +33,7 @@
       },
 
       fetchMovieWatchlist:function(){
+
         var req = {
           method: 'GET',
           url: API + '/sync/watchlist/movies',
@@ -43,15 +45,12 @@
           }
         };
 
-        if (TOKEN) {
-          $http(req).
-            success(function(data, status, headers, config) {
-              // this callback will be called asynchronously
-              // when the response is available
-              console.log(status, "Fetched movies");
-              watchlistMovies = data;
+        if(TOKEN){
 
-              // Filter imdb ID's
+          return $http(req).
+            then(function(response){
+              watchlistMovies = response.data;
+              // Filter imdb ID's in seperate array
               watchlistMoviesById = [];
               for (var movie in watchlistMovies){
                 if(watchlistMovies.hasOwnProperty(movie)){
@@ -65,35 +64,29 @@
                   }
                 }
               }
-            }).
-            error(function(data, status, headers, config) {
-              // called asynchronously if an error occurs
-              // or server returns response with an error status.
-              console.log(data, status);
+            }, function(error){
+              return error;
             });
+
         } else {
-          console.log('no token found!');
+          console.log('No token found');
+          return false;
         }
       },
       getMovieWatchlistById:function(){
         if(watchlistMoviesById){
           return watchlistMoviesById;
         }
-        else{
-          return "watchlist is empty!";
-        }
       },
       getMovieWatchlist:function(){
         return watchlistMovies;
       },
-
       addMovieToWatchlist:function(imdb_id){
-        var movie = {
-          'ids': {
-            'imdb': imdb_id
-          }
-        };
-        var movies = [movie];
+
+        var movies =
+          [{
+            'ids': { 'imdb': imdb_id }
+          }];
 
         var req = {
           method: 'POST',
@@ -107,18 +100,24 @@
           data: { movies: movies }
         };
 
-        sendData(req);
-
-        // Add movie to offline array
-        watchlistMoviesById.push(imdb_id);
+        if(TOKEN){
+          return $http(req).
+            then(function(obj){
+              console.log('success', obj);
+            }, function(obj){
+              console.log('error', obj);
+            });
+        } else {
+          console.log('No token found');
+          return false;
+        }
       },
       removeMovieFromWatchlist:function(imdb_id){
-        var movie = {
-          'ids': {
-            'imdb': imdb_id
-          }
-        };
-        var movies = [movie];
+
+        var movies =
+          [{
+            'ids': { 'imdb': imdb_id }
+          }];
 
         var req = {
           method: 'POST',
@@ -132,39 +131,219 @@
           data: { movies: movies }
         };
 
-        sendData(req);
-
-        // Remove movie from offline array
-        var index = watchlistMoviesById.indexOf(imdb_id);
-        if (index > -1){
-          watchlistMoviesById.splice(index, 1);
+        if(TOKEN){
+          return $http(req).
+            then(function(obj){
+              console.log('success', obj);
+            }, function(obj){
+              console.log('error', obj);
+            });
+        } else {
+          console.log('No token found');
+          return false;
         }
+      },
+
+      fetchUserLists:function(){
+
+        var req = {
+          method: 'GET',
+          url: API + '/users/me/lists',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + TOKEN,
+            'trakt-api-version': TRAKT_VERSION,
+            'trakt-api-key': CLIENT_ID
+          }
+        };
+
+        if(TOKEN){
+          return $http(req).
+            then(function(response){
+              console.log("Fetched lists");
+              userLists = response.data;
+            }, function(error){
+              return error;
+            });
+        } else {
+          console.log('No token found');
+          return false;
+        }
+      },
+      getUserLists:function(){
+        return userLists;
+      },
+      fetchUserListDetail:function(id){
+
+        var req = {
+          method: 'GET',
+          url: API + '/users/me/lists/' + id + '/items',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + TOKEN,
+            'trakt-api-version': TRAKT_VERSION,
+            'trakt-api-key': CLIENT_ID
+          }
+        };
+
+        if(TOKEN){
+          return $http(req).
+            then(function(response){
+              console.log("Fetched list detail");
+              userListDetail = response.data;
+            }, function(error){
+              return error;
+            });
+        } else {
+          console.log('No token found');
+          return false;
+        }
+
+      },
+      getUserListDetail:function(){
+        return userListDetail;
+      },
+      removeMovieFromCustomList:function(list, item) {
+
+        if (item.movie) {
+          var movies = [{
+            'ids': { 'imdb': item.movie.ids.imdb }
+          }];
+
+          var req = {
+            method: 'POST',
+            url: API + '/users/me/lists/' + list + '/items/remove',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + TOKEN,
+              'trakt-api-version': TRAKT_VERSION,
+              'trakt-api-key': CLIENT_ID
+            },
+            data: {movies: movies}
+          };
+
+          if(TOKEN){
+            return $http(req).
+              then(function(response){
+                console.log("Removed item from list");
+                return true;
+              }, function(error){
+                console.log("Error", error);
+                return false;
+              });
+          } else {
+            console.log("No token found");
+            return false;
+          }
+        }
+      },
+
+      addRatingToMovie:function(id, rating){
+
+        var data =
+          {
+            'movies':
+              [
+                {
+                  'ids': { 'imdb': id },
+                  'rating': rating
+                }
+              ]
+          };
+
+        var req = {
+          method: 'POST',
+          url: API + '/sync/ratings',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + TOKEN,
+            'trakt-api-version': TRAKT_VERSION,
+            'trakt-api-key': CLIENT_ID
+          },
+          data: data
+        };
+
+        if(TOKEN){
+          return $http(req).
+            then(function(obj){
+              console.log('success', obj);
+            }, function(obj){
+              console.log('error', obj);
+            });
+        } else {
+          console.log('No token found');
+          return false;
+        }
+
+
+      },
+      fetchMovieRatings:function(){
+        var req = {
+          method: 'GET',
+          url: API + '/sync/ratings/movies',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + TOKEN,
+            'trakt-api-version': TRAKT_VERSION,
+            'trakt-api-key': CLIENT_ID
+          }
+        };
+
+        if(TOKEN){
+          return $http(req).
+            then(function(response){
+              userMovieRatings = response.data;
+            }, function(error){
+              return error;
+            });
+        } else {
+          console.log('No token found');
+          return false;
+        }
+      },
+      getMovieRatings:function(){
+        return userMovieRatings;
+      },
+      removeMovieRating:function(id){
+
+        if (id) {
+          var data =
+          {
+            'movies':[{
+              'ids': { 'imdb': id }
+            }]
+          };
+
+          var req = {
+            method: 'POST',
+            url: API + '/sync/ratings/remove',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + TOKEN,
+              'trakt-api-version': TRAKT_VERSION,
+              'trakt-api-key': CLIENT_ID
+            },
+            data: data
+          };
+
+          if(TOKEN){
+            return $http(req).
+              then(function(response){
+                console.log("Removed rating from " + id);
+                return true;
+              }, function(error){
+                console.log("Error", error);
+                return false;
+              });
+          } else {
+            console.log("No token found");
+            return false;
+          }
+        }
+
       }
+
     };
-
-
-
-    /*------------------------------------*\
-        #HELPERS
-    \*------------------------------------*/
-
-    function sendData(req){
-      if (TOKEN) {
-        $http(req).
-          success(function(data, status, headers, config) {
-            // this callback will be called asynchronously
-            // when the response is available
-            console.log(status, "updated");
-          }).
-          error(function(data, status, headers, config) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
-            console.log(status, "error");
-          });
-      } else {
-        console.log('no token found!');
-      }
-    }
 
   }]);
 })();

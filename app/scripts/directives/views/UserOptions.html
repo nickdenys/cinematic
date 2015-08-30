@@ -1,11 +1,10 @@
 <div class="cm-userdropdown">
-    <a href="javascript:void(0)" class="cm-btn-small cm-btn-yellow" ng-show="isUserLoggedIn">Dashboard</a>
+    <a href="#dashboard" class="cm-btn-small cm-btn-yellow" ng-show="isUserLoggedIn">Dashboard</a>
     <oauth
         site='https://trakt.tv'
         client-id='6aa065a776b54ddc441dbee1f8f50ab27a33521e152fe8f859c02cbc1bcffadc'
-        redirect-uri='http://dev.cinematic.local'
+        redirect-uri='http://localhost:3000'
         template='scripts/js/vendor/oauth-ng/dist/views/templates/default.html'
-        profile-uri='https://api-v2launch.trakt.tv/users/me'
         scope='public'>
     </oauth>
 </div>

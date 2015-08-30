@@ -27,7 +27,6 @@
         opacity: 1;
         padding-top: 0.6em;
         text-align: left;
-        z-index: 99999999999;
 
         @include media($large-screen) {
             padding-top: 5em;
@@ -80,24 +79,23 @@
         position: relative;
         width: 95%;
         font-size: .9rem;
-        opacity: .85;
 
         > .details{
             color: $cm-darkgrey;
         }
 
-        .actors{
+        .actors {
             font-size: .9rem;
             @include display(flex);
             @include flex-wrap(wrap);
             @include justify-content(space-between);
 
-            .actor{
+            .actor {
                 @include flex-basis(15em);
                 @include flex-grow(1);
                 margin-bottom: .5rem;
             }
-            .image{
+            .image {
                 display: block;
                 width: 45px;
                 min-height: 45px;
@@ -105,15 +103,11 @@
                 float: left;
                 margin-right: .5rem;
             }
-            .name-wrapper{
-                .name{
+            .name-wrapper {
+                .name {
                     font-family: $aller-bold;
                 }
             }
-        }
-
-        .links:last-of-type{
-            margin-bottom: 2rem;
         }
 
         @include media($medium-screen) {

@@ -47,6 +47,12 @@ input[type="submit"] {
     &:hover{
         background: $cm-red;
     }
+    &:focus{
+        color: $cm-red;
+        &:hover{
+            color: #fff;
+        }
+    }
 }
 
 .cm-btn-blue{
@@ -54,6 +60,12 @@ input[type="submit"] {
     color: $cm-blue;
     &:hover{
         background: $cm-blue;
+    }
+    &:focus{
+        color: $cm-blue;
+        &:hover{
+            color: #fff;
+        }
     }
 }
 
@@ -63,6 +75,12 @@ input[type="submit"] {
     &:hover{
         background: $cm-green;
     }
+    &:focus{
+        color: $cm-green;
+        &:hover{
+            color: #fff;
+        }
+    }
 }
 
 .cm-btn-yellow{
@@ -70,6 +88,12 @@ input[type="submit"] {
     color: $cm-yellow;
     &:hover{
         background: $cm-yellow;
+    }
+    &:focus{
+        color: $cm-yellow;
+        &:hover{
+            color: #fff;
+        }
     }
 }
 

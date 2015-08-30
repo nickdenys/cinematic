@@ -298,11 +298,18 @@
                             <li ng-if="data.movieDetail.trailers.youtube.length"><a href="https://www.youtube.com/watch?v={{ data.movieDetail.trailers.youtube[0].source }}" target="_blank"><i class="fa fa-youtube-play"></i> Trailer</a></li>
                             <li><a href="http://www.imdb.com/title/{{ data.movieDetail.basic.imdb_id }}" target="_blank"><i class="fa fa-external-link"></i> IMDB</a></li>
                         </ul>
-                        <span class="subtitle">Trakt.tv</span>
+                        <span class="subtitle">Lists</span>
                         <ul class="links">
-                            <li><a href="javascript:void(0)" ng-cloak ng-hide="data.movieDetail.watchlist" ng-click="addToWatchlist(data.movieDetail.basic.imdb_id)" data-imdb="{{ data.movieDetail.basic.imdb_id }}"><i class="fa fa-plus-circle"></i>Add to watchlist</a></li>
-                            <li><a href="javascript:void(0)" ng-cloak ng-hide="!data.movieDetail.watchlist" ng-click="removeFromWatchlist(data.movieDetail.basic.imdb_id)" data-imdb="{{ data.movieDetail.basic.imdb_id }}"><i class="fa fa-minus-circle"></i>Remove from watchlist</a></li>
+                            <li><a class="link" href="javascript:void(0)" ng-cloak ng-hide="data.movieDetail.watchlist" ng-click="addToWatchlist(data.movieDetail.basic.imdb_id)" data-imdb="{{ data.movieDetail.basic.imdb_id }}"><i class="fa fa-plus-circle"></i>Add to watchlist</a></li>
+                            <li><a class="link" href="javascript:void(0)" ng-cloak ng-hide="!data.movieDetail.watchlist" ng-click="removeFromWatchlist(data.movieDetail.basic.imdb_id)" data-imdb="{{ data.movieDetail.basic.imdb_id }}"><i class="fa fa-minus-circle"></i>Remove from watchlist</a></li>
                         </ul>
+                        <span class="subtitle">Rating</span>
+                        <div class="rating">
+                            <div ng-init="rating = star.rating - 1"></div>
+                            <div class="star-rating" star-rating rating-value="rating" data-max="10" on-rating-selected="toggleRating(data.movieDetail.basic.imdb_id, rating)" on-rating-hovered="previewRatingFunc(rating)"></div>
+                            <span class="rating-preview" ng-if="previewRating > 0 || previewRating == 'Unrate'">{{ previewRating }}</span>
+                        </div>
+                        <span ng-if="rating > 0">You rated this a {{ rating }}</span>
                     </div>
                 </div>
                 <div class="cm-spinner" ng-hide="data.movieDetail.basic"><i class="fa fa-2x fa-cog fa-spin"></i><br />Fetching data...</div>

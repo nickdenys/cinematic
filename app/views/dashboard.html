@@ -1,0 +1,85 @@
+<div class="wrapper">
+  <div class="cm-content-center dashboard fade-in" ng-init="fetchUserData()">
+    <div class="logo-wrapper">
+      <a href="#/" class="logo" title="Go to homepage">
+        <img src="/assets/images/logo.png" alt="cinematic"/>
+      </a>
+    </div>
+
+    <div class="flash-error fade-in" ng-show="error" ng-cloak>
+      <span>{{ error }}</span>
+    </div>
+
+    <h1 class="page-title"><span class="special">Dashboard</span></h1>
+
+    <section class="dashboard-section lists-section" ng-init="getUserLists()">
+      <h2 class="subtitle">Your Lists</h2>
+
+      <ul class="lists left">
+        <li class="list" ng-click="getWatchList()"><i class="fa fa-dot-circle-o fa-lg"></i> Watchlist</li>
+        <li class="list fade-in" ng-repeat="list in data.userlists" ng-click="getUserListDetail(list.ids.trakt)">
+          <i class="fa fa-bars fa-lg"></i> {{ list.name }}
+        </li>
+      </ul>
+
+      <div class="lists-detail right">
+        <table class="table-minimal" ng-hide="!data.items">
+          <tbody>
+          <tr class="item-detail" ng-repeat="item in data.items">
+            <td>{{ item.movie.title }}</td>
+            <td class="actions">
+              <a href="javascript:void(0)" class="cm-btn-small cm-btn-red remove-item" ng-click="removeMovieFromList(item)">
+                Remove <i class="fa fa-times fa-lg"></i>
+              </a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <div class="empty-text fade-in" ng-show="searching">
+          <i class="fa fa-3x fa-cog fa-spin"></i>
+          <p>Fetching data...</p>
+        </div>
+      </div>
+
+
+    </section>
+
+    <section class="dashboard-section recently-rated">
+      <h2 class="subtitle">Recently rated</h2>
+
+      <table class="table-minimal">
+        <tbody>
+        <tr class="item-detail" ng-repeat="item in data.recentlyRated | limitTo:5">
+          <td>{{ item.movie.title }} ({{ item.movie.year }})</td>
+          <td>Rating: {{ item.rating }}</td>
+          <td class="actions">
+            <div class="rating">
+              <div ng-init="rating = item.rating"></div>
+              <div class="star-rating" star-rating rating-value="rating" data-max="10" on-rating-selected="toggleRating(item.movie.ids.imdb, rating)"></div>
+            </div>
+            </a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+    </section>
+
+    <section class="dashboard-section recently-viewed"></section>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  $('.lists').on('click', 'li.list',function(e){
+    $('li.list').removeClass('active');
+    jQuery(this).addClass('active');
+    e.preventDefault();
+  });
+
+  $('.lists-detail').on('click', '.remove-item', function(e){
+    jQuery(this).parent().closest('.item-detail').hide();
+    e.preventDefault();
+  });
+</script>
