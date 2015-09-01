@@ -1,0 +1,58 @@
+.stats {
+    $base-spacing: 1.5em !default;
+    $dark-gray: #333 !default;
+    $base-font-color: $dark-gray !default;
+    $action-color: #477dca !default;
+
+    padding: $base-spacing / 2;
+    display: inline-block;
+
+    ul {
+        padding: 0;
+    }
+
+    li {
+        border-right: 1px solid transparentize($base-font-color, 0.8);
+        color: $cm-blue;
+        display: inline;
+        float: left;
+        font-size: 1.2em;
+        line-height: 1.1em;
+        padding: 0 0.7em;
+        text-align: left;
+
+        &:first-child {
+            padding-left: 0;
+        }
+
+        &:last-child {
+            border-right: 0;
+        }
+        &.movie{
+            color: $cm-blue;
+        }
+        &.show{
+            color: $cm-red;
+        }
+        &.season{
+            color: $cm-green;
+        }
+        &.episode{
+            color: $cm-yellow;
+        }
+
+        .left{
+            float: left;
+        }
+        .right{
+            float: right;
+        }
+    }
+
+    span {
+        color: $base-font-color;
+        display: block;
+        font-size: 0.7em;
+        font-weight: normal;
+    }
+}

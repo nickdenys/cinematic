@@ -17,16 +17,16 @@
         $scope.searchMovie = function(){
             $scope.selectedMovie = {};
             $scope.similarMovies = null;
-            $scope.error = "";
             $scope.results = null;
             $scope.searching = true;
             $scope.searchingMovies = true;
             // Execute search query
-            if ($scope.searchString.length >= 3) {
+            if ($scope.searchString.length >= 2) {
                 theMovieDb.search.getMovie({"query":$scope.searchString}, successCB, errorCB);
             }
             else {
-                this.error = "Woops! Your search term needs to be at least 3 characters long.";
+                showNotification(2, "Woops! Your search term needs to be at least 2 characters long.");
+
             }
         };
 
@@ -46,6 +46,7 @@
               },
               function(error){
                   console.log(error);
+                  showNotification(2, "Woops! Your search term needs to be at least 2 characters long.");
               }
             );
         };
@@ -90,6 +91,7 @@
                   }
               },function(error) {
                   console.log(error);
+                  showNotification(2, "Something went wrong. Try refreshing the page.");
               }
             );
 
@@ -101,6 +103,7 @@
                   });
               }, function(error) {
                   console.log(error);
+                  showNotification(2, "Something went wrong. Try refreshing the page.");
               }
             );
 
@@ -112,6 +115,7 @@
                   });
               }, function(error) {
                   console.log(error);
+                  showNotification(2, "Something went wrong. Try refreshing the page.");
               }
             );
 
@@ -171,12 +175,12 @@
                 } else {
                     TraktSrvc.addRatingToMovie(id, rating).
                       then(function(){
-                          console.log('Added rating of ' + rating + ' to ' + id);
                           updateRatings();
                       });
                 }
             } else {
                 console.log('Some arguments are missing');
+                showNotification(2, "Something went wrong. Try refreshing the page.");
             }
         };
 
@@ -196,10 +200,7 @@
         $scope.addItemToList = function(id, list){
             TraktSrvc.addItemToCustomList(id, list.ids.trakt).
               then(function(){
-                  //$scope.error = "Successfully added to list";
                   $scope.checkIfMovieIsInLists($scope.data.movieDetail.basic.imdb_id);
-              }, function(){
-                  //$scope.error = "Something went wrong";
               });
         };
 
@@ -226,18 +227,10 @@
         };
 
         $scope.checkInMovie = function(id){
-            TraktSrvc.checkInMovie(id).
-              then(function(response){
-                  if (response.status == 409){
-                      console.log("You are already watching something else!");
-                      //$scope.error = "You are already watching something else!";
-                  } else {
-                      console.log("You are now watching", response.data.movie.title);
-                      //$scope.error = "You are now watching" + response.data.movie.title;
-                  }
-              }, function(reponse){
-                  //$scope.error = "Something went wrong";
-              });
+            var c = confirm("Are you sure?");
+            if (c == true) {
+                TraktSrvc.checkInMovie(id);
+            }
         }
 
     }]);
@@ -266,6 +259,7 @@
             searchScope.searching = false;
             searchScope.searchingMovies = false;
         });
+        showNotification(2, "Something went wrong. Try refreshing the page.");
     }
 
 

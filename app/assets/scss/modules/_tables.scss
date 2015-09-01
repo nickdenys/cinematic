@@ -43,7 +43,6 @@ th {
   $table-stripe-background-hover: darken($table-stripe-background, 5);
   $table-padding: .75em 1em;
 
-  //border-collapse: separate;
   border-spacing: 0;
   width: 100%;
   margin: 0;
@@ -55,26 +54,11 @@ th {
     tr + tr{
       border-top: 1px solid $table-border-color;
     }
-    tr{
-      //padding-top: 3px;
-      //padding-bottom: 3px;
-    }
   }
-
-  //thead {
-  //  display: none;
-  //  background: $base-background-color;
-  //  th {
-  //    border-bottom: 0;
-  //    padding: $table-padding;
-  //    text-align: left;
-  //  }
-  //}
 
   tbody {
     td {
       border-bottom: 0;
-      //border-top: 1px solid $table-border-color;
       line-height: $base-line-height;
       padding: $table-padding;
 
@@ -97,8 +81,13 @@ th {
     td.right-cell{
       text-align: right;
     }
-  }
-  .actions{
-    text-align: right;
+    td.actions{
+      .cm-btn,.cm-btn-small{
+        opacity: 0.5;
+        &:hover{
+          opacity: 1;
+        }
+      }
+    }
   }
 }

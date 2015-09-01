@@ -21,6 +21,7 @@
     var userListDetailId = null;
     var userMovieRatings = [];
     var userHistory = [];
+    var userStats = {};
 
     /*------------------------------------*\
         #FUNCTIONS
@@ -505,6 +506,35 @@
       },
       getHistory:function(){
         return userHistory;
+      },
+
+      fetchUserStats:function(){
+        var req = {
+          method: 'GET',
+          url: API + '/users/me/stats',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + TOKEN,
+            'trakt-api-version': TRAKT_VERSION,
+            'trakt-api-key': CLIENT_ID
+          }
+        };
+
+        if(TOKEN){
+          return $http(req).
+            then(function(response){
+              console.log("Fetched stats");
+              userStats = response.data;
+            }, function(error){
+              return error;
+            });
+        } else {
+          console.log('No token found');
+          return false;
+        }
+      },
+      getUserStats:function(){
+        return userStats;
       }
 
     };

@@ -107,6 +107,7 @@
           });
         }, function (error) {
           console.log(error);
+          showNotification(2, "Something went wrong. Try refreshing the page.");
         });
       }
     }
@@ -191,6 +192,7 @@
         function(error){
           console.log(error);
           scope.searchingPeople = false;
+          showNotification(2, "Something went wrong. Try refreshing the page.");
         });
     };
     $scope.data.selectedCast = {};
@@ -415,6 +417,7 @@
         },
         function (error) {
           console.log(error);
+          showNotification(2, "Something went wrong. Try refreshing the page.");
         });
     };
     $scope.getMovieDetail = function(id){
@@ -437,6 +440,7 @@
           }
         },function(error) {
           console.log(error);
+          showNotification(2, "Something went wrong. Try refreshing the page.");
         }
       );
 
@@ -448,6 +452,7 @@
           });
         }, function(error) {
             console.log(error);
+          showNotification(2, "Something went wrong. Try refreshing the page.");
         }
       );
 
@@ -459,6 +464,7 @@
           });
         }, function(error) {
           console.log(error);
+          showNotification(2, "Something went wrong. Try refreshing the page.");
         }
       );
 
@@ -519,12 +525,12 @@
         } else {
           TraktSrvc.addRatingToMovie(id, rating).
             then(function(){
-              console.log('Added rating of ' + rating + ' to ' + id);
               updateRatings();
             });
         }
       } else {
         console.log('Some arguments are missing');
+        showNotification(2, "Something went wrong. Try refreshing the page.");
       }
     };
 
@@ -544,10 +550,7 @@
     $scope.addItemToList = function(id, list){
       TraktSrvc.addItemToCustomList(id, list.ids.trakt).
         then(function(){
-          //$scope.error = "Successfully added to list";
           $scope.checkIfMovieIsInLists($scope.data.movieDetail.basic.imdb_id);
-        }, function(){
-          //$scope.error = "Something went wrong";
         });
     };
 

@@ -976,8 +976,10 @@ tr, td, th {
           width: auto; } }
   .table-minimal tbody td.right-cell {
     text-align: right; }
-  .table-minimal .actions {
-    text-align: right; }
+  .table-minimal tbody td.actions .cm-btn, .table-minimal tbody td.actions .cm-btn-small, .table-minimal tbody td.actions .oauth span, .oauth .table-minimal tbody td.actions span, .table-minimal tbody td.actions .cm-btn-small, .table-minimal tbody td.actions .oauth span, .oauth .table-minimal tbody td.actions span {
+    opacity: 0.5; }
+    .table-minimal tbody td.actions .cm-btn:hover, .table-minimal tbody td.actions .cm-btn-small:hover, .table-minimal tbody td.actions .oauth span:hover, .oauth .table-minimal tbody td.actions span:hover, .table-minimal tbody td.actions .cm-btn-small:hover, .table-minimal tbody td.actions .oauth span:hover, .oauth .table-minimal tbody td.actions span:hover {
+      opacity: 1; }
 
 .cm-sidebar {
   border-right: 1px solid #ddd;
@@ -1346,6 +1348,42 @@ tr, td, th {
       color: #f23a29; }
   .rating .rating-preview {
     color: #424242; }
+
+.stats {
+  padding: 0.809em;
+  display: inline-block; }
+  .stats ul {
+    padding: 0; }
+  .stats li {
+    border-right: 1px solid rgba(51, 51, 51, 0.2);
+    color: #3ab9c3;
+    display: inline;
+    float: left;
+    font-size: 1.2em;
+    line-height: 1.1em;
+    padding: 0 0.7em;
+    text-align: left; }
+    .stats li:first-child {
+      padding-left: 0; }
+    .stats li:last-child {
+      border-right: 0; }
+    .stats li.movie {
+      color: #3ab9c3; }
+    .stats li.show {
+      color: #f23a29; }
+    .stats li.season {
+      color: #A1C366; }
+    .stats li.episode {
+      color: #ffcb10; }
+    .stats li .left {
+      float: left; }
+    .stats li .right {
+      float: right; }
+  .stats span {
+    color: #333;
+    display: block;
+    font-size: 0.7em;
+    font-weight: normal; }
 
 /* THEME
 The theme files contain the sites unique styling elements broken down in to site sections including Header, Footer, Nav etc.
@@ -2463,6 +2501,8 @@ rzslider span.rz-bubble.rz-limit {
   margin-bottom: 1.5rem; }
   .dashboard .dashboard-section:last-child {
     margin-right: 0; }
+  .dashboard .dashboard-section.stats-section {
+    text-align: center; }
 
 .load-more {
   text-transform: uppercase;

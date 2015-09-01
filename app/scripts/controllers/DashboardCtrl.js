@@ -40,23 +40,18 @@
 
         TraktSrvc.fetchUserListDetail(id).
           then(function(){
-            $scope.error = null;
             $scope.searching = false;
             $scope.data.items = TraktSrvc.getUserListDetail();
           }, function(){
-            $scope.error = "Something went wrong with receiving the data";
             $scope.searching = false;
           });
       }
     };
 
-    showNotification(1, "Successfully removed item from list");
-
     $scope.removeItemFromList = function(item){
       if($scope.currentListId != "watchlist") {
         TraktSrvc.removeItemFromCustomList($scope.currentListId, item).
           then(function(){
-            //$scope.notification = "Successfully removed item from list";
             showNotification(1, "Successfully removed item from list");
           });
       }
@@ -70,6 +65,24 @@
 
     getRecentlyRated();
     getRecentlyViewed();
+    getUserStats();
+
+    function getUserStats(){
+      TraktSrvc.fetchUserStats().
+        then(function(){
+          $scope.data.stats = TraktSrvc.getUserStats();
+          console.log($scope.data.stats);
+          if(!$scope.data.stats.movies.watched){
+            $scope.data.stats.movies.watched=0;
+          }
+          if(!$scope.data.stats.shows.watched){
+            $scope.data.stats.shows.watched=0;
+          }
+          if(!$scope.data.stats.episodes.watched){
+            $scope.data.stats.episodes.watched=0;
+          }
+        });
+    }
 
     function getRecentlyRated(){
       TraktSrvc.fetchMovieRatings().
@@ -92,7 +105,7 @@
             getRecentlyRated();
           });
       } else {
-        console.log('Some arguments are missing');
+        showNotification(2, "Something went wrong. Try refreshing the page.");
       }
     };
 

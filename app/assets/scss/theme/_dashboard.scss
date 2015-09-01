@@ -10,6 +10,9 @@
         border-radius: 5px;
         @include span-columns(12);
         margin-bottom: 1.5rem;
+        &.stats-section{
+            text-align: center;
+        }
     }
 }
 
