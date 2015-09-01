@@ -64,3 +64,34 @@
         }
     }
 }
+
+#userlists{
+    display: none;
+    position: absolute;
+    padding: 1rem;
+    border-radius: 5px;
+    background: #fff;
+    border: 1px solid darken($cm-lightergrey,5%);
+    max-height: 250px;
+    width: auto;
+    margin-bottom: 1rem;
+    &:before{
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: '▲';
+        margin-top: -1rem;
+        color: #fff;
+        text-shadow: 0 -2px 2px silver;
+    }
+    .subtitle{
+        margin-top: 0;
+    }
+    .btn-close{
+        position: absolute;
+        right: 1rem;
+        &:hover{
+            cursor: pointer;
+        }
+    }
+}

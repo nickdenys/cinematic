@@ -10,10 +10,10 @@
       <span>{{ error }}</span>
     </div>
 
-    <h1 class="page-title"><span class="special">Dashboard</span></h1>
+    <h1 class="page-title"><span class="special">Welcome back!</span></h1>
 
     <section class="dashboard-section lists-section" ng-init="getUserLists()">
-      <h2 class="subtitle">Your Lists</h2>
+      <h2 class="subtitle">Lists</h2>
 
       <ul class="lists left">
         <li class="list" ng-click="getWatchList()"><i class="fa fa-dot-circle-o fa-lg"></i> Watchlist</li>
@@ -25,12 +25,16 @@
       <div class="lists-detail right">
         <table class="table-minimal" ng-hide="!data.items">
           <tbody>
-          <tr class="item-detail" ng-repeat="item in data.items">
-            <td>{{ item.movie.title }}</td>
-            <td class="actions">
-              <a href="javascript:void(0)" class="cm-btn-small cm-btn-red remove-item" ng-click="removeMovieFromList(item)">
-                Remove <i class="fa fa-times fa-lg"></i>
-              </a>
+          <tr class="item-detail" ng-repeat="item in data.items" ng-switch="item.type">
+            <td ng-switch-when="movie" title="Movie" class="movie"><i class="fa fa-film"></i> {{ item.movie.title }}</td>
+            <td ng-switch-when="show" title="Show" class="show"><i class="fa fa-television"></i> {{ item.show.title }}</td>
+            <td ng-switch-when="season" title="Season" class="season"><i class="fa fa-list"></i> {{ item.show.title }} (S{{ item.season.number }})</td>
+            <td ng-switch-when="episode" title="Episode" class="episode"><i class="fa fa-clone"></i> {{ item.show.title }} ({{ item.episode.season }}x{{ item.episode.number }})</td>
+            <td class="actions" ng-switch="item.type">
+              <a ng-switch-when="movie" href="javascript:void(0)" class="cm-btn-small cm-btn-red remove-item" ng-click="removeItemFromList(item)">Remove <i class="fa fa-times fa-lg"></i></a>
+              <a ng-switch-when="show" href="javascript:void(0)" class="cm-btn-small cm-btn-red remove-item" ng-click="removeItemFromList(item)">Remove <i class="fa fa-times fa-lg"></i></a>
+              <a ng-switch-when="season" href="javascript:void(0)" class="cm-btn-small cm-btn-red remove-item" ng-click="removeItemFromList(item)">Remove  <i class="fa fa-times fa-lg"></i></a>
+              <a ng-switch-when="episode" href="javascript:void(0)" class="cm-btn-small cm-btn-red remove-item" ng-click="removeItemFromList(item)">Remove <i class="fa fa-times fa-lg"></i></a>
             </td>
           </tr>
           </tbody>
@@ -41,16 +45,15 @@
         </div>
       </div>
 
-
     </section>
 
     <section class="dashboard-section recently-rated">
-      <h2 class="subtitle">Recently rated</h2>
+      <h2 class="subtitle">Recently rated movies</h2>
 
       <table class="table-minimal">
         <tbody>
         <tr class="item-detail" ng-repeat="item in data.recentlyRated | limitTo:5">
-          <td>{{ item.movie.title }} ({{ item.movie.year }})</td>
+          <td><i class="fa fa-fw fa-film"></i> {{ item.movie.title }} ({{ item.movie.year }})</td>
           <td>Rating: {{ item.rating }}</td>
           <td class="actions">
             <div class="rating">
@@ -62,10 +65,22 @@
         </tr>
         </tbody>
       </table>
-
     </section>
 
-    <section class="dashboard-section recently-viewed"></section>
+    <section class="dashboard-section recently-viewed">
+      <h2 class="subtitle">Recently viewed</h2>
+
+      <table class="table-minimal">
+        <tbody>
+        <tr class="item-detail" ng-repeat="item in data.recentlyViewed | limitTo:10" ng-switch="item.type">
+          <td ng-switch-when="movie"><i class="fa fa-film"></i> {{ item.movie.title }} ({{ item.movie.year }})</td>
+          <td ng-switch-when="episode"><i class="fa fa-clone"></i>  {{ item.show.title }} ({{ item.episode.season }}x{{ item.episode.number }})</td>
+          <td class="right-cell">{{ parseDate(item.watched_at) }}</td>
+        </tr>
+        </tbody>
+      </table>
+
+    </section>
 
     </div>
   </div>
@@ -82,4 +97,5 @@
     jQuery(this).parent().closest('.item-detail').hide();
     e.preventDefault();
   });
+
 </script>

@@ -69,7 +69,9 @@
 
           scope.$watch('ratingValue',
             function(oldVal, newVal) {
-              if (newVal) {
+              if(newVal) {
+                updateStars();
+              } else {
                 updateStars();
               }
             }
@@ -77,7 +79,9 @@
 
           scope.$watch('previewRatingValue',
             function(oldVal, newVal) {
-              if (oldVal) {
+              if(oldVal) {
+                updateStarsPreview();
+              } else {
                 updateStarsPreview();
               }
             }

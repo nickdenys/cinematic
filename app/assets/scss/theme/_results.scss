@@ -64,6 +64,18 @@
                 color: darken($cm-blue, 10%);
             }
         }
+        .link.add-item{
+            color: $cm-green;
+            &:hover{
+                color: darken($cm-green, 10%);
+            }
+        }
+        .link.remove-item{
+            color: $cm-red;
+            &:hover{
+                color: darken($cm-red, 10%);
+            }
+        }
         .link i.fa{
             margin-right: 7px;
         }

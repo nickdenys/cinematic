@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* VENDOR
 This folder contains third party Sass files such as normalize and Font Awesome. More files can be added as and when they are needed such as print resets and browser fallbacks.
 ========================================================================== */
@@ -925,6 +926,8 @@ tr, td, th {
         .table-minimal tbody td button {
           margin-bottom: 0;
           width: auto; } }
+  .table-minimal tbody td.right-cell {
+    text-align: right; }
   .table-minimal .actions {
     text-align: right; }
 
@@ -1697,6 +1700,32 @@ h1, h2, h3, h4, h5, h6 {
     font-size: .9rem;
     font-family: 'Aller Italic', sans-serif; }
 
+#userlists {
+  display: none;
+  position: absolute;
+  padding: 1rem;
+  border-radius: 5px;
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  max-height: 250px;
+  width: auto;
+  margin-bottom: 1rem; }
+  #userlists:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '▲';
+    margin-top: -1rem;
+    color: #fff;
+    text-shadow: 0 -2px 2px silver; }
+  #userlists .subtitle {
+    margin-top: 0; }
+  #userlists .btn-close {
+    position: absolute;
+    right: 1rem; }
+    #userlists .btn-close:hover {
+      cursor: pointer; }
+
 .answers {
   max-width: 100%;
   margin-left: auto;
@@ -2025,6 +2054,14 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Oswald", "Aller", "Helvetica Neue", "Arial", sans-serif; }
   .movie-detail .links li a:hover {
     color: #2e949c; }
+.movie-detail .links .link.add-item {
+  color: #A1C366; }
+  .movie-detail .links .link.add-item:hover {
+    color: #89b145; }
+.movie-detail .links .link.remove-item {
+  color: #f23a29; }
+  .movie-detail .links .link.remove-item:hover {
+    color: #db1f0d; }
 .movie-detail .links .link i.fa {
   margin-right: 7px; }
 
@@ -2421,6 +2458,19 @@ rzslider span.rz-bubble.rz-limit {
 .lists-detail.right {
   display: table;
   color: #424242; }
+
+.item-detail {
+  color: #424242; }
+  .item-detail .fa {
+    margin-right: 5px; }
+  .item-detail .fa-film {
+    color: #3ab9c3; }
+  .item-detail .fa-television {
+    color: #f23a29; }
+  .item-detail .fa-list {
+    color: #A1C366; }
+  .item-detail .fa-clone {
+    color: #ffcb10; }
 
 /* WEB FONTS
 Google web font include.

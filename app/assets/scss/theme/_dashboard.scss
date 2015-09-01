@@ -60,3 +60,16 @@
     display: table;
     color: $cm-darkgrey;
 }
+
+.item-detail {
+    color: $cm-darkgrey;
+    .fa{
+        margin-right: 5px;
+    }
+    .fa-film{
+        color: $cm-blue;
+    }
+    .fa-television{ color: $cm-red; }
+    .fa-list{ color: $cm-green }
+    .fa-clone{ color: $cm-yellow }
+}

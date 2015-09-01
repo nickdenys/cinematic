@@ -14,6 +14,9 @@
     $http.get('./data/questions.json').success(function (data){
       $scope.data.questions = data.questions;
     });
+    $scope.isUserLoggedIn = function(){
+      return TraktSrvc.getToken();
+    };
 
 
     /*------------------------------------*\
@@ -415,10 +418,9 @@
         });
     };
     $scope.getMovieDetail = function(id){
+
       $('#modal').show();
       $("body").addClass("modal-open");
-
-
 
       var wrapper = $('.discover-movie');
       $scope.data.movieDetail = {};
@@ -428,9 +430,10 @@
           scope.$apply(function () {
             scope.data.movieDetail.basic = JSON.parse(data);
           });
-          isMovieInWatchlist($scope.data.movieDetail.basic.imdb_id);
-          isMovieInRatings($scope.data.movieDetail.basic.imdb_id);
-          //console.log("scope", scope.data.movieDetail);
+          if($scope.isUserLoggedIn()){
+            isMovieInWatchlist($scope.data.movieDetail.basic.imdb_id);
+            isMovieInRatings($scope.data.movieDetail.basic.imdb_id);
+          }
         },function(error) {
           console.log(error);
         }
@@ -463,22 +466,24 @@
     /*------------------------------------*\
         #TRAKT FUNCTIONALITY
     \*------------------------------------*/
-    $scope.watchlist = [];
-    updateWatchlist();
-    updateRatings();
+
+    if($scope.isUserLoggedIn()){
+      $scope.watchlist = [];
+      updateWatchlist();
+      updateRatings();
+    }
+
 
     function updateWatchlist(){
       TraktSrvc.fetchMovieWatchlist().
         then(function(){
           $scope.watchlist = TraktSrvc.getMovieWatchlistById();
-          console.log("watchlist", $scope.watchlist);
         });
     }
     function updateRatings(){
       TraktSrvc.fetchMovieRatings().
         then(function(){
           $scope.userRatings = TraktSrvc.getMovieRatings();
-          console.log("ratings", $scope.userRatings);
         })
     }
 
@@ -490,7 +495,7 @@
         });
     };
     $scope.removeFromWatchlist = function(id){
-      TraktSrvc.removeMovieFromWatchlist(id).
+      TraktSrvc.removeItemFromWatchlist(id).
         then(function(){
           updateWatchlist();
           $scope.data.movieDetail.watchlist = false;
@@ -508,6 +513,7 @@
             then(function(){
               $scope.rating = -1;
               $scope.previewRating = null;
+              updateRatings();
             });
         } else {
           TraktSrvc.addRatingToMovie(id, rating).
@@ -520,6 +526,66 @@
         console.log('Some arguments are missing');
       }
     };
+
+    $scope.manageLists = function(){
+      $scope.data.userLists = TraktSrvc.getUserLists();
+      if(!$scope.data.userLists.length){
+        TraktSrvc.fetchUserLists().
+          then(function(){
+            $scope.data.userLists = TraktSrvc.getUserLists();
+            $scope.checkIfMovieIsInLists($scope.data.movieDetail.basic.imdb_id);
+          });
+      } else {
+        $scope.checkIfMovieIsInLists($scope.data.movieDetail.basic.imdb_id);
+      }
+    };
+
+    $scope.addItemToList = function(id, list){
+      TraktSrvc.addItemToCustomList(id, list.ids.trakt).
+        then(function(){
+          //$scope.error = "Successfully added to list";
+          $scope.checkIfMovieIsInLists($scope.data.movieDetail.basic.imdb_id);
+        }, function(){
+          //$scope.error = "Something went wrong";
+        });
+    };
+
+    $scope.checkIfMovieIsInLists = function(id){
+      $scope.data.matchingListIds = [];
+      for(var i = 0; i < $scope.data.userLists.length; i++){
+        var listId = $scope.data.userLists[i].ids.trakt;
+        TraktSrvc.fetchUserListDetail(listId).
+          then(function(){
+            var currentList = TraktSrvc.getUserListDetail();
+            var currentListId = TraktSrvc.getUserListDetailId();
+            for (var j = 0; j < currentList.length; j++){
+              if(currentList[j].movie && id == currentList[j].movie.ids.imdb){
+                $scope.data.matchingListIds.push(currentListId);
+              }
+            }
+          });
+      }
+    };
+
+    $scope.checkIfCurrentItemIsInList = function(list){
+      var id = list.ids.trakt;
+      return $scope.data.matchingListIds.indexOf(id) > -1;
+    };
+
+    $scope.checkInMovie = function(id){
+      TraktSrvc.checkInMovie(id).
+        then(function(response){
+          if (response.status == 409){
+            console.log("You are already watching something else!");
+            //$scope.error = "You are already watching something else!";
+          } else {
+            console.log("You are now watching", response.data.movie.title);
+            //$scope.error = "You are now watching" + response.data.movie.title;
+          }
+        }, function(reponse){
+          //$scope.error = "Something went wrong";
+        });
+    }
 
   }]);
 
@@ -556,11 +622,10 @@
             if(id === item.movie.ids.imdb){
               scope.data.movieDetail.userRating = item.rating;
               scope.rating = item.rating;
-              console.log("true", item.rating, scope.data.movieDetail);
             }
           }
         }
-      })
+      });
     }
   }
 

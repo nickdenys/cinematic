@@ -50,15 +50,15 @@
       }
     };
 
-    $scope.removeMovieFromList = function(item){
+    $scope.removeItemFromList = function(item){
       if($scope.currentListId != "watchlist") {
-        TraktSrvc.removeMovieFromCustomList($scope.currentListId, item).
+        TraktSrvc.removeItemFromCustomList($scope.currentListId, item).
           then(function(){
             //$scope.error = "Success!";
           });
       }
       else {
-        TraktSrvc.removeMovieFromWatchlist(item.movie.ids.imdb).
+        TraktSrvc.removeItemFromWatchlist(item).
           then(function(){
             //$scope.error = "Success!";
           });
@@ -66,12 +66,19 @@
     };
 
     getRecentlyRated();
+    getRecentlyViewed();
 
     function getRecentlyRated(){
       TraktSrvc.fetchMovieRatings().
         then(function(){
           $scope.data.recentlyRated = TraktSrvc.getMovieRatings();
-          console.log($scope.data.recentlyRated);
+        });
+    }
+
+    function getRecentlyViewed(){
+      TraktSrvc.fetchHistory().
+        then(function(){
+          $scope.data.recentlyViewed = TraktSrvc.getHistory();
         });
     }
 
@@ -85,6 +92,12 @@
       } else {
         console.log('Some arguments are missing');
       }
+    };
+
+    $scope.parseDate = function(date){
+      var y = moment(date).format("MMM DD, YYYY h:mm A");
+
+      return y;
     }
 
 
