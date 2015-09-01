@@ -50,17 +50,20 @@
       }
     };
 
+    showNotification(1, "Successfully removed item from list");
+
     $scope.removeItemFromList = function(item){
       if($scope.currentListId != "watchlist") {
         TraktSrvc.removeItemFromCustomList($scope.currentListId, item).
           then(function(){
-            //$scope.error = "Success!";
+            //$scope.notification = "Successfully removed item from list";
+            showNotification(1, "Successfully removed item from list");
           });
       }
       else {
         TraktSrvc.removeItemFromWatchlist(item).
           then(function(){
-            //$scope.error = "Success!";
+            showNotification(1, "Successfully removed item from watchlist");
           });
       }
     };
@@ -86,7 +89,6 @@
       if(id && rating){
         TraktSrvc.addRatingToMovie(id, rating).
           then(function(){
-            console.log('Added rating of ' + rating + ' to ' + id);
             getRecentlyRated();
           });
       } else {

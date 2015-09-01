@@ -74,6 +74,7 @@
 
             $('#modal').show();
             $("body").addClass("modal-open");
+            $('.cm-userdropdown').addClass('hidden');
 
             var wrapper = $('.search-movie');
             $scope.data.movieDetail = {};

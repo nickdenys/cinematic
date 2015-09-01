@@ -41,9 +41,6 @@
         .discover{
             @include linear-gradient(53deg, $cm-yellow, $cm-blue);
         }
-        .watchlist{
-            @include linear-gradient(-127deg, $cm-red, $cm-blue);
-        }
 
         .copy {
             color: white;

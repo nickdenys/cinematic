@@ -421,6 +421,7 @@
 
       $('#modal').show();
       $("body").addClass("modal-open");
+      $('.cm-userdropdown').addClass('hidden');
 
       var wrapper = $('.discover-movie');
       $scope.data.movieDetail = {};
@@ -573,18 +574,10 @@
     };
 
     $scope.checkInMovie = function(id){
-      TraktSrvc.checkInMovie(id).
-        then(function(response){
-          if (response.status == 409){
-            console.log("You are already watching something else!");
-            //$scope.error = "You are already watching something else!";
-          } else {
-            console.log("You are now watching", response.data.movie.title);
-            //$scope.error = "You are now watching" + response.data.movie.title;
-          }
-        }, function(reponse){
-          //$scope.error = "Something went wrong";
-        });
+      var c = confirm("Are you sure?");
+      if (c == true) {
+        TraktSrvc.checkInMovie(id);
+      }
     }
 
   }]);

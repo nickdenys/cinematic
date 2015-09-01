@@ -105,9 +105,10 @@
         if(TOKEN){
           return $http(req).
             then(function(obj){
-              console.log('success', obj);
+              showNotification(1, "Successfully added item to your watchlist");
             }, function(obj){
               console.log('error', obj);
+              showNotification(2, "Something went wrong. Try refreshing the page.");
             });
         } else {
           console.log('No token found');
@@ -164,9 +165,10 @@
           if (TOKEN) {
             return $http(req).
               then(function (obj) {
-                console.log('success', obj);
+                showNotification(1, "Successfully removed item from your watchlist");
               }, function (obj) {
                 console.log('error', obj);
+                showNotification(2, "Something went wrong. Try refreshing the page.");
               });
           } else {
             console.log('No token found');
@@ -288,10 +290,11 @@
           if(TOKEN){
             return $http(req).
               then(function(response){
-                console.log("Removed item from list");
+                showNotification(1, "Successfully removed item from list");
                 return true;
               }, function(error){
                 console.log("Error", error);
+                showNotification(2, "Something went wrong");
                 return false;
               });
           } else {
@@ -360,9 +363,10 @@
         if(TOKEN){
           return $http(req).
             then(function(obj){
-              console.log('success', obj);
+              showNotification(1, "Successfully added rating");
             }, function(obj){
               console.log('error', obj);
+              showNotification(2, "Something went wrong. Try refreshing the page.");
             });
         } else {
           console.log('No token found');
@@ -422,11 +426,11 @@
           if(TOKEN){
             return $http(req).
               then(function(response){
-                console.log("Removed rating from " + id);
+                showNotification(1, "Successfully removed rating");
                 return true;
               }, function(error){
                 console.log("Error", error);
-                return false;
+                showNotification(2, "Something went wrong. Try refreshing the page.");
               });
           } else {
             console.log("No token found");
@@ -458,11 +462,14 @@
           if(TOKEN){
             return $http(req).
               then(function(response){
-                console.log("Checked in", id);
-                return response;
+                showNotification(1, "You are now watching " + response.data.movie.title);
               }, function(error){
                 console.log("Error", error);
-                return error;
+                if (error.status == 409){
+                  showNotification(4, "You are already watching something else!");
+                } else {
+                  showNotification(2, "Something went wrong. Try refreshing the page.");
+                }
               });
           } else {
             console.log("No token found");

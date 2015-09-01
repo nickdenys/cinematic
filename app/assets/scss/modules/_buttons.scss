@@ -97,14 +97,6 @@ input[type="submit"] {
     }
 }
 
-.cm-userdropdown {
-    float: right;
-    position: absolute;
-    z-index: 3;
-    right: 1rem;
-    top: 1rem;
-}
-
 .oauth span {
     @extend .cm-btn-small;
     @extend .cm-btn-yellow;

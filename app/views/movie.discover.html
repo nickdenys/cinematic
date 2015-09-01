@@ -1,3 +1,7 @@
+<div id="flash" class="fade-in" ng-cloak>
+    <span class="content"></span>
+</div>
+
 <div class="cm-sidebar fade-in">
     <div class="logo-wrapper">
         <a href="#/" class="logo" title="Go to homepage">
@@ -345,6 +349,7 @@
             $('.modal-close').on('click', function() {
                 modal.hide();
                 $("body").removeClass("modal-open");
+                $('.cm-userdropdown').removeClass('hidden');
             });
 
             // Show/hide custom lists windows
