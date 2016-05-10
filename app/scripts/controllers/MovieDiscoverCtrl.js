@@ -329,7 +329,7 @@
         rating = rating / 10;
         return rating.toFixed(2);
       } else {
-        return "";
+        return 0;
       }
 
     }
