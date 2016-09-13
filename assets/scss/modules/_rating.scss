@@ -1,0 +1,19 @@
+.rating{
+    color: $cm-grey;
+    &:hover{
+        cursor: pointer;
+    }
+    .star-rating{
+        display: inline-block;
+        li{
+            display: inline-block;
+            margin-right: 1px;
+        }
+        li.filled{
+            color: $cm-red;
+        }
+    }
+    .rating-preview{
+        color: $cm-darkgrey;
+    }
+}

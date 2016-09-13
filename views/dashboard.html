@@ -1,0 +1,137 @@
+<div class="wrapper">
+  <div class="cm-content-center dashboard fade-in">
+    <div class="logo-wrapper">
+      <a href="#/" class="logo" title="Go to homepage">
+        <img src="assets/images/logo.png" alt="cinematic"/>
+      </a>
+    </div>
+
+    <div id="flash" class="fade-in">
+      <span class="content"></span>
+    </div>
+
+    <h1 class="page-title"><span class="special">Welcome back!</span></h1>
+
+    <section class="dashboard-section stats-section">
+      <h2 class="subtitle">Statistics</h2>
+      <p>You have watched...</p>
+      <div class="stats">
+        <ul>
+          <li class="movie">
+            <div class="left stat-icon">
+              <i class="fa fa-fw fa-film fa-2x"></i>
+            </div>
+            <div class="right">
+              {{ data.stats.movies.watched }}
+              <span>Movies</span>
+            </div>
+          </li>
+          <li class="show">
+            <div class="left stat-icon">
+              <i class="fa fa-fw fa-television fa-2x"></i>
+            </div>
+            <div class="right">
+              {{ data.stats.shows.watched }}
+              <span>Shows</span>
+            </div>
+          </li>
+          <li class="episode">
+            <div class="left stat-icon">
+              <i class="fa fa-fw fa-clone fa-2x"></i>
+            </div>
+            <div class="right">
+              {{ data.stats.episodes.watched }}
+              <span>Episodes</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="dashboard-section lists-section" ng-init="getUserLists()">
+      <h2 class="subtitle">Lists</h2>
+
+      <ul class="lists left">
+        <li class="list" ng-click="getWatchList()"><i class="fa fa-dot-circle-o fa-lg"></i> Watchlist</li>
+        <li class="list fade-in" ng-repeat="list in data.userlists" ng-click="getUserListDetail(list.ids.trakt)">
+          <i class="fa fa-bars fa-lg"></i> {{ list.name }}
+        </li>
+      </ul>
+
+      <div class="lists-detail right">
+        <table class="table-minimal" ng-hide="!data.items">
+          <tbody>
+          <tr class="item-detail" ng-repeat="item in data.items" ng-switch="item.type">
+            <td ng-switch-when="movie" title="Movie" class="movie"><i class="fa fa-film"></i> {{ item.movie.title }}</td>
+            <td ng-switch-when="show" title="Show" class="show"><i class="fa fa-television"></i> {{ item.show.title }}</td>
+            <td ng-switch-when="season" title="Season" class="season"><i class="fa fa-list"></i> {{ item.show.title }} (S{{ item.season.number }})</td>
+            <td ng-switch-when="episode" title="Episode" class="episode"><i class="fa fa-clone"></i> {{ item.show.title }} ({{ item.episode.season }}x{{ item.episode.number }})</td>
+            <td class="right-cell actions" ng-switch="item.type">
+              <a ng-switch-when="movie" href="javascript:void(0)" class="cm-btn-small cm-btn-red remove-item" ng-click="removeItemFromList(item)">Remove <i class="fa fa-times fa-lg"></i></a>
+              <a ng-switch-when="show" href="javascript:void(0)" class="cm-btn-small cm-btn-red remove-item" ng-click="removeItemFromList(item)">Remove <i class="fa fa-times fa-lg"></i></a>
+              <a ng-switch-when="season" href="javascript:void(0)" class="cm-btn-small cm-btn-red remove-item" ng-click="removeItemFromList(item)">Remove  <i class="fa fa-times fa-lg"></i></a>
+              <a ng-switch-when="episode" href="javascript:void(0)" class="cm-btn-small cm-btn-red remove-item" ng-click="removeItemFromList(item)">Remove <i class="fa fa-times fa-lg"></i></a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <div class="empty-text fade-in" ng-show="searching">
+          <i class="fa fa-3x fa-cog fa-spin"></i>
+          <p>Fetching data...</p>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="dashboard-section recently-rated">
+      <h2 class="subtitle">Recently rated movies</h2>
+
+      <table class="table-minimal">
+        <tbody>
+        <tr class="item-detail" ng-repeat="item in data.recentlyRated | limitTo:5">
+          <td><i class="fa fa-fw fa-film"></i> {{ item.movie.title }} ({{ item.movie.year }})</td>
+          <td>Rating: {{ item.rating }}</td>
+          <td class="actions">
+            <div class="rating">
+              <div ng-init="rating = item.rating"></div>
+              <div class="star-rating" star-rating rating-value="rating" data-max="10" on-rating-selected="toggleRating(item.movie.ids.imdb, rating)"></div>
+            </div>
+            </a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="dashboard-section recently-viewed">
+      <h2 class="subtitle">Recently viewed</h2>
+
+      <table class="table-minimal">
+        <tbody>
+        <tr class="item-detail" ng-repeat="item in data.recentlyViewed | limitTo:10" ng-switch="item.type">
+          <td ng-switch-when="movie"><i class="fa fa-film"></i> {{ item.movie.title }} ({{ item.movie.year }})</td>
+          <td ng-switch-when="episode"><i class="fa fa-clone"></i>  {{ item.show.title }} ({{ item.episode.season }}x{{ item.episode.number }})</td>
+          <td class="right-cell">{{ parseDate(item.watched_at) }}</td>
+        </tr>
+        </tbody>
+      </table>
+
+    </section>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  $('.lists').on('click', 'li.list',function(e){
+    $('li.list').removeClass('active');
+    jQuery(this).addClass('active');
+    e.preventDefault();
+  });
+
+  $('.lists-detail').on('click', '.remove-item', function(e){
+    jQuery(this).parent().closest('.item-detail').hide();
+    e.preventDefault();
+  });
+
+</script>
